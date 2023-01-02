@@ -1,6 +1,3 @@
-import React from 'react'
-
-
 /**
  * A function to calculate the stat value of a pokemon based on its base stats, ev, iv, level, and nature. only works for stats other than HP
  * @param base_stat the base stat of the pokemon ranging from 1 - 255
