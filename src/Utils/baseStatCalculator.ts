@@ -7,7 +7,7 @@
  * @param level the level of the pokemon ranging from 1 - 100
  * @returns {stat, errMessage} returns object with the final value of the pokemon and an array of string containing errors
  */
-const BaseStatCalculator = (base_stat : number, ev: number, iv : number, nature: 'beneficial' | 'hindering' | 'neutral', level? : number) =>{
+const baseStatCalculator = (base_stat : number, ev: number, iv : number, nature: 'beneficial' | 'hindering' | 'neutral', level? : number) =>{
   const NATURE_BOOST = new Map<string, number>([
     ['beneficial', 1.1],
     ['neutral', 1],
@@ -32,7 +32,7 @@ const BaseStatCalculator = (base_stat : number, ev: number, iv : number, nature:
   let stat; 
   let props = {base_stat, ev, iv, nature, level}
 
-  //error checker for values excluding nature
+  //error checker for values excluding nature, and change value to max or min caps
   let key : keyof typeof props
   for (key in props){
     if(key !== 'nature'){
@@ -51,4 +51,4 @@ const BaseStatCalculator = (base_stat : number, ev: number, iv : number, nature:
   return {stat, errMessage}
 }
 
-export default BaseStatCalculator
+export default baseStatCalculator
