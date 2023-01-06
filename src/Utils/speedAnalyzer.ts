@@ -104,9 +104,9 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
     resp.verdict = SLOWER
   }
 
-  // if(inTrickRoom){
-  //   resp.verdict = resp.verdict * -1 as 1 | 0 | -1
-  // }
+  if(inTrickRoom){
+    resp.verdict = resp.verdict * -1 as 1 | 0 | -1
+  }
 
 
   //analyze further based on verdict
@@ -114,6 +114,13 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
   let min_boost : number;
   let minEV: number;
 
+  /**
+   * analyze speed based on environtment and different possible cases
+   * some terminology used(assumes 31IV unless stated otherwise):
+   * max(252 EV), min(0 EV), +(beneficial nature), -(hindering nature), [no sign](neutral nature), --(hindering nature 0IV)
+   * ex: max+(252 EV 31 IV Beneficial Nature), min--(0 EV, 0IV, Hindering Nature)
+   */
+  console.log(`${p1SpeedStat.get('max')!} ${p2SpeedStat.get('max')!}`)
   if(!inTrickRoom){
     switch (resp.verdict) {
       case FASTER:
@@ -151,7 +158,7 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
           minEV =  evExtractor(base_speed1, p2SpeedStat.get('neutral_min')! + 1, 'beneficial')
           if(minEV < 0){
             //cannot outspeed min speed neutral nature p2
-            minStat = {minEV: minEV, minIV: 31, nature:'beneficial', opponentState:'min'}
+            minStat = {minEV: minEV, minIV: 31, nature:'beneficial', opponentState:'win'}
           }else if(minEV >= 0){
              //can outspeed min speed neutral nature p2
             minStat = {minEV: minEV, minIV: 31, nature:'beneficial', opponentState:'min'}
@@ -169,13 +176,50 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
       default:
         break;
     }
-  
-    return resp
 
   }else if(!!inTrickRoom){
-
+    switch (resp.verdict) {
+      case FASTER:
+        // check nature to outslow min-- speed p2
+        if(p1SpeedStat.get('neutral_min')! < p2SpeedStat.get('min')!){
+          //p1 can still outslow min-- p2 with neutral max iv 
+          minStat = {minEV : 0, minIV: 31, nature: 'neutral', opponentState:'min--'}
+        }else if(baseStatCalculator(base_speed1,0,0,'neutral').stat < p2SpeedStat.get('min')!){
+          //p1 can still outslow min-- p2 with neutral no iv
+          minStat = {minEV : 0, minIV: 0, nature: 'neutral', opponentState:'min--'}
+        }else{
+          //p1 can only outslow min-- p2 with min--
+          minStat = {minEV : 0, minIV: 0, nature: 'hindering', opponentState:'min--'}
+        }
+        //min booost needed to outslow p1
+        //used the formula x = Math.ceil(log(p2Speed/p1Speed)/log(2)) ; 2 because each boost divides speed by 1/2 
+        min_boost = Math.ceil(Math.log(p1SpeedStat.get('min')! / p2SpeedStat.get('min')!) / Math.log(2))
+        console.log(`p1 ${p1SpeedStat.get('min')!} p2 ${p2SpeedStat.get('min')!}`)
+        console.log(Math.log(p2SpeedStat.get('min')! / p1SpeedStat.get('min')!) / Math.log(2))
+        resp.message.push(`will outslowed with at least -${min_boost} (${Math.pow(0.5, min_boost)}x) speed boost`)
+      break;
+      case TIE:
+        minStat = {minEV : 0, minIV: 0, nature: 'neutral', opponentState:'min--'}
+        min_boost = 1;
+        break;
+      case SLOWER:
+        if(p1SpeedStat.get('min')! >= p2SpeedStat.get('neutral_min')!){
+          minStat = {minEV : 0, minIV: 0, nature: 'neutral', opponentState:'min'}
+        }else{
+          minStat = {minEV : 0, minIV: 0, nature: 'neutral', opponentState:'win'}
+        }
+        //min booost needed to outslow p2
+        //used the formula x = Math.ceil(log(p1Speed/p2Speed)/log(2)) ; 2 because each boost divides speed by 1/2 
+        min_boost = Math.ceil(Math.log(p1SpeedStat.get('min')! / p2SpeedStat.get('min')!) / Math.log(2))
+        resp.message.push(`will outsped with at least -${min_boost} (${Math.pow(0.5, min_boost)}x) speed boost`)
+        break;
+        
+      default:
+        break;
+    }
   }
   
+  return resp
 }
 
 export default speedAnalyzer
