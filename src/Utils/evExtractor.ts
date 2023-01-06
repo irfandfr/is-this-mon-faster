@@ -27,7 +27,7 @@ const evExtractor = (baseStat : number, actualStat : number, nature : 'beneficia
     calcLevel = level
   }
 
-  //check if speed is attainable
+  //check if speed is attainable, returns -1 if speed is too high or too low to achieve
   if(actualStat > baseStatCalculator(baseStat,252, calcIV ,nature, calcLevel).stat || actualStat < baseStatCalculator(baseStat,0, calcIV ,nature, calcLevel).stat){
     return(-1)
   }else{
