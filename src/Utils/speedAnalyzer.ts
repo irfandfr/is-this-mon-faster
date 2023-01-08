@@ -1,9 +1,18 @@
 import baseStatCalculator from "./baseStatCalculator";
 import evExtractor from "./evExtractor";
 
+
+interface minStatProp{
+  minEV: number,
+  minIV: number,
+  nature: 'beneficial' | 'hindering' | 'neutral' | undefined
+  opponentState: 'min' | 'min-' |'min--' | 'max' | 'max+' | 'neutral' | 'win'| undefined
+}
 interface responseProp{
   verdict : 1 | 0 | -1
-  message: string[]
+  min_stat: minStatProp
+  min_boost: number
+  inTrickRoom: boolean
 }
 
 export enum statusTypes{
@@ -31,7 +40,9 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
 
   let resp : responseProp = {
     verdict: 0,
-    message: []
+    min_stat:{minEV: 0, minIV: 0, nature: undefined, opponentState: undefined},
+    min_boost: 0,
+    inTrickRoom : !!inTrickRoom
   }
 
   /**
@@ -110,7 +121,7 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
 
 
   //analyze further based on verdict
-  let minStat = {minEV: 0,minIV: 0, nature:'', opponentState: ''}
+  let minStat : minStatProp= {minEV: 0,minIV: 0, nature:undefined, opponentState: undefined}
   let min_boost : number;
   let minEV: number;
 
@@ -120,7 +131,6 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
    * max(252 EV), min(0 EV), +(beneficial nature), -(hindering nature), [no sign](neutral nature), --(hindering nature 0IV)
    * ex: max+(252 EV 31 IV Beneficial Nature), min--(0 EV, 0IV, Hindering Nature)
    */
-  console.log(`${p1SpeedStat.get('max')!} ${p2SpeedStat.get('max')!}`)
   if(!inTrickRoom){
     switch (resp.verdict) {
       case FASTER:
@@ -142,7 +152,7 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
   
         //min booost needed to outspeed p1
         min_boost = Math.ceil((p1SpeedStat.get('max')! / p2SpeedStat.get('max')! / 0.5) - 2)
-        resp.message.push(`will get outsped with at least ${min_boost} (${1 + (0.5 * min_boost)}x) speed boost`)
+        resp.min_boost = min_boost
         break;
         
         //minimum EV for +Nature p1 to outspeed p2 with max EV and a neutral nature
@@ -170,7 +180,7 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
   
         //min booost needed to outspeed p2
         min_boost = Math.ceil((p1SpeedStat.get('max')! / p2SpeedStat.get('max')! / 0.5) - 2)
-        resp.message.push(`will outsped with at least ${min_boost} (${1 + (0.5 * min_boost)}x) speed boost`)
+        resp.min_boost = min_boost;
         break;
           
       default:
@@ -192,11 +202,9 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
           minStat = {minEV : 0, minIV: 0, nature: 'hindering', opponentState:'min--'}
         }
         //min booost needed to outslow p1
-        //used the formula x = Math.ceil(log(p2Speed/p1Speed)/log(2)) ; 2 because each boost divides speed by 1/2 
-        min_boost = Math.ceil(Math.log(p1SpeedStat.get('min')! / p2SpeedStat.get('min')!) / Math.log(2))
-        console.log(`p1 ${p1SpeedStat.get('min')!} p2 ${p2SpeedStat.get('min')!}`)
-        console.log(Math.log(p2SpeedStat.get('min')! / p1SpeedStat.get('min')!) / Math.log(2))
-        resp.message.push(`will outslowed with at least -${min_boost} (${Math.pow(0.5, min_boost)}x) speed boost`)
+        //used the formula x =(2 x (faster speed) ) / (lower speed) ; formula for negative boost is 2 / (2 + boost)
+        min_boost = Math.ceil((2* p1SpeedStat.get('min')!) / p2SpeedStat.get('min')!)
+        resp.min_boost = min_boost
       break;
       case TIE:
         minStat = {minEV : 0, minIV: 0, nature: 'neutral', opponentState:'min--'}
@@ -209,15 +217,16 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
           minStat = {minEV : 0, minIV: 0, nature: 'neutral', opponentState:'win'}
         }
         //min booost needed to outslow p2
-        //used the formula x = Math.ceil(log(p1Speed/p2Speed)/log(2)) ; 2 because each boost divides speed by 1/2 
-        min_boost = Math.ceil(Math.log(p1SpeedStat.get('min')! / p2SpeedStat.get('min')!) / Math.log(2))
-        resp.message.push(`will outsped with at least -${min_boost} (${Math.pow(0.5, min_boost)}x) speed boost`)
+        min_boost = Math.ceil((2* p2SpeedStat.get('min')!) / p1SpeedStat.get('min')!)
+        resp.min_boost = min_boost
         break;
         
       default:
         break;
     }
   }
+
+  resp.min_stat = {...minStat}
   
   return resp
 }
