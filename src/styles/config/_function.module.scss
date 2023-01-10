@@ -1,0 +1,11 @@
+/*
+* This file contains reusable sass functions
+* v.0.0
+*/  
+
+@use "sass:math";
+
+@function calculateRem($size) {
+  $remSize: math.div($size , 16px);
+  @return $remSize * 1rem;
+}

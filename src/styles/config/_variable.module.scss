@@ -1,0 +1,19 @@
+
+$z-indexes: (
+  "navbar": 3,
+  "header": 2,
+);
+
+$breakpoints: (
+  "small" : 768px,
+  "medium" : 992px,
+  "large" : 1200px
+);
+
+$header-height: (
+  "mobile": 40px,
+  "desktop": 50px
+);
+
+$BODY_FONT: 'Roboto', sans-serif;
+$HEADING_FONT: 'Concert One', cursive;
