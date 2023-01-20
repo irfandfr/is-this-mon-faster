@@ -179,7 +179,7 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
         }
   
         //min booost needed to outspeed p2
-        min_boost = Math.ceil((p1SpeedStat.get('max')! / p2SpeedStat.get('max')! / 0.5) - 2)
+        min_boost = Math.ceil((p2SpeedStat.get('max')! / p1SpeedStat.get('max')! / 0.5) - 2)
         resp.min_boost = min_boost;
         break;
           
