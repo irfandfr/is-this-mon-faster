@@ -1,10 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import baseStatCalculator from './Utils/baseStatCalculator';
+import './styles/global.scss';
 import speedAnalyzer from './Utils/speedAnalyzer';
-import evExtractor from './Utils/evExtractor';
-import { statusTypes } from './Utils/speedAnalyzer';
+import { Outlet } from 'react-router-dom';
 
 
 function App() {
@@ -17,14 +15,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {(baseStatCalculator(monStat.base_speed1, 300, 31, 'beneficial')).stat}
-        <p>  vs  </p>
-        {(baseStatCalculator(monStat.base_speed2, 300, 31, 'beneficial')).stat}
-        <hr />
-        <div>
-        </div>
-        <hr />
+        
       </header>
+      <Outlet />
     </div>
   );
 }
