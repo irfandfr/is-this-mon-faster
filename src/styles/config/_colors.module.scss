@@ -3,22 +3,44 @@
 * v.0.0
 */
 
-/*
-* Main Color
-*/
+//FONT COLORS
+$basic-heading: #153F67;
+$body-font: #2B2B2B;
+$light-font: #f3f3f3;
+
+//BACKGROUND COLORS
+$content-bg: #F1F9FB;
+$app-bg: #F3F3F3;
+$primary-bg: #5F9FFF;
+$secondary-bg: #153F67;
+
+//COMPLEMENTARY COLORS
+$pkmn1-color: #36B7AF;
+$pkmn2-color: #9221C7;
+$success-color: #0AA849;
+$warning-color: #FFCA0F;
+$danger-color: #EA526F;
+$faster-color: #5994BF;
+$slower-color: #BB9262;
+$tie-color: #CBBA20;
+
+
 
 /*
-* Background or Text
+* DARK MODE STYLE
 */
-$basic-1000: #000;
-$basic-900: #141519;
-$basic-800:#202225;
-$basic-700:#1c1e20;
-$basic-600:#1F2228;
-$basic-500:#393C43;
-$basic-400:#40444C;
-$basic-300:#8D9298;
-$basic-200:#BEBEBE;
-$basic-150:#CFD2D9;
-$basic-100:#f3f3f3; 
-$basic-0: #ffffff;
+:global(.dark){
+  //Font Colors
+  $basic-heading: #eaeaea;
+  $body-font: #eaeaea;
+  $light-heading: #153F67;
+
+
+  //Background Colors
+  $app-bg: #3c3c3c;
+  $content-bg: #4f4f4f;
+  $secondary-bg: #CCD2E3;
+
+}
+
+
