@@ -13,10 +13,11 @@ body {
 }
 
 
-h1,h2,h3,h4,h5,p{
+h1,h2,h3,h4,h5{
   margin: 0;
-  font-family: 'Concert One', cursive;
+  font-family: 'Patua One', cursive;
 }
+
 
 a {
   color: inherit;
@@ -42,4 +43,8 @@ a {
 .flex-c{
   display: flex;
   flex-flow: column;
+}
+
+main{
+  padding: 0 12px;
 }
