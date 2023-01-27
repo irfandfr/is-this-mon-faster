@@ -1,0 +1,30 @@
+@import "./../../styles/config.module.scss";
+
+
+.header{
+  height: $HEADER_HEIGHT;
+  width: 100%;
+  background-color: $secondary-bg;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+
+  .appLogoName{
+    display: flex;
+    align-items: center;
+
+    img{
+      margin-right: 5px;
+      width: 57.28px;
+    }
+
+    .headerAppName{
+      font-family: 'Patua One', cursive;
+      color: $light-font;
+      @include font-size(16px);
+    }
+  }
+}
