@@ -1,0 +1,29 @@
+@import './../../../styles/config.module.scss';
+
+.bigInputContainer{
+  width:100%;
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-flow: column-reverse;
+  align-items: center;
+  .bigInput{
+    all: unset;
+    width: 100%;
+    height: 30px;
+    font-family: 'Patua One', cursive;
+    color: $pkmn1-color;
+    @include font-size(24px);
+    position: relative;
+    margin-bottom: 3px;
+  }
+
+  .underline{
+    display: block;
+    position: absolute;
+    max-width: 200px;
+    width: 100%;
+    height: 2px;
+    background-image: url("data:image/svg+xml,%3Csvg width='48' height='2' viewBox='0 0 48 2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 1H12' stroke='%23153F67' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M20 1H28' stroke='%23153F67' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M36 1H44' stroke='%23153F67' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+}
