@@ -8,6 +8,7 @@ interface CardProp{
   children? : React.ReactNode
   className?: string
   style? : React.CSSProperties
+  dark? : boolean
 }
 
 interface CardHeaderProp{
@@ -19,9 +20,9 @@ interface CardListItemProp {
   type? : 'warning' | 'safe' | 'danger' 
 }
 
-const Card = ({children, className, style} : CardProp) =>{
+const Card = ({children, className, style, dark} : CardProp) =>{
   return(
-    <div className={`${styles.card} ${!!className? className : ''}`} style={style}>
+    <div className={`${styles.card} ${dark ? styles.dark : styles.light} ${!!className? className : ''}`} style={style}>
       {children}
     </div>
   )
