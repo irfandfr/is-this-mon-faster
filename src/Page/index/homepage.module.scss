@@ -5,12 +5,8 @@
   flex-flow: column;
   align-items: center;
   width: 100%;
-  
-  .textIs{
-    margin: 33px 0;
-  }
 
-  h3,h4{
-    color: $basic-heading;
+  .text{
+    color: var(--basic-heading);
   }
 }
