@@ -6,6 +6,10 @@
   box-sizing: border-box;
   position: relative;
   
+  &:focus-visible{
+    outline: solid 3px #f3f3f3
+  }
+
   &::before{
     content: '';  
     background: rgba(46, 46, 46, 0.4);
