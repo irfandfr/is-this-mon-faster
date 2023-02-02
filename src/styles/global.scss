@@ -7,6 +7,8 @@
   --basic-heading: #153F67;
   --body-font: #2B2B2B;
   --light-font: #f3f3f3;
+  
+  --svg-underline :url("data:image/svg+xml,%3Csvg width='48' height='2' viewBox='0 0 48 2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 1H12' stroke='%23153F67' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M20 1H28' stroke='%23153F67' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M36 1H44' stroke='%23153F67' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
 
   //BACKGROUND COLORS
   --content-bg: #F1F9FB;
@@ -20,7 +22,8 @@
     --basic-heading: #eaeaea;
     --body-font: #eaeaea;
     --light-font: #2b2b2b;
-  
+
+    --svg-underline : url("data:image/svg+xml,%3Csvg width='48' height='2' viewBox='0 0 48 2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 1H12' stroke='%23EAEAEA' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M20 1H28' stroke='%23EAEAEA' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M36 1H44' stroke='%23EAEAEA' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");  
   
     //Background Colors
     --app-bg: #3c3c3c;
