@@ -2,12 +2,13 @@ import React from 'react'
 import Button from '../../Components/Button/Button'
 import Card from '../../Components/Card/Card'
 import BigInput from '../../Components/Forms/BigInput/BigInput'
+import MainView from '../../Components/MainView/MainView'
 
 import style from './homepage.module.scss'
 
 const Homepage = () =>{
   return(
-    <main className={style.homepage}>
+    <MainView className={style.homepage}>
       <h3 className={style.text} style={{margin: '33px 0'}}>Is</h3>
       <BigInput color='#36B7AF'/>
       <h4 className={style.text}style={{textAlign: 'center', margin: '34px 0'}}>faster <br /> than</h4>
@@ -21,7 +22,7 @@ const Homepage = () =>{
         <Card.ListItem text='Minimum speed boost to outspeed or outsped' type='warning' />
       </Card>
       <Button text='Try Now' type='primary' style={{paddingLeft: '20px', paddingRight: '20px', marginTop: '37px', marginBottom: '20px'}}/>
-    </main>
+    </MainView>
   )
 }
 

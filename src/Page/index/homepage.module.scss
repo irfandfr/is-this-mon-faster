@@ -1,11 +1,6 @@
 @import './../../styles/config.module.scss';
 
 .homepage{
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  width: 100%;
-
   .text{
     color: var(--basic-heading);
   }
