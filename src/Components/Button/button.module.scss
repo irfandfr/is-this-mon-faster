@@ -12,6 +12,7 @@
   @include font-size(20px);
   cursor: pointer;
   box-sizing: border-box;
+  transition: all 0.1s ease-in-out;
 
 
   &::after{
@@ -28,14 +29,15 @@
   &:hover{
     &::after{
       background: rgba($color: #fff, $alpha: 0.1);
-      mix-blend-mode: lighten;
+      mix-blend-mode: multiply;
     }
   }
 
   &:active{
+    transform: translate(1px);
     &::after{
       background: rgba($color: #000, $alpha: 0.2);
-      mix-blend-mode: darken;
+      mix-blend-mode: multiply;
     }
   }
 

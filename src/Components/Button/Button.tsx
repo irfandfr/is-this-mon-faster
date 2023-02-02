@@ -6,6 +6,7 @@ interface ButtonProp{
   disabled? : boolean
   type? : 'primary' | 'secondary' | 'danger'
   style? : React.CSSProperties
+  onClick?: () => {}
 }
 
 const Button = ({text, icon, disabled, type, style}: ButtonProp) =>{
