@@ -3,18 +3,9 @@
 * v.0.0
 */
 
-//FONT COLORS
-$basic-heading: #153F67;
-$body-font: #2B2B2B;
-$light-font: #f3f3f3;
-
-//BACKGROUND COLORS
-$content-bg: #F1F9FB;
-$app-bg: #F3F3F3;
-$primary-bg: #5F9FFF;
-$secondary-bg: #153F67;
-
 //COMPLEMENTARY COLORS
+$light-color: #f3f3f3;
+$primary-color: #153F67;
 $pkmn1-color: #36B7AF;
 $pkmn2-color: #9221C7;
 $success-color: #0AA849;
@@ -23,24 +14,6 @@ $danger-color: #EA526F;
 $faster-color: #5994BF;
 $slower-color: #BB9262;
 $tie-color: #CBBA20;
-
-
-
-/*
-* DARK MODE STYLE
-*/
-:global(.dark){
-  //Font Colors
-  $basic-heading: #eaeaea;
-  $body-font: #eaeaea;
-  $light-heading: #153F67;
-
-
-  //Background Colors
-  $app-bg: #3c3c3c;
-  $content-bg: #4f4f4f;
-  $secondary-bg: #CCD2E3;
-
-}
+$header-color :#3584CD;
 
 
