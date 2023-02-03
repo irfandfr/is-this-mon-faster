@@ -31,7 +31,7 @@ const Card = ({children, className, style, dark} : CardProp) =>{
 const Header : React.FC<CardHeaderProp> = ({text} : CardHeaderProp) => {
   return(
     <div className={styles.header}>
-      <h3>{text}</h3>
+      <h3 className={styles.headerTitle}>{text}</h3>
       <hr />
     </div>
   )

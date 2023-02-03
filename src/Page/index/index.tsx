@@ -9,10 +9,12 @@ import style from './homepage.module.scss'
 const Homepage = () =>{
   return(
     <MainView className={style.homepage}>
-      <h3 className={style.text} style={{margin: '33px 0'}}>Is</h3>
-      <BigInput color='#36B7AF'/>
-      <h4 className={style.text}style={{textAlign: 'center', margin: '34px 0'}}>faster <br /> than</h4>
-      <BigInput color='#9221C7'/>
+      <h3 className={style.text} >Is</h3>
+      <div className={style.compareGroup}>
+        <BigInput color='#36B7AF'/>
+        <h4 className={style.text}style={{textAlign: 'center'}}>faster <br /> than</h4>
+        <BigInput color='#C13CFF'/>
+      </div>
       <Card style={{marginTop: '37px'}}>
         <Card.Header text='Find Out:' />
         <Card.ListItem text='Speed calculations (Max, Min, Neutral nature etc.)' type='safe' />

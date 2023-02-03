@@ -13,6 +13,7 @@
   justify-content: center;
   padding: 0 12px;
   z-index: map-get($map: $z-indexes, $key: 'header');
+  color: $light-color;
   
   .headerContent{
     width: 100%;
@@ -34,7 +35,6 @@
 
     .headerAppName{
       font-family: 'Patua One', cursive;
-      color: $light-color;
       @include font-size(16px);
     }
   }
@@ -66,7 +66,6 @@
         cursor: pointer;
         text-decoration: none;
         font-family: 'Patua One', cursive;
-        color: $light-color;
         @include font-size(24px);
         margin-bottom: 25px;
         position: relative;
@@ -108,6 +107,7 @@
   @media screen and (min-width: map-get($breakpoints, 'small')) {
     height: map-get($map: $header-height, $key: "desktop");
     background: transparent;
+    color: var(--basic-heading);
 
     .headerContent{
       max-width: $max-header-width;
@@ -121,6 +121,54 @@
     .appLogoName{
       .headerAppName{
         @include font-size(20px);
+        opacity: 0.8;
+      }
+    }
+
+    .navContainer{
+      max-height: 250px;
+      overflow: hidden;
+      position: inherit;
+      background-color: transparent;
+      width: 100%;
+      left: 0;
+      top: map-get($map: $header-height, $key: "mobile");
+      transition: max-height 0.15s ease-in-out;
+      
+      ul{
+        flex-flow: row;
+        align-items: flex-start;
+        justify-content: right;
+        padding: 0;
+        margin: 0;
+  
+        li{
+          @include font-size(20px);
+          margin-bottom: 0;
+          position: relative;
+          width: max-content;
+          z-index: 1;
+          margin-left: 20px;
+          opacity: 0.8;
+  
+          &.active{
+            text-decoration: underline;
+          }
+  
+          &::before{
+            background: var(--primary-bg);
+          }
+          &:hover{
+            opacity: 1;
+            &::before{
+              opacity: 1;
+            }
+          }
+        }
+      }
+  
+      &.open{
+        max-height: 250px;
       }
     }
   }

@@ -4,4 +4,33 @@
   .text{
     color: var(--basic-heading);
   }
+
+  h3.text{
+    margin: 33px 0
+  }
+
+  .compareGroup{
+    display: flex;
+    flex-flow: column;
+    margin: 34px 0;
+  }
+
+  @media screen and (min-width: map-get($breakpoints, 'small')) {
+    h3.text{
+      @include font-size(32px);
+      margin: 69px 0 25px 0;
+    }
+
+    h4.text{
+      @include font-size(20px);
+      @include line-height(24px);
+    }
+    .compareGroup{
+      width: 100%;
+      flex-flow: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 4px;
+    }
+  }
 }

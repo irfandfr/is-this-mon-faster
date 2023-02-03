@@ -10,11 +10,14 @@
   background: var(--content-bg);
 
   .header{
-    @include font-size(20px);
-    @include line-height(24px);
     color: var(--basic-heading);
     margin-top: 6px;
     margin-bottom: 11px;
+
+    .headerTitle{
+      @include font-size(20px);
+      @include line-height(24px);
+    }
   }
 
   hr{
@@ -50,6 +53,29 @@
         width: 4px;
         border-radius: 6px;
         background-color: var(--body-font);
+      }
+    }
+  }
+
+  @media screen and (min-width: map-get($breakpoints, 'small')) {
+    .listItem{
+      margin-bottom: 5px;
+      .icon{
+        height: 24px;
+        width: auto;
+      }
+      p{
+        margin-top: 4px;
+        margin-left: 4px;
+        @include font-size(14px);
+        @include line-height(20px);
+      }
+    }
+
+    .header{
+      .headerTitle{
+        @include font-size(24px);
+        @include line-height(28px);
       }
     }
   }
