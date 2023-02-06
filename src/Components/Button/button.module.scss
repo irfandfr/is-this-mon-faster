@@ -29,7 +29,7 @@
   &:hover{
     &::after{
       background: rgba($color: #fff, $alpha: 0.1);
-      mix-blend-mode: multiply;
+      mix-blend-mode: lighten;
     }
   }
 
