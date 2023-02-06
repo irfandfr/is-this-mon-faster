@@ -1,0 +1,85 @@
+/*
+* This file contains reusable sass mixins
+* v.0.0
+*/
+
+/*
+ For font size and line height, if browser doesn't support rem; fallback to pixel value
+*/
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+@mixin line-height($size) {
+  line-height: $size;
+  line-height: calculateRem($size);
+}
+
+@mixin letter-spacing($size) {
+  letter-spacing: $size;
+  letter-spacing: calculateRem($size);
+}
+
+
+/*
+ Mixin for breakpoints
+*/
+
+@mixin breakpoint {
+  @media only screen and (max-width: 30em) {
+    @content;
+  }
+}
+
+
+/*
+ Mixin for creating animation
+*/
+
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+      @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+      @content;
+  }  
+  @-ms-keyframes #{$animation-name} {
+      @content;
+  }
+  @-o-keyframes #{$animation-name} {
+      @content;
+  }  
+  @keyframes #{$animation-name} {
+      @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};      
+}
+
+@mixin transition($str){
+  -webkit-transition: #{$str};
+  -moz-transition: #{$str};
+  -ms-transition: #{$str};
+  -o-transition: #{$str};
+  transition: #{$str};
+}
+
+/*
+* Maintaining aspect ratios for an element
+*/
+@mixin maintain-ratio($ratio: 1 1) {
+  $width: 100%;
+  $height: percentage(nth($ratio, 2) / nth($ratio, 1));
+  
+  width: $width;
+  height: 0;
+  padding-bottom: $height;
+}

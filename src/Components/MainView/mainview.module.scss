@@ -1,0 +1,13 @@
+@import './../../styles/config.module.scss';
+
+.mainview{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+
+
+  @media screen and (min-width: map-get($breakpoints, 'small')) {
+    width: $main-container;
+  }
+}

@@ -1,0 +1,16 @@
+@import "./styles/config.module.scss";
+
+.app{
+  min-height: 100vh;
+  max-width: 100vw;
+  padding: 0 12px;
+  padding-top: map-get($map: $header-height, $key: 'mobile');
+  background: var(--app-bg);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  @media screen and (min-width: map-get($breakpoints, 'small')) {
+    padding-top: map-get($map: $header-height, $key: "desktop");
+  }
+}
