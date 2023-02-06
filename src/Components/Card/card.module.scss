@@ -1,0 +1,82 @@
+@import './../../styles/config.module.scss';
+
+.card{
+  padding: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  width: 100%;
+  @include font-size(12px);
+  @include line-height(16px);
+  background: var(--content-bg);
+
+  .header{
+    color: var(--basic-heading);
+    margin-top: 6px;
+    margin-bottom: 11px;
+
+    .headerTitle{
+      @include font-size(20px);
+      @include line-height(24px);
+    }
+  }
+
+  hr{
+    border: none;
+    border-bottom: solid 1px var(--basic-heading);
+    opacity: 0.5;
+    margin: 0 10px;
+    margin-top: 6px;
+  }
+
+  .listItem{
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 3px;
+    color: var(--body-font);
+
+    .icon{
+      flex-shrink: 0;
+    }
+    p{
+      margin: 0;
+      margin-top: 2px;
+    }
+    .dot{
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      span{
+        height: 4px;
+        width: 4px;
+        border-radius: 6px;
+        background-color: var(--body-font);
+      }
+    }
+  }
+
+  @media screen and (min-width: map-get($breakpoints, 'small')) {
+    .listItem{
+      margin-bottom: 5px;
+      .icon{
+        height: 24px;
+        width: auto;
+      }
+      p{
+        margin-top: 4px;
+        margin-left: 4px;
+        @include font-size(14px);
+        @include line-height(20px);
+      }
+    }
+
+    .header{
+      .headerTitle{
+        @include font-size(24px);
+        @include line-height(28px);
+      }
+    }
+  }
+}

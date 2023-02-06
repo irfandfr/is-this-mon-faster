@@ -1,0 +1,30 @@
+@import './../../../styles/config.module.scss';
+
+.bigInputContainer{
+  width:100%;
+  max-width: 200px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-flow: column-reverse;
+  align-items: center;
+  .bigInput{
+    all: unset;
+    width: 100%;
+    height: 30px;
+    font-family: 'Patua One', cursive;
+    color: $pkmn1-color;
+    @include font-size(24px);
+    position: relative;
+    margin-bottom: 3px;
+  }
+
+  .underline{
+    display: block;
+    position: absolute;
+    max-width: 200px;
+    width: 100%;
+    height: 2px;
+    background-image: var(--svg-underline);
+  }
+}
