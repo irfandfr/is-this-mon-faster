@@ -1,8 +1,9 @@
 import React from 'react';
-import './App.css';
+import style from './App.module.scss';
 import './styles/global.scss';
 import speedAnalyzer from './Utils/speedAnalyzer';
 import { Outlet } from 'react-router-dom';
+import Header from './Components/Header/Header';
 
 
 function App() {
@@ -11,12 +12,9 @@ function App() {
     base_speed2: 20,
     inTrickRoom: true
   }
-  console.log(speedAnalyzer({...monStat}))
   return (
-    <div className="App">
-      <header className="App-header">
-        
-      </header>
+    <div className={`${style.light} ${style.app}`} data-theme='dark'>
+      <Header />
       <Outlet />
     </div>
   );
