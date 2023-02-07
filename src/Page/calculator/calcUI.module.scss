@@ -1,0 +1,18 @@
+@import './../../styles/config.module.scss';
+
+.calcUIContainer{
+  padding-top: 35px;
+  width: 240px;
+  
+  .text{
+    color: var(--basic-heading);
+  }
+
+  .pContainer{
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+  
+}
