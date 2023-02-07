@@ -6,15 +6,17 @@ interface ButtonProp{
   disabled? : boolean
   type? : 'primary' | 'secondary' | 'danger'
   style? : React.CSSProperties
-  onClick?: () => {}
+  onClick?: () => void | (() => {})
 }
 
-const Button = ({text, icon, disabled, type, style}: ButtonProp) =>{
+const Button = ({text, icon, disabled, type, style, onClick}: ButtonProp) =>{
   return(
-    <button className={`${styles.button} ${!!type ? styles[type] : ''}`} disabled={disabled} style={style}>
+    <button className={`${styles.button} ${!!type ? styles[type] : ''}`} disabled={disabled} style={style} onClick={onClick}>
       {text}
     </button>
   )
 }
+
+
 
 export default Button
