@@ -110,7 +110,7 @@ const CalculatorUI = () =>{
         <h5 className={style.text}>in</h5>
         <InputGroup groupList={stateTrickRoom} onClick={trToggle} />
       </div>
-      <Button text="Analyze" type="primary" style={{marginTop: '30px'}}/>
+      <Button text="Analyze" type="primary" style={{marginTop: '30px', marginBottom: '40px'}}/>
     </MainView>
   )
 }
