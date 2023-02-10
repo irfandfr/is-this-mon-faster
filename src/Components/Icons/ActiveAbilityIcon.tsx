@@ -7,7 +7,7 @@ interface Props{
   className?: string
 }
 
-const ActiveAbility = ({width, height, style, className} : Props) => (
+const ActiveAbilityIcon = ({width, height, style, className} : Props) => (
   <svg
     width={!!width ? width : (!!height? (height * 60)/60:'60')}
     height={!!height ? height : (!!width? (width * 60)/60:'60')}
@@ -36,4 +36,4 @@ const ActiveAbility = ({width, height, style, className} : Props) => (
   </svg>
 )
 
-export default ActiveAbility
+export default ActiveAbilityIcon
