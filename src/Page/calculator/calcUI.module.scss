@@ -6,8 +6,21 @@
   
   .text{
     color: var(--basic-heading);
+    text-align: center;
+  }
+  h3.text{
+    margin-bottom: 22px;
+  }
+  h4.text{
+    margin: 20px 0;
+  }
+  h5.text{
+    margin: 4px 0 6px 0;
   }
 
+  .compareContainer{
+    margin-bottom: 6px;
+  }
   .pContainer{
     width: 100%;
     display: flex;
@@ -15,4 +28,10 @@
     align-items: center;
   }
   
+  .formContainer{
+    width: 100%;
+    display: flex;
+    align-items: row;
+    flex-wrap: wrap;
+  }
 }
