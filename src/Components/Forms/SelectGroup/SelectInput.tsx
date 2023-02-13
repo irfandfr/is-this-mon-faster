@@ -20,7 +20,7 @@ const SelectInput = ({options,  title, id, onChange, className, style, disabled}
   return(
     <div className={`${!!className ? className : ''}  ${styles.selectInputContainer}`} style={style}>
       <label className={styles.inputLabel} htmlFor={id}>{title}</label>
-      <select className={styles.selectInput} name={title} id={id}>
+      <select className={styles.selectInput} name={title} id={id}>aa
         {renderOption()}
       </select>
     </div>

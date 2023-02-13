@@ -99,5 +99,20 @@
       }
     }
   }
-  
+  @media screen and (min-width: map-get($breakpoints, 'small')) {
+    .checkItem{
+      height: 40px;
+      @include font-size(18px);
+
+      .iconContainer{
+        height: 24px;
+        width: 24px;
+
+        .icon{
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }
 }

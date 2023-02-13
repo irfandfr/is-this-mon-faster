@@ -5,6 +5,7 @@
   flex-flow: column;
   align-items: center;
   width: 100%;
+  position: relative;
 
 
   @media screen and (min-width: map-get($breakpoints, 'small')) {

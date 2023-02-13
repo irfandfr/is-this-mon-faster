@@ -42,4 +42,7 @@
     border-right: 4px solid transparent;
     border-top: 6px solid var(--secondary-bg);
   }
+  @media screen and (min-width: map-get($breakpoints, 'small')) {
+    @include font-size(14px);
+  }
 }

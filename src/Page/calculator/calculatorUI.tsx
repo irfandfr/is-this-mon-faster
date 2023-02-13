@@ -14,6 +14,7 @@ import ChoiceScarfIcon from "../../Components/Icons/ChoiceScarfIcon"
 import Input from "../../Components/Forms/Input/Input"
 import SelectInput from "../../Components/Forms/SelectInput/SelectInput"
 import Button from "../../Components/Button/Button"
+import RefreshIcon from "../../Components/Icons/RefreshIcon"
 
 enum InitialStateKey{
   active_ability= 'active_ability',
@@ -21,6 +22,16 @@ enum InitialStateKey{
   paralyze = 'paralyze',
   choice_scarf = 'choice_scarf',
   iron_ball = 'iron_ball'
+}
+
+interface pkmnData{
+  base_spd: number
+  ev: number
+  iv: number
+  nature: 'beneficial' | 'hindering' | 'neutral'
+  name?: string
+  id?:string
+  img?:string
 }
 
 interface ActionType{
@@ -39,6 +50,12 @@ const CalculatorUI = () =>{
     paralyze : {icon:<ParalyzeIcon /> , title: 'Paralyze', id:'paralyze', value:'pr', check: false},
     choice_scarf : {icon:<ChoiceScarfIcon /> , title: 'Choice Scarf', id:'choice_scarf', value:'cs', check: false},
     iron_ball : {icon:<IronBallIcon /> , title: 'Iron Ball', id:'iron_ball', value:'ib', check: false},
+  }
+  const initialPkmnData : pkmnData = {
+    base_spd: 1,
+    ev: 0,
+    iv: 0,
+    nature: 'neutral'
   }
   const NATURE_OPTIONS = [
     {value:'neutral', name: 'Neutral'},
@@ -65,10 +82,26 @@ const CalculatorUI = () =>{
       }
     }
   }
-
+  const [p1Stat, setp1Stat] = useState<pkmnData>(initialPkmnData)
+  const [p2Stat, setp2Stat] = useState<pkmnData>(initialPkmnData)
   const [stateP1 , dispatch1] = useReducer(reducer, initialState)
   const [stateP2 , dispatch2] = useReducer(reducer, initialState)
   const [stateTrickRoom , setTRstate] = useState({trick_room :{icon:<TrickRoomIcon /> , title: 'Trick Room', id:'trick_room', value:'tr', check: false}})
+
+  function setP1Value(id : string , value : string | number){
+    console.log('called')
+    setp1Stat({
+      ...p1Stat,
+      [id] : value
+    })
+  }
+
+  function setP2Value(id : keyof string , value : string | number){
+    setp2Stat({
+      ...p2Stat,
+      [id] : value
+    })
+  }
 
   function trToggle(){
     let value = stateTrickRoom.trick_room
@@ -78,11 +111,14 @@ const CalculatorUI = () =>{
   }
   return(
     <MainView className={style.calcUIContainer}>
-      <h3 className={style.text}>Is</h3>
+      <div className={style.pageHeader}>
+        <h3 className={style.text}>Is</h3>
+        <button className={style.faqButton}>?</button>
+      </div>
       <div className={style.compareContainer}>
         <div className={style.pContainer}>
           <form className={style.formContainer}>
-            <Input title="Name" id='p1name' type="text"/>
+            <Input title="Name" id='p1name' type="text" onChange={setP1Value}/>
             <Input title="Base" id='p1base' minValue={1} maxValue={255}type="number" required defaultValue={1}/>
             <Input title="EV" id='p1ev' minValue={0} maxValue={252} defaultValue={252} type="number"/>
             <Input title="IV" id='p1iv' minValue={0} maxValue={31} defaultValue={31} type="number"/>
@@ -110,7 +146,8 @@ const CalculatorUI = () =>{
         <h5 className={style.text}>in</h5>
         <InputGroup groupList={stateTrickRoom} onClick={trToggle} />
       </div>
-      <Button text="Analyze" type="primary" style={{marginTop: '30px', marginBottom: '40px'}}/>
+      <Button icon={<RefreshIcon className={style.refreshIcon} />} text="Analyze" type="primary" style={{marginTop: '30px'}}/>
+      <a className={style.link} href="/calc">Switch to Simple</a>
     </MainView>
   )
 }
