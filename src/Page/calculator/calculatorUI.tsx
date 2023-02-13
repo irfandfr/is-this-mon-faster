@@ -53,8 +53,8 @@ const CalculatorUI = () =>{
   }
   const initialPkmnData : pkmnData = {
     base_spd: 1,
-    ev: 0,
-    iv: 0,
+    ev: 252,
+    iv: 31,
     nature: 'neutral'
   }
   const NATURE_OPTIONS = [
@@ -89,14 +89,14 @@ const CalculatorUI = () =>{
   const [stateTrickRoom , setTRstate] = useState({trick_room :{icon:<TrickRoomIcon /> , title: 'Trick Room', id:'trick_room', value:'tr', check: false}})
 
   function setP1Value(id : string , value : string | number){
-    console.log('called')
+    console.log('called ' + value)
     setp1Stat({
       ...p1Stat,
       [id] : value
     })
   }
 
-  function setP2Value(id : keyof string , value : string | number){
+  function setP2Value(id : string , value : string | number){
     setp2Stat({
       ...p2Stat,
       [id] : value
@@ -119,10 +119,10 @@ const CalculatorUI = () =>{
         <div className={style.pContainer}>
           <form className={style.formContainer}>
             <Input title="Name" id='p1name' type="text" onChange={setP1Value}/>
-            <Input title="Base" id='p1base' minValue={1} maxValue={255}type="number" required defaultValue={1}/>
-            <Input title="EV" id='p1ev' minValue={0} maxValue={252} defaultValue={252} type="number"/>
-            <Input title="IV" id='p1iv' minValue={0} maxValue={31} defaultValue={31} type="number"/>
-            <SelectInput options={NATURE_OPTIONS} id='p1nature' title="Nature"/>
+            <Input title="Base" id='p1base' minValue={1} maxValue={255}type="number" required defaultValue={1} onChange={setP1Value} />
+            <Input title="EV" id='p1ev' minValue={0} maxValue={252} defaultValue={252} type="number" onChange={setP1Value}/>
+            <Input title="IV" id='p1iv' minValue={0} maxValue={31} defaultValue={31} type="number" onChange={setP1Value}/>
+            <SelectInput options={NATURE_OPTIONS} id='p1nature' title="Nature" onChange={setP1Value}/>
           </form>
           <h5 className={style.text}>with</h5>
           <InputGroup groupList={stateP1} onClick={dispatch1}/>
@@ -132,11 +132,11 @@ const CalculatorUI = () =>{
         
         <div className={style.pContainer}>
           <form className={style.formContainer}>
-            <Input title="Name" id='p2name' type="text"/>
-            <Input title="Base" id='p2base' minValue={1} maxValue={255}type="number" required defaultValue={1}/>
-            <Input title="EV" id='p2ev' minValue={0} maxValue={252} defaultValue={252} type="number"/>
-            <Input title="IV" id='p2iv' minValue={0} maxValue={31} defaultValue={31} type="number"/>
-            <SelectInput options={NATURE_OPTIONS} id='p2nature' title="Nature"/>
+            <Input title="Name" id='p2name' type="text" onChange={setP2Value} />
+            <Input title="Base" id='p2base' minValue={1} maxValue={255}type="number" required defaultValue={1} onChange={setP2Value}/>
+            <Input title="EV" id='p2ev' minValue={0} maxValue={252} defaultValue={252} type="number" onChange={setP2Value}/>
+            <Input title="IV" id='p2iv' minValue={0} maxValue={31} defaultValue={31} type="number" onChange={setP2Value}/>
+            <SelectInput options={NATURE_OPTIONS} id='p2nature' title="Nature" onChange={setP2Value}/>
           </form>
           <h5 className={`${style.text}`}>with</h5>
           <InputGroup groupList={stateP2} onClick={dispatch2}/>

@@ -43,5 +43,8 @@
   }
   @media screen and (min-width: map-get($breakpoints, 'small')) {
     @include font-size(14px);
+    .selectInput{
+      width: 70px;
+    }
   }
 }
