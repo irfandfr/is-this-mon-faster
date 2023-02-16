@@ -7,14 +7,14 @@ import Header from './Components/Header/Header';
 
 
 function App() {
-  let monStat = {
-    base_speed1: 90,
-    base_speed2: 20,
-    inTrickRoom: true
-  }
+  const HEADER_MENU = [
+    {title: 'Home', link:'/'},
+    {title: 'Calculator', link:'/calc'},
+    {title: 'Advanced Calculator', link: '/calc'}
+  ]
   return (
-    <div className={`${style.light} ${style.app}`} data-theme='dark'>
-      <Header />
+    <div className={`${style.light} ${style.app}`} data-theme='light'>
+      <Header menu = {HEADER_MENU}/>
       <Outlet />
     </div>
   );
