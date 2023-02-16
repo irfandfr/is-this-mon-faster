@@ -9,6 +9,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Homepage from './Page/index';
 import CalculatorUI from './Page/calculator/calculatorUI';
+import ResultPage from './Page/result/ResultPage';
 
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path:'/calc',
         element:<CalculatorUI />
+      },
+      {
+        path:'/result',
+        element:<ResultPage />
       }
     ]
   },
