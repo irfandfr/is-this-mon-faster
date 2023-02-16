@@ -12,7 +12,7 @@ const ModifierContainer = ({icon, className, text, size} : ModifierContainerProp
   let styledIcon = React.cloneElement(icon,{className: style.modIcon})
   return(
     <div className={`${style.modContainer} ${size && style[size]} ${className}`}>
-      <span className={style.modTooltip}>{text}</span>
+      {!!text && <span className={style.modTooltip}>{text}</span>}
       {styledIcon}
     </div>
   )
