@@ -1,0 +1,56 @@
+@import './../../styles/config.module.scss';
+
+.modContainer{
+  --mod-size-m:24px;
+  --mod-size-s: 16px;
+  background-color: var(--icon-bg);
+  display: inline-block;
+  position: relative;
+
+  &.m{
+    height: var(--mod-size-m);
+    width:var(--mod-size-m);
+    border-radius: calc(var(--mod-size-m) / 2);
+
+    .modIcon{
+      height: var(--mod-size-m);
+      width: var(--mod-size-m);
+    }
+  }
+  &.s{
+    height: var(--mod-size-s);
+    width: var(--mod-size-s);
+    border-radius: calc(var(--mod-size-s) / 2);
+
+    .modIcon{
+      height: var(--mod-size-s);
+      width: var(--mod-size-s);
+    }
+  }
+
+  @media screen and (min-width:map-get($breakpoints, 'small')) {
+    --mod-size-m:26px;
+    --mod-size-s: 18px;
+  }
+
+  .modTooltip{
+    display: inline-block;
+    background: var(--icon-bg);
+    color: var(--light-font);
+    padding: 3px 6px;
+    border-radius: 4px;
+    @include font-size(12px);
+    position: absolute;
+    white-space: nowrap;
+    top: -30px;
+    left: 50%;
+    margin-left: -50px;
+    width: 100px;
+    text-align: center;
+
+    &::before{
+      content: '';
+      
+    }
+  }
+}
