@@ -16,7 +16,7 @@ interface CardHeaderProp{
 }
 
 interface CardListItemProp {
-  text: string
+  children? : React.ReactNode
   type? : 'warning' | 'safe' | 'danger' 
 }
 
@@ -38,7 +38,7 @@ const Header : React.FC<CardHeaderProp> = ({text} : CardHeaderProp) => {
 }
 Card.Header = Header
 
-const ListItem : React.FC<CardListItemProp> = ({text, type} : CardListItemProp) =>{
+const ListItem : React.FC<CardListItemProp> = ({children, type} : CardListItemProp) =>{
   function renderIconType(type : 'warning' | 'safe' | 'danger' | undefined){
     switch (type) {
       case 'safe':
@@ -54,7 +54,9 @@ const ListItem : React.FC<CardListItemProp> = ({text, type} : CardListItemProp) 
   return(
     <div className={styles.listItem}>
       {renderIconType(type)}
-      <p>{text}</p>
+      <div className={styles.content}>
+        {children}
+      </div>
     </div>
   )
 }
