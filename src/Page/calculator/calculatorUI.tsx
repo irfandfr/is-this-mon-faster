@@ -89,7 +89,6 @@ const CalculatorUI = () =>{
   const [stateTrickRoom , setTRstate] = useState({trick_room :{icon:<TrickRoomIcon /> , title: 'Trick Room', id:'trick_room', value:'tr', check: false}})
 
   function setP1Value(id : string , value : string | number){
-    console.log('called ' + value)
     setp1Stat({
       ...p1Stat,
       [id] : value
@@ -109,6 +108,7 @@ const CalculatorUI = () =>{
       trick_room : {...value, check : !value.check}
     })
   }
+  
   return(
     <MainView className={style.calcUIContainer}>
       <div className={style.pageHeader}>
