@@ -33,7 +33,7 @@ const ResultPage = ({advanced} : ResultPageInterface) => {
   let result = advancedModeAnalyzer(p1, p2, p1mods, p2mods, false)
   return(
     <MainView className={style.resultPage}>
-      <ResultCard advanced={advanced}/>
+      <ResultCard advanced={advanced} trick_room={false} verdict={result.verdict} advProp={{p1baseSpeed :p1.base}}/>
       <StatCalcCard p1stats={p1} p2stats={p2} p1mods={p1mods} p2mods={p2mods} verdict={result.verdict} minBoost={result.min_boost} trick_room={false}/>
       <Button icon={<TriangleLeftIcon />} type='secondary' text="Back" style={{marginTop: '39px'}}/>
     </MainView>
