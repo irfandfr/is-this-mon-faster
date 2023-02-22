@@ -22,19 +22,15 @@ interface ResultCardProp{
   advProp? : advResultProp
   simpleProp? : simpleResultProp 
 }
+
 const ResultCard = ({advanced, verdict, trick_room,advProp,simpleProp} : ResultCardProp) =>{
-  function renderVerdict(verdict : 1 | 0 | -1){
-    switch (verdict) {
-      case(1):
-        return(<BigInput defaultValue="Faster" disabled color="#5994BF" className={style.bigInput}/>)
-      case(0):
-      return(<BigInput defaultValue="Tie" disabled color="#CBBA20" className={style.bigInput}/>)
-      case(-1):
-      return(<BigInput defaultValue="Slower" disabled color="#BB9262" className={style.bigInput}/>)
-    
-      default:
-        break;
-    }
+  let verdictResult = {verdict:'', color:''}
+  if(verdict === 1){
+    verdictResult = {verdict: 'Faster', color: '#5994BF'}
+  }else if(verdict === 0){
+    verdictResult = {verdict: 'Tie', color: '#CBBA20'}
+  }else if(verdict === -1){
+    verdictResult = {verdict: 'Slower', color: '#BB9262'}
   }
 
   return(
@@ -45,7 +41,7 @@ const ResultCard = ({advanced, verdict, trick_room,advProp,simpleProp} : ResultC
       </div>}
       <h2 className={style.p1text}>{advProp?.p1baseSpeed} BSpd</h2>
       <p className={style.text}>is</p>
-      {renderVerdict(verdict)}
+      <BigInput defaultValue={verdictResult.verdict} disabled color={verdictResult.color} className={style.bigInput}/>
     </Card>
   )
 }
