@@ -27,7 +27,7 @@ const Input = ({type, title, id, size, defaultValue, onChange, className, style,
       if(typeof onChange !== 'undefined' && id){
         onChange(id, value)
       }
-    }, 2000);
+    }, 1000);
   }
 
   return(
