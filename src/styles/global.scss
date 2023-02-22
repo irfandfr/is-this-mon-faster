@@ -15,6 +15,7 @@
   --app-bg: #F3F3F3;
   --primary-bg: #5F9FFF;
   --secondary-bg: #153F67;
+  --icon-bg: rgba(21, 63, 103, 0.8);
 }
 
 [data-theme='dark']{
@@ -29,6 +30,7 @@
     --app-bg: #3c3c3c;
     --content-bg: #4f4f4f;
     --secondary-bg: #CCD2E3;  
+    --icon-bg: #f3f3f3;
 }
 
 html,

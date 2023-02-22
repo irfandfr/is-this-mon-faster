@@ -7,6 +7,7 @@ import StatCalcCard from "./subcomponent/StatCalcCard"
 import style from "./result.module.scss"
 import { Modifiers, PkmnBaseStat } from "../../Utils/types"
 import advancedModeAnalyzer from "../../Utils/advancedModeAnalyzer"
+import StatTables from "./subcomponent/StatTables"
 
 interface ResultPageInterface{
   advanced: boolean

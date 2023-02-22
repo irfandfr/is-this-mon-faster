@@ -56,12 +56,19 @@ $icon-size: 16px;
   
       .statContainer{
         justify-self: center;
+        display: flex;
+        flex-flow: column;
+        align-items: center
       }
   
       .bspd{
         @include font-size(16px);
         @include line-height(18px);
         font-family: 'Patua One', cursive;
+      }
+
+      .stat{
+        font-size: 10.5px;
       }
       .vs{
         font-family: 'Patua One', cursive;
@@ -128,6 +135,26 @@ $icon-size: 16px;
 
     .statCalcCard{
       max-width: 442px;
+    }
+  }
+
+  .statTable{
+    width: 90%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: var(--basic-heading);
+    tr{
+      th:first-child{
+        text-align: left;
+        font-weight: 700;
+      }
+      th{
+        width: calc(100% / 3);
+        font-weight:500;
+      }
+      &:nth-child(odd){
+        background-color: rgba($color: #DFEDEE, $alpha: 0.8);
+      }
     }
   }
 }
