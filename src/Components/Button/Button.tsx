@@ -8,7 +8,7 @@ interface ButtonProp{
   disabled? : boolean
   type? : 'primary' | 'secondary' | 'danger'
   style? : React.CSSProperties
-  onClick?: () => void | (() => {})
+  onClick?: (e:React.MouseEvent<HTMLButtonElement>) => void | ((e:React.MouseEvent<HTMLButtonElement>) => {})
 }
 
 const Button = ({text, icon, disabled, type, style, onClick}: ButtonProp) =>{

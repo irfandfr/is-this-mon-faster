@@ -26,14 +26,14 @@
     background: transparent;
     transition: all 0.1s ease-in-out;
   }
-  &:hover{
+  &:hover:not(:disabled){
     &::after{
       background: rgba($color: #fff, $alpha: 0.1);
       mix-blend-mode: lighten;
     }
   }
 
-  &:active{
+  &:active:not(:disabled){
     transform: translate(1px);
     &::after{
       background: rgba($color: #000, $alpha: 0.2);
@@ -41,7 +41,17 @@
     }
   }
 
-  &:focus-visible{
+  &:disabled{
+    background-color: gray!important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.0);
+    cursor:default;
+    &::after{
+      background: rgba($color: gray, $alpha: 0.5);
+      mix-blend-mode: darken;
+    }
+  }
+
+  &:focus-visible:not(:disabled){
     outline: solid 3px var(--body-font);
   }
 
