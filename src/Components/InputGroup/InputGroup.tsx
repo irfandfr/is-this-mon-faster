@@ -16,6 +16,7 @@ interface SelectionGroupProp{
 interface InputGroupProp{
   groupList : SelectionGroupProp
   onClick: ([arg] : any) => void
+  disabled?: boolean
 }
 
 interface CheckItemProp extends SelectionProp{
@@ -35,7 +36,7 @@ const CheckItem = ({check, icon, title, id, onClick, value, } : CheckItemProp) =
   )
 }
 
-const InputGroup = ( {groupList, onClick} : InputGroupProp) =>{
+const InputGroup = ( {groupList, onClick, disabled} : InputGroupProp) =>{
   function renderGroup(listItems:SelectionGroupProp){
     return Object.keys(listItems).map((key : string) => {
       let {icon, title, id, value, check} = listItems[key]
@@ -44,7 +45,7 @@ const InputGroup = ( {groupList, onClick} : InputGroupProp) =>{
     })
   }
   return(
-  <form className={style.inputCheckGroup}>
+  <form className={`${style.inputCheckGroup} ${disabled ? style.disabled : ''}`}>
     {renderGroup(groupList)}
   </form>
   )

@@ -22,21 +22,19 @@ const Input = ({type, title, id, size, defaultValue, onChange, className, style,
   
   function updateValue(event : React.FormEvent<HTMLInputElement>){
     clearTimeout(timerId)
+    let target = event.currentTarget //save current target so fn can access in timeout fn
     let value = type === 'number' ? Number(event.currentTarget.value) : event.currentTarget.value;
-    if(type === 'number' && event.currentTarget.value === ''){
-      console.log(value)
-      event.currentTarget.value = minValue+'' 
-    }else if(typeof value === 'number'){//check if input value is in range of min and max value
-      if(minValue && value < minValue){
-        value = minValue
-        event.currentTarget.value = minValue+''
-      }else if(maxValue && value > maxValue){
-        value = maxValue
-        event.currentTarget.value = maxValue+''
-      }
-    }
     timerId = setTimeout(() => {
       if(typeof onChange !== 'undefined' && id){
+        if(typeof value === 'number'){//check if input value is in range of min and max value
+          if(minValue && value < minValue){
+            value = minValue
+            target.value = minValue+''
+          }else if(maxValue && value > maxValue){
+            value = maxValue
+            target.value = maxValue+''
+          }
+        }
         onChange(id, value)
       }
     }, 1000);
