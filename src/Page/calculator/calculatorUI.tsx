@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react"
+import React, { useReducer, useState } from "react"
 import ActiveAbilityIcon from "../../Components/Icons/ActiveAbilityIcon"
 import InputGroup from "../../Components/InputGroup/InputGroup"
 import MainView from "../../Components/MainView/MainView"
@@ -15,6 +15,9 @@ import Input from "../../Components/Forms/Input/Input"
 import SelectInput from "../../Components/Forms/SelectInput/SelectInput"
 import Button from "../../Components/Button/Button"
 import RefreshIcon from "../../Components/Icons/RefreshIcon"
+import { useNavigate } from "react-router-dom"
+import { PkmnData } from "../../Utils/types"
+import { modifiersAbbreviator, natureToSigns } from "../../Utils/utils"
 
 enum InitialStateKey{
   active_ability= 'active_ability',
@@ -26,6 +29,7 @@ enum InitialStateKey{
 
 interface pkmnData{
   base_spd: number
+  lvl: number
   ev: number
   iv: number
   nature: 'beneficial' | 'hindering' | 'neutral'
@@ -53,9 +57,15 @@ const CalculatorUI = () =>{
   }
   const initialPkmnData : pkmnData = {
     base_spd: 1,
+    lvl:50,
     ev: 252,
     iv: 31,
     nature: 'neutral'
+  }
+  const initialSelectState = {
+    p1group: false,
+    p2group: false,
+    trstate: false
   }
   const NATURE_OPTIONS = [
     {value:'neutral', name: 'Neutral'},
@@ -84,10 +94,11 @@ const CalculatorUI = () =>{
   }
   const [p1Stat, setp1Stat] = useState<pkmnData>(initialPkmnData)
   const [p2Stat, setp2Stat] = useState<pkmnData>(initialPkmnData)
+  const [selectGroupState, setGroupState] = useState(initialSelectState)
   const [stateP1 , dispatch1] = useReducer(reducer, initialState)
   const [stateP2 , dispatch2] = useReducer(reducer, initialState)
   const [stateTrickRoom , setTRstate] = useState({trick_room :{icon:<TrickRoomIcon /> , title: 'Trick Room', id:'trick_room', value:'tr', check: false}})
-
+  const navigate = useNavigate()
   function setP1Value(id : string , value : string | number){
     setp1Stat({
       ...p1Stat,
@@ -101,12 +112,42 @@ const CalculatorUI = () =>{
       [id] : value
     })
   }
-
+  function getTrValue(){
+    return Object.entries(stateTrickRoom).map((value : [string, SelectionProp]) =>{
+      return value[1].check
+    })
+  }
   function trToggle(){
     let value = stateTrickRoom.trick_room
     setTRstate({
       trick_room : {...value, check : !value.check}
     })
+  }
+
+  function extractData(pkmn:pkmnData, mods: initialState){
+    let pStats :any[]= [pkmn.base_spd,pkmn.ev,pkmn.iv,pkmn.lvl,natureToSigns(pkmn.nature)]
+    Object.entries(mods).map((value : [string, SelectionProp]) =>{
+      if(value[1].check){
+        pStats.push(modifiersAbbreviator(value[0] as keyof typeof InitialStateKey))
+      }
+    })
+    return pStats
+  }
+
+  function toResultPage(e:React.MouseEvent<HTMLButtonElement>){
+    e.preventDefault()
+    e.currentTarget.disabled = true;
+    setGroupState({
+      p1group: true,
+      p2group: true,
+      trstate: true
+    })
+    setTimeout(() => {//wait incase for debounce function
+      let p1data = extractData(p1Stat,stateP1);
+      let p2data = extractData(p2Stat,stateP2)
+      let tr = getTrValue().toString()
+      let url = `/result?p1=${p1data.join('_')}&p2=${p2data.join('_')}&tr=${tr}`
+    }, 800);
   }
   
   return(
@@ -118,36 +159,36 @@ const CalculatorUI = () =>{
       <div className={style.compareContainer}>
         <div className={style.pContainer}>
           <form className={style.formContainer}>
-            <Input title="Name" id='p1name' type="text" onChange={setP1Value}/>
-            <Input title="Base" id='p1base' minValue={1} maxValue={255}type="number" required defaultValue={1} onChange={setP1Value} />
-            <Input title="EV" id='p1ev' minValue={0} maxValue={252} defaultValue={252} type="number" onChange={setP1Value}/>
-            <Input title="IV" id='p1iv' minValue={0} maxValue={31} defaultValue={31} type="number" onChange={setP1Value}/>
-            <SelectInput options={NATURE_OPTIONS} id='p1nature' title="Nature" onChange={setP1Value}/>
+            <Input title="Base" id='base_spd' minValue={1} maxValue={255}type="number" required defaultValue={1} onChange={setP1Value} />
+            <Input title="Lvl" id='lvl' minValue={1} maxValue={100} type="number" required defaultValue={50} onChange={setP2Value}/>
+            <Input title="EV" id='ev' minValue={0} maxValue={252} defaultValue={252} type="number" onChange={setP1Value}/>
+            <Input title="IV" id='iv' minValue={0} maxValue={31} defaultValue={31} type="number" onChange={setP1Value}/>
+            <SelectInput options={NATURE_OPTIONS} id='nature' title="Nature" onChange={setP1Value}/>
           </form>
           <h5 className={style.text}>with</h5>
-          <InputGroup groupList={stateP1} onClick={dispatch1}/>
+          <InputGroup groupList={stateP1} onClick={dispatch1} disabled={selectGroupState.p1group}/>
         </div>
 
         <h4 className={style.text}>faster<br />than</h4>
         
         <div className={style.pContainer}>
           <form className={style.formContainer}>
-            <Input title="Name" id='p2name' type="text" onChange={setP2Value} />
-            <Input title="Base" id='p2base' minValue={1} maxValue={255}type="number" required defaultValue={1} onChange={setP2Value}/>
-            <Input title="EV" id='p2ev' minValue={0} maxValue={252} defaultValue={252} type="number" onChange={setP2Value}/>
-            <Input title="IV" id='p2iv' minValue={0} maxValue={31} defaultValue={31} type="number" onChange={setP2Value}/>
-            <SelectInput options={NATURE_OPTIONS} id='p2nature' title="Nature" onChange={setP2Value}/>
+            <Input title="Base" id='base_spd' minValue={1} maxValue={255}type="number" required defaultValue={1} onChange={setP2Value}/>
+            <Input title="Lvl" id='lvl' minValue={1} maxValue={100}type="number" required defaultValue={50} onChange={setP2Value}/>
+            <Input title="EV" id='ev' minValue={0} maxValue={252} defaultValue={252} type="number" onChange={setP2Value}/>
+            <Input title="IV" id='iv' minValue={0} maxValue={31} defaultValue={31} type="number" onChange={setP2Value}/>
+            <SelectInput options={NATURE_OPTIONS} id='nature' title="Nature" onChange={setP2Value}/>
           </form>
           <h5 className={`${style.text}`}>with</h5>
-          <InputGroup groupList={stateP2} onClick={dispatch2}/>
+          <InputGroup groupList={stateP2} onClick={dispatch2} disabled={selectGroupState.p2group}/>
         </div>
       </div>
       <div className={style.pContainer}>
         <h5 className={style.text}>in</h5>
-        <InputGroup groupList={stateTrickRoom} onClick={trToggle} />
+        <InputGroup groupList={stateTrickRoom} onClick={trToggle} disabled={selectGroupState.trstate}/>
       </div>
-      <Button icon={<RefreshIcon className={style.refreshIcon} />} text="Analyze" type="primary" style={{marginTop: '30px'}}/>
-      <a className={style.link} href="/calc">Switch to Simple</a>
+      <Button icon={<RefreshIcon className={style.refreshIcon} />} onClick={toResultPage} text="Analyze" type="primary" style={{marginTop: '30px'}}/>
+      {/* <a className={style.link} href="/calc">Switch to Simple</a> */}
     </MainView>
   )
 }
