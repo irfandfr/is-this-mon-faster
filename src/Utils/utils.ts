@@ -1,3 +1,4 @@
+import { Modifiers } from "./types";
 
 /**
  * @desc function to calculate speed after been given a speed boost
@@ -19,7 +20,7 @@ export function statBoostCalc(speed: number, boost: number):number{
  * @param nature :('beneficial'|'hindering'|'neutral') the expected nature types
  * @returns : '+'|'-'|'.' signs representing said natures
  */
-export function natureToSigns(nature: 'beneficial'|'hindering'|'neutral'){
+export function natureToSigns(nature: 'beneficial'|'hindering'|'neutral'|string){
   switch (nature) {
     case 'beneficial':
       return('+')
@@ -28,7 +29,7 @@ export function natureToSigns(nature: 'beneficial'|'hindering'|'neutral'){
     case 'neutral':
       return('.')
     default:
-      return'';
+      return undefined;
   }
 }
 
@@ -37,7 +38,7 @@ export function natureToSigns(nature: 'beneficial'|'hindering'|'neutral'){
  * @param sign :'+'|'-'|'.' the expected sign types
  * @returns : ('beneficial'|'hindering'|'neutral') nature representing said sign
  */
- export function signsToNature(sign: '+'|'-'|'.'){
+ export function signsToNature(sign: '+'|'-'|'.'|string){
   switch (sign) {
     case '+':
       return('beneficial')
@@ -46,11 +47,11 @@ export function natureToSigns(nature: 'beneficial'|'hindering'|'neutral'){
     case '.':
       return('neutral')
     default:
-      return'';
+      return undefined;
   }
 }
 
-export function modifiersAbbreviator(mod : 'active_ability'|'tailwind'|'paralyze'|'iron_ball'|'choice_scarf'){
+export function modifiersAbbreviator(mod : Modifiers | string){
   switch (mod) {
     case 'active_ability':
       return 'ab'
@@ -63,11 +64,11 @@ export function modifiersAbbreviator(mod : 'active_ability'|'tailwind'|'paralyze
     case 'iron_ball':
       return 'ib'
     default:
-      break;
+      return undefined
   }
 }
 
-export function modifiersExtendor(mod : 'ab'|'tw'|'pz'|'ib'|'cs'){
+export function modifiersExtendor(mod : 'ab'|'tw'|'pz'|'ib'|'cs'|string): Modifiers|undefined{
   switch (mod) {
     case 'ab':
       return 'active_ability'
@@ -80,6 +81,6 @@ export function modifiersExtendor(mod : 'ab'|'tw'|'pz'|'ib'|'cs'){
     case 'ib':
       return 'iron_ball'
     default:
-      break;
+      return undefined
   }
 }
