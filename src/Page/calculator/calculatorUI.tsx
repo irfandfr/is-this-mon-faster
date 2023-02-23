@@ -16,7 +16,6 @@ import SelectInput from "../../Components/Forms/SelectInput/SelectInput"
 import Button from "../../Components/Button/Button"
 import RefreshIcon from "../../Components/Icons/RefreshIcon"
 import { useNavigate } from "react-router-dom"
-import { PkmnData } from "../../Utils/types"
 import { modifiersAbbreviator, natureToSigns } from "../../Utils/utils"
 
 enum InitialStateKey{
@@ -124,6 +123,7 @@ const CalculatorUI = () =>{
     })
   }
 
+  //compile pokemon stats and modifiers into one array
   function extractData(pkmn:pkmnData, mods: initialState){
     let pStats :any[]= [pkmn.base_spd,pkmn.ev,pkmn.iv,pkmn.lvl,natureToSigns(pkmn.nature)]
     Object.entries(mods).map((value : [string, SelectionProp]) =>{
@@ -147,6 +147,7 @@ const CalculatorUI = () =>{
       let p2data = extractData(p2Stat,stateP2)
       let tr = getTrValue().toString()
       let url = `/result?p1=${p1data.join('_')}&p2=${p2data.join('_')}&tr=${tr}`
+      navigate(url)
     }, 800);
   }
   
