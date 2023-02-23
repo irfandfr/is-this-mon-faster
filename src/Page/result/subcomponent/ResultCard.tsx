@@ -28,7 +28,7 @@ const ResultCard = ({advanced, verdict, trick_room,advProp,simpleProp} : ResultC
   if(verdict === 1){
     verdictResult = {verdict: 'Faster', color: '#5994BF'}
   }else if(verdict === 0){
-    verdictResult = {verdict: 'Tie', color: '#CBBA20'}
+    verdictResult = {verdict: 'Tied', color: '#CBBA20'}
   }else if(verdict === -1){
     verdictResult = {verdict: 'Slower', color: '#BB9262'}
   }
