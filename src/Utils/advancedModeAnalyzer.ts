@@ -5,7 +5,7 @@ import { Modifiers, PkmnBaseStat } from "./types"
 
 
 
-interface responseProp{
+export interface responseProp{
   verdict : 1 | 0 | -1
   min_boost: number
   inTrickRoom: boolean
