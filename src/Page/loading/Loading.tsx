@@ -15,7 +15,7 @@ const LoadingPage = ({errorText}: LoadingPageProp) =>{
         !(errorText === '') ? (
           <>
             <h3>{errorText}</h3>
-            <Button icon={<TriangleLeftIcon />} href="/calc" type='secondary' text="Go back" style={{marginTop: '39px'}}/>
+            <Button icon={<TriangleLeftIcon />} href="/" type='secondary' text="Go back" style={{marginTop: '39px'}}/>
           </>
         ) : (
           <h3 className={style.loadingText}></h3>

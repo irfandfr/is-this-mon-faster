@@ -7,7 +7,7 @@ import {
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Homepage from './Page/index';
+//import Homepage from './Page/index';
 import CalculatorUI from './Page/calculator/calculatorUI';
 import ResultPage from './Page/result/ResultPage';
 
@@ -17,17 +17,17 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
+      // {
+      //   path:'/',
+      //   element:<Homepage />
+      // },
       {
         path:'/',
-        element:<Homepage />
-      },
-      {
-        path:'/calc',
         element:<CalculatorUI />
       },
       {
         path:'/result',
-        element:<ResultPage />
+        element:<ResultPage advanced={false} />
       }
     ]
   },
