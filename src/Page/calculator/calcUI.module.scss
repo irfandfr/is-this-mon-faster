@@ -65,6 +65,18 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+
+    .formTitle{
+      font-family: 'Roboto', sans-serif;
+      font-weight: 600;
+
+      &.pokemon1{
+        color: $pkmn1-color;
+      }
+      &.pokemon2{
+        color: $pkmn2-color;
+      }
+    }
   }
 
   .refreshIcon{

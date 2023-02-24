@@ -13,7 +13,7 @@ import { Modifiers } from "./types";
   const IRON_BALL_MULTIPLIER = 0.5
   let stat : number;
 
-  stat = baseStatCalculator(base_speed, iv, ev, nature, level).stat
+  stat = baseStatCalculator(base_speed, ev, iv, nature, level).stat
   if(!!status && status.length > 0 ){
     status.forEach( entry => {
       switch (entry) {

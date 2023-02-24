@@ -5,13 +5,13 @@ import Header from './Components/Header/Header';
 
 
 function App() {
-  const HEADER_MENU = [
+  const HEADER_MENU : [] | {title: string, link: string} = [
     //{title: 'Home', link:'/'},
-    {title: 'Calculator', link:'/'},
+    //{title: 'Calculator', link:'/'},
     //{title: 'Advanced Calculator', link: '/calc'}
   ]
   return (
-    <div className={`${style.light} ${style.app}`} data-theme='light'>
+    <div className={`${style.light} ${style.app}`} >
       <Header menu = {HEADER_MENU}/>
       <Outlet />
     </div>
