@@ -5,7 +5,6 @@ import IronBallIcon from "../../../Components/Icons/IronBallIcon"
 import ParalyzeIcon from "../../../Components/Icons/ParalyzeIcon"
 import TailwindIcon from "../../../Components/Icons/TailwindIcon"
 import ModifierContainer from "../../../Components/ModifierContainer/ModifierContainer"
-import baseStatCalculator from "../../../Utils/baseStatCalculator"
 import statCalculator from "../../../Utils/statCalculator"
 import { Modifiers, PkmnBaseStat } from "../../../Utils/types"
 import { statBoostCalc } from "../../../Utils/utils"
@@ -35,7 +34,6 @@ const StatCalcCard = ({p1stats,p2stats,p1mods,p2mods, verdict, minBoost, trick_r
     if(!mods || mods.length === 0){
       return(<></>)
     }else{
-      console.log(mods)
       return(
         mods.map((mod : Modifiers) =>{
           switch (mod) {
@@ -85,18 +83,18 @@ const StatCalcCard = ({p1stats,p2stats,p1mods,p2mods, verdict, minBoost, trick_r
     switch (verdict) {
       case 1:
         if(minBoost <= 6){
-          return(<Card.ListItem type="warning"><span className={style.p2text}><b>{p2stats.base} Bspd</b></span> will outspeed with at least <b>+{minBoost}/ {(2 + minBoost)/2}x Speed Boost (<span className={style.p1text}>{p1totalSpeed} Spd</span> vs <span className={style.p2text}>{statBoostCalc(p2totalSpeed,minBoost) } Spd</span>)</b></Card.ListItem>)
+          return(<Card.ListItem type="warning"><span className={style.p2text}><b>{p2stats.base} Bspd</b></span> will outspeed with at least <b>+{minBoost}/ {(2 + minBoost)/2}x Speed Boost <br />(<span className={style.p1text}>{p1totalSpeed} Spd</span> vs <span className={style.p2text}>{statBoostCalc(p2totalSpeed,minBoost) } Spd</span>)</b></Card.ListItem>)
         }else if(minBoost > 6){
-          return(<Card.ListItem type="safe"><span className={style.p2text}><b>{p2stats.base} Bspd</b></span> will not outspeed with <b>+6/ 4x Speed Boost (<span className={style.p1text}>{p1totalSpeed} Spd</span> vs <span className={style.p2text}>{statBoostCalc(p2totalSpeed,6) } Spd</span>)</b>  </Card.ListItem>)
+          return(<Card.ListItem type="safe"><span className={style.p2text}><b>{p2stats.base} Bspd</b></span> will not outspeed with <b>+6/ 4x Speed Boost <br />(<span className={style.p1text}>{p1totalSpeed} Spd</span> vs <span className={style.p2text}>{statBoostCalc(p2totalSpeed,6) } Spd</span>)</b>  </Card.ListItem>)
         }
         break;
       case 0:
         break;
       case -1:
         if(minBoost <= 6){
-          return(<Card.ListItem type="warning"><span className={style.p2text}><b>{p1stats.base} Bspd</b></span> can outspeed with at least <b>+{minBoost}/ {(2 + minBoost)/2}x Speed Boost (<span className={style.p1text}>{statBoostCalc(p1totalSpeed,minBoost)} Spd</span> vs <span className={style.p2text}>{p2totalSpeed} Spd</span>)</b></Card.ListItem>)
+          return(<Card.ListItem type="warning"><span className={style.p1text}><b>{p1stats.base} Bspd</b></span> can outspeed with at least <b>+{minBoost}/ {(2 + minBoost)/2}x Speed Boost <br />(<span className={style.p1text}>{statBoostCalc(p1totalSpeed,minBoost)} Spd</span> vs <span className={style.p2text}>{p2totalSpeed} Spd</span>)</b></Card.ListItem>)
         }else if(minBoost > 6){
-          return(<Card.ListItem type="safe"><span className={style.p2text}><b>{p2stats.base} Bspd</b></span> can not outspeed with <b>+6/ 4x Speed Boost (<span className={style.p1text}>{statBoostCalc(p1totalSpeed,minBoost)} Spd</span> vs <span className={style.p2text}>{p2totalSpeed} Spd</span>)</b>  </Card.ListItem>)
+          return(<Card.ListItem type="safe"><span className={style.p1text}><b>{p2stats.base} Bspd</b></span> can not outspeed with <b>+6/ 4x Speed Boost <br />(<span className={style.p1text}>{statBoostCalc(p1totalSpeed,minBoost)} Spd</span> vs <span className={style.p2text}>{p2totalSpeed} Spd</span>)</b>  </Card.ListItem>)
         }break;
       default:
         break;

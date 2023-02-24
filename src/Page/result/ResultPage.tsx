@@ -131,7 +131,7 @@ const ResultPage = ({advanced} : ResultPageInterface) => {
   }else if(result && pData){
     return(
       <MainView className={style.resultPage}>
-        <ResultCard advanced={advanced} trick_room={isTr} verdict={result.verdict} advProp={{p1baseSpeed :pData.p1.base}}/>
+        <ResultCard advanced={advanced} trick_room={isTr} verdict={result.verdict} advProp={{p1baseSpeed :pData.p1.base}} p1mod={pData.p1mod}/>
         <StatCalcCard p1stats={pData.p1} p2stats={pData.p2} p1mods={pData.p1mod} p2mods={pData.p2mod} verdict={result.verdict} minBoost={result.min_boost} trick_room={false}/>
         <Button icon={<TriangleLeftIcon />} href="/" type='secondary' text="Back" style={{marginTop: '39px'}}/>
       </MainView>

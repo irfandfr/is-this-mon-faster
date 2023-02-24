@@ -55,7 +55,7 @@ const CalculatorUI = () =>{
     iron_ball : {icon:<IronBallIcon /> , title: 'Iron Ball', id:'iron_ball', value:'ib', check: false},
   }
   const initialPkmnData : pkmnData = {
-    base_spd: 1,
+    base_spd: 100,
     lvl:50,
     ev: 252,
     iv: 31,
@@ -160,7 +160,7 @@ const CalculatorUI = () =>{
       <div className={style.compareContainer}>
         <div className={style.pContainer}>
           <form className={style.formContainer}>
-            <Input title="Base" id='base_spd' minValue={1} maxValue={255}type="number" required defaultValue={1} onChange={setP1Value} />
+            <Input title="Base" id='base_spd' minValue={1} maxValue={255}type="number" required defaultValue={100} onChange={setP1Value} />
             <Input title="Lvl" id='lvl' minValue={1} maxValue={100} type="number" required defaultValue={50} onChange={setP2Value}/>
             <Input title="EV" id='ev' minValue={0} maxValue={252} defaultValue={252} type="number" onChange={setP1Value}/>
             <Input title="IV" id='iv' minValue={0} maxValue={31} defaultValue={31} type="number" onChange={setP1Value}/>
@@ -174,7 +174,7 @@ const CalculatorUI = () =>{
         
         <div className={style.pContainer}>
           <form className={style.formContainer}>
-            <Input title="Base" id='base_spd' minValue={1} maxValue={255}type="number" required defaultValue={1} onChange={setP2Value}/>
+            <Input title="Base" id='base_spd' minValue={1} maxValue={255}type="number" required defaultValue={100} onChange={setP2Value}/>
             <Input title="Lvl" id='lvl' minValue={1} maxValue={100}type="number" required defaultValue={50} onChange={setP2Value}/>
             <Input title="EV" id='ev' minValue={0} maxValue={252} defaultValue={252} type="number" onChange={setP2Value}/>
             <Input title="IV" id='iv' minValue={0} maxValue={31} defaultValue={31} type="number" onChange={setP2Value}/>
