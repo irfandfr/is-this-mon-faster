@@ -52,15 +52,20 @@
     left: 0;
     top: map-get($map: $header-height, $key: "mobile");
     transition: max-height 0.15s ease-in-out;
+    display: flex;
+    align-items: center;
+    display: none;//temporary
     
     ul{
       display: flex;
       flex-flow: column;
       list-style-type: none;
       align-items: flex-end;
+      align-items: center;
       padding: 0 14px;
       padding-top: 25px;
       margin: 0;
+      flex-grow: 1;
 
       li{
         cursor: pointer;
@@ -103,11 +108,18 @@
       max-height: 250px;
     }
   }
+  .themeTemp{
+    margin-left: auto;
+  }
 
   @media screen and (min-width: map-get($breakpoints, 'small')) {
     height: map-get($map: $header-height, $key: "desktop");
     background: transparent;
     color: var(--basic-heading);
+
+    .themeTemp{
+      display: none;
+    }
 
     .headerContent{
       max-width: $max-header-width;
@@ -135,6 +147,8 @@
       left: 0;
       top: map-get($map: $header-height, $key: "mobile");
       transition: max-height 0.15s ease-in-out;
+      display: flex;
+      overflow: visible;
       
       ul{
         flex-flow: row;

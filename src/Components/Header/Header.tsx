@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import BurgerMenu from '../BurgerMenu/BurgerMenu'
+import ThemeButton from '../ThemeButton/ThemeButton'
 import style from './header.module.scss'
 
 interface MenuProp{
@@ -9,7 +10,7 @@ interface MenuProp{
 }
 
 interface HeaderProp{
-  menu : MenuProp[]
+  menu : MenuProp[] | []
 }
 
 const Header = ({menu} : HeaderProp) =>{
@@ -33,11 +34,13 @@ const Header = ({menu} : HeaderProp) =>{
           <img src="/isMonFasterLogo.svg" alt="isMonFaster Logo" className={style.isMonLogo}/>
           <span className={style.headerAppName}> isMonFaster?</span> 
         </a>
-        <BurgerMenu className={style.menuBtn} open={open} setOpen={toggleMenu} />
+        {/*<BurgerMenu className={style.menuBtn} open={open} setOpen={toggleMenu} />*/}
+        <ThemeButton className={style.themeTemp}/>
         <nav className={`${style.navContainer} ${open ? style.open : ''}`}>
           <ul>
             {renderMenu(menu)}
           </ul>
+          <ThemeButton />
         </nav>
       </div>
     </header>

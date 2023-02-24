@@ -16,6 +16,7 @@
   --primary-bg: #5F9FFF;
   --secondary-bg: #153F67;
   --icon-bg: rgba(21, 63, 103, 0.8);
+  --theme-bg: #D9D9D9;
 }
 
 [data-theme='dark']{
@@ -31,6 +32,7 @@
     --content-bg: #4f4f4f;
     --secondary-bg: #CCD2E3;  
     --icon-bg: #f3f3f3;
+    --theme-bg: #626262;
 }
 
 html,
