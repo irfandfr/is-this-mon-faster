@@ -30,13 +30,40 @@ function advancedModeAnalyzer(p1stats : PkmnBaseStat, p2stats : PkmnBaseStat ,p1
   }
   let p1TotalSpeed = statCalculator(p1stats.base,p1stats.ev,p1stats.iv,p1stats.nature,p1stats.lvl,p1Mods);
   let p2TotalSpeed = statCalculator(p2stats.base,p2stats.ev,p2stats.iv,p2stats.nature,p1stats.lvl,p2Mods);
-  if(p1TotalSpeed > p2TotalSpeed){
-    resp.verdict = 1;
-    resp.min_boost = Math.ceil((p1TotalSpeed / p2TotalSpeed / 0.5) - 2);
-  }else if(p1TotalSpeed < p2TotalSpeed){
-    resp.verdict = -1;
-    resp.min_boost = Math.ceil((p2TotalSpeed / p1TotalSpeed / 0.5) - 2);
-  }else if(p1TotalSpeed === p2TotalSpeed){}
+
+  if(trick_rooom){
+    if(p1TotalSpeed < p2TotalSpeed){
+      resp.verdict = 1;
+      let min_boost = Math.ceil((2* p2TotalSpeed) / p1TotalSpeed - 2)
+      if(min_boost % 1 === 0){
+        resp.min_boost = Math.ceil(min_boost) + 1
+      }else{
+        resp.min_boost = Math.ceil(min_boost)
+      }
+    }else if(p1TotalSpeed > p2TotalSpeed){
+      resp.verdict = -1;
+      let min_boost = (2* p1TotalSpeed) / p2TotalSpeed - 2;
+      if(min_boost % 1 === 0){
+        resp.min_boost = Math.ceil(min_boost) + 1
+      }else{
+        resp.min_boost = Math.ceil(min_boost)
+      }
+    }else if(p1TotalSpeed === p2TotalSpeed){
+      resp.verdict = 0;
+      resp.min_boost = 1
+    }
+  }else{
+    if(p1TotalSpeed > p2TotalSpeed){
+      resp.verdict = 1;
+      resp.min_boost = Math.ceil((p1TotalSpeed / p2TotalSpeed / 0.5) - 2);
+    }else if(p1TotalSpeed < p2TotalSpeed){
+      resp.verdict = -1;
+      resp.min_boost = Math.ceil((p2TotalSpeed / p1TotalSpeed / 0.5) - 2);
+    }else if(p1TotalSpeed === p2TotalSpeed){
+      resp.verdict = 0;
+      resp.min_boost = 1
+    }
+  }
 
   return resp
 }
