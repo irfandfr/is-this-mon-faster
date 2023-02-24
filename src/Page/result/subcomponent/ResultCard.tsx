@@ -72,7 +72,7 @@ const ResultCard = ({advanced, verdict, trick_room, p1mod, advProp,simpleProp} :
       {
         p1mod.length > 0 ? (
         <>
-          <p className={style.text} style={{marginBottom: 8,marginTop: 10}}>with</p>
+          <p className={style.text} style={{marginBottom: 6,marginTop: 2}}>with</p>
           <div className={style.modContainer}>
             {renderModifiers(p1mod, 1, 'm')}
           </div>
