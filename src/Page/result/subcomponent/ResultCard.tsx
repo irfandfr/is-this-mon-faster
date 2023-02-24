@@ -65,14 +65,14 @@ const ResultCard = ({advanced, verdict, trick_room, p1mod, advProp,simpleProp} :
   return(
     <Card className={style.verdictCard}>
       {trick_room && <div className={style.trResult}>
-        <p>in</p>
+        <p className={style.text}>in</p>
         <ModifierContainer text="Trick Room" icon={<TrickRoomIcon />} size='m' />
       </div>}
       <h2 className={style.p1text}>{advProp?.p1baseSpeed} BSpd</h2>
       {
         p1mod.length > 0 ? (
         <>
-          <p style={{marginBottom: 6,marginTop: 10}}>with</p>
+          <p className={style.text} style={{marginBottom: 8,marginTop: 10}}>with</p>
           <div className={style.modContainer}>
             {renderModifiers(p1mod, 1, 'm')}
           </div>

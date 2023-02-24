@@ -85,6 +85,9 @@ $icon-size: 16px;
         &.slower{
           color:$slower-color;
         }
+        &.tied{
+          color:$tie-color;
+        }
       }
 
       .modifierContainer{
@@ -122,7 +125,7 @@ $icon-size: 16px;
   .text{
     @include font-size(16px);
     font-weight: medium;
-    color: $primary-color
+    color: var(--basic-heading)
   }
 
   @media screen and (min-width: map-get($breakpoints, 'small')){

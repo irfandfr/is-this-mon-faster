@@ -74,18 +74,18 @@ const ResultPage = ({advanced} : ResultPageInterface) => {
       if(p1data.length >= 5 && p2data.length >=5){//check if minimum amount of data is given
         let p1props = arrayToPkmnData(p1data)
         let p2props = arrayToPkmnData(p2data)
-        let isTr : boolean | -1 = -1
+        let trResult : boolean | -1 = -1
         if(trActive === 'true'){
-          isTr = true
+          trResult = true
         }else if(trActive === 'false'){
-          isTr = false
+          trResult = false
         }
-        if(p1props === -1 || p2props === -1 || isTr === -1){//check for mismatch value
+        if(p1props === -1 || p2props === -1 || trResult === -1){//check for mismatch value
           setError('Property value mismatch!')
-          console.log(p1props,p2props,isTr)
+          console.log(p1props,p2props,trResult)
         }else{//analyze data
-          let result = advancedModeAnalyzer(p1props[0],p2props[0],p1props[1],p2props[1],isTr)
-          setTr(isTr)
+          let result = advancedModeAnalyzer(p1props[0],p2props[0],p1props[1],p2props[1],trResult)
+          setTr(trResult)
           setResult({...result})
           setPData({
             p1: {...p1props[0]},
@@ -132,7 +132,7 @@ const ResultPage = ({advanced} : ResultPageInterface) => {
     return(
       <MainView className={style.resultPage}>
         <ResultCard advanced={advanced} trick_room={isTr} verdict={result.verdict} advProp={{p1baseSpeed :pData.p1.base}} p1mod={pData.p1mod}/>
-        <StatCalcCard p1stats={pData.p1} p2stats={pData.p2} p1mods={pData.p1mod} p2mods={pData.p2mod} verdict={result.verdict} minBoost={result.min_boost} trick_room={false}/>
+        <StatCalcCard p1stats={pData.p1} p2stats={pData.p2} p1mods={pData.p1mod} p2mods={pData.p2mod} verdict={result.verdict} minBoost={result.min_boost} trick_room={isTr}/>
         <Button icon={<TriangleLeftIcon />} href="/" type='secondary' text="Back" style={{marginTop: '39px'}}/>
       </MainView>
     )
