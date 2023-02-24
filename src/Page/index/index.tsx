@@ -1,5 +1,4 @@
-import React from 'react'
-import {  redirect, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Button from '../../Components/Button/Button'
 import Card from '../../Components/Card/Card'
 import BigInput from '../../Components/Forms/BigInput/BigInput'
@@ -10,7 +9,7 @@ import style from './homepage.module.scss'
 const Homepage = () =>{
   let navigate = useNavigate()
   function redirectToCalc(){
-    navigate("/calc")
+    navigate("/")
   }
   return(
     <MainView className={style.homepage}>
