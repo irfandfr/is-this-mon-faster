@@ -4,6 +4,8 @@ import SunIcon from '../Icons/SunIcon'
 import style from './themebtn.module.scss'
 
 interface ThemeButtonProp{
+  state: boolean
+  toggle: (val:boolean) => void
   className?:string
 }
 /**
@@ -12,8 +14,7 @@ interface ThemeButtonProp{
  * @param className string containing the style for this component 
  * 
  */
-const ThemeButton = ({ className}: ThemeButtonProp) =>{
-  const [state, setState] = useState(true)
+const ThemeButton = ({ state, toggle, className}: ThemeButtonProp) =>{
   const [firstLoad, setLoad] = useState(true)
 
   useEffect(() => {
@@ -24,12 +25,12 @@ const ThemeButton = ({ className}: ThemeButtonProp) =>{
         localStorage.setItem('ismonfasterTheme','light')
       }else if(x === 'dark'){
         document.body.setAttribute('data-theme','dark')
-        setState(false)
+        toggle(false)
       }else if(x === 'light'){
         document.body.setAttribute('data-theme','light')
-        setState(true)
+        toggle(true)
       }else if(theme === 'dark'){
-        setState(false)
+        toggle(false)
       }
       setLoad(false)
     }
@@ -39,11 +40,11 @@ const ThemeButton = ({ className}: ThemeButtonProp) =>{
     if(state){
       document.body.setAttribute('data-theme','dark')
       localStorage.setItem('ismonfasterTheme','dark')
-      setState(false)
+      toggle(false)
     }else{
       document.body.setAttribute('data-theme','light')
       localStorage.setItem('ismonfasterTheme','light')
-      setState(true)
+      toggle(true)
     }
   }
   return(

@@ -16,8 +16,12 @@ interface HeaderProp{
 const Header = ({menu} : HeaderProp) =>{
   const [open, setopen] = useState(false)
   let location = useLocation()
-  function toggleMenu() {
-    setopen(!open);
+  function toggleMenu(val? : boolean) {
+    if(typeof val === 'undefined'){
+      setopen(!open);
+    }else{
+      setopen(val)
+    }
   }
 
   function renderMenu(menu : MenuProp[]){
@@ -35,12 +39,12 @@ const Header = ({menu} : HeaderProp) =>{
           <span className={style.headerAppName}> isMonFaster?</span> 
         </a>
         {/*<BurgerMenu className={style.menuBtn} open={open} setOpen={toggleMenu} />*/}
-        <ThemeButton className={style.themeTemp}/>
+        <ThemeButton state={open} toggle={toggleMenu} className={style.themeTemp}/>
         <nav className={`${style.navContainer} ${open ? style.open : ''}`}>
           <ul>
             {renderMenu(menu)}
           </ul>
-          <ThemeButton />
+          <ThemeButton state={open} toggle={toggleMenu}/>
         </nav>
       </div>
     </header>
