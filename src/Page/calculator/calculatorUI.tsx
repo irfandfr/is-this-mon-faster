@@ -17,6 +17,8 @@ import Button from "../../Components/Button/Button"
 import RefreshIcon from "../../Components/Icons/RefreshIcon"
 import { useNavigate } from "react-router-dom"
 import { modifiersAbbreviator, natureToSigns } from "../../Utils/utils"
+import Modal from "../../Components/Modal/Modal"
+import ModifierContainer from "../../Components/ModifierContainer/ModifierContainer"
 
 enum InitialStateKey{
   active_ability= 'active_ability',
@@ -97,6 +99,16 @@ const CalculatorUI = () =>{
   const [stateP1 , dispatch1] = useReducer(reducer, initialState)
   const [stateP2 , dispatch2] = useReducer(reducer, initialState)
   const [stateTrickRoom , setTRstate] = useState({trick_room :{icon:<TrickRoomIcon /> , title: 'Trick Room', id:'trick_room', value:'tr', check: false}})
+  const GUIDE_DATA = [
+    {icon:<ActiveAbilityIcon />, title: 'Active Ability', description: 'Ability that doubles Speed under certain conditions such as weather effect(Swift Swim), consuming item(Unburden). (x2)'},
+    {icon:<TailwindIcon />, title: 'Tailwind', description: 'A move that doubles the user\’s and their allies Speed (x2)'},
+    {icon:<ParalyzeIcon />, title: 'Paralyze', description: 'A status effect that reduces Speed by 50%(x0.5)'},
+    {icon:<ChoiceScarfIcon />, title: 'Choice Scarf', description: 'A held item that increases the user Speed by 50%(x1.5)'},
+    {icon:<IronBallIcon />, title: 'Iron Ball', description: 'A held item that decreases the user\’s Speed by 50%(x0.5)'},
+  ]
+  const [modalOpen, setModal] = useState(false)
+
+
   const navigate = useNavigate()
   function setP1Value(id : string , value : string | number){
     setp1Stat({
@@ -134,6 +146,7 @@ const CalculatorUI = () =>{
     return pStats
   }
 
+  //function to analyze all the data and redirect to appropriate page
   function toResultPage(e:React.MouseEvent<HTMLButtonElement>){
     e.preventDefault()
     e.currentTarget.disabled = true;
@@ -153,9 +166,29 @@ const CalculatorUI = () =>{
   
   return(
     <MainView className={style.calcUIContainer}>
+      <Modal open={modalOpen} closeIcon={true} onClose={() => setModal(false)}>
+        <>
+          <Modal.Header text="Guide"/>
+          <div className={style.guideContainer}>
+          {
+            GUIDE_DATA.map((data) => {
+              return(
+                <div className={style.guideItem} key={data.title}>
+                  <ModifierContainer icon={data.icon} size="l" />
+                  <div className={style.guideDesc}>
+                    <h5>{data.title+':'}</h5>
+                    <p>{data.description}</p>
+                  </div>
+                </div>
+              )
+            })
+          }
+          </div>
+        </>
+      </Modal>
       <div className={style.pageHeader}>
         <h3 className={style.text}>Is</h3>
-        <button className={style.faqButton}>?</button>
+        <button className={style.faqButton} onClick={() => setModal(true)}>?</button>
       </div>
       <div className={style.compareContainer}>
         <div className={style.pContainer}>

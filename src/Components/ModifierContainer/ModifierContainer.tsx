@@ -5,7 +5,7 @@ interface ModifierContainerProp{
   icon: ReactElement
   className?: string
   text?: string
-  size?: 's' | 'm'
+  size?: 's' | 'm' | 'l'
 }
 
 const ModifierContainer = ({icon, className, text, size} : ModifierContainerProp) =>{

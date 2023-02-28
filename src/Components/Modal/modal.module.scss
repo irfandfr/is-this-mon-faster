@@ -1,0 +1,49 @@
+@import './../../styles/config.module.scss';
+
+
+.modalContainer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba($color: #000000, $alpha: 0.5);
+  display: none;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: map-get($map: $z-indexes, $key: "modal");
+  padding: 16px;
+  padding-top: 70px;
+  .modalCard{
+    position: relative;
+    padding: 8px;
+    width: 100%;
+    background: var(--content-bg);
+    color: var(--body-font);
+    border-radius: 6px;
+
+    .headerTitle{
+      @include font-size(20px)
+    }
+
+    .closeBtn{ 
+      all : unset;
+      cursor: pointer;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+
+      .icon{
+        width: 20px;
+        height: 24px;
+        path{
+          stroke : var(--basic-heading);
+        }
+      }
+    }
+  }
+  
+  &.open{
+    display: flex;
+  }
+}

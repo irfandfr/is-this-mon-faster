@@ -85,6 +85,30 @@
     }
   }
 
+  .guideContainer{
+    display: flex;
+    flex-flow: column;
+    margin-top: 16px;
+    .guideItem{
+      display: flex;
+      flex-wrap: nowrap;
+      margin-bottom: 14px;
+      align-items: center;
+      .guideDesc{
+        display: flex;
+        flex-flow: column;
+        margin-left: 10px;
+        h5{
+          margin-bottom: 2px;
+        }
+        p{
+          margin: 0;
+          @include font-size(12px)
+        }
+      }
+    }
+  }
+
   @media screen and (min-width:map-get($breakpoints, 'small')) {
     width: $main-container;
 

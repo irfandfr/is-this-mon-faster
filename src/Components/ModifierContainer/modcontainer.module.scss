@@ -1,16 +1,27 @@
 @import './../../styles/config.module.scss';
 
 .modContainer{
-  --mod-size-m:24px;
+  --mod-size-l: 36px;
+  --mod-size-m: 24px;
   --mod-size-s: 16px;
   background-color: var(--icon-bg);
   display: inline-block;
   position: relative;
+  border-radius: var(--mod-size-l);
 
+
+  &.l{
+    height: var(--mod-size-l);
+    width:var(--mod-size-l);
+
+    .modIcon{
+      height: var(--mod-size-l);
+      width: var(--mod-size-l);
+    }
+  }
   &.m{
     height: var(--mod-size-m);
     width:var(--mod-size-m);
-    border-radius: calc(var(--mod-size-m) / 2);
 
     .modIcon{
       height: var(--mod-size-m);
@@ -20,7 +31,6 @@
   &.s{
     height: var(--mod-size-s);
     width: var(--mod-size-s);
-    border-radius: calc(var(--mod-size-s) / 2);
 
     .modIcon{
       height: var(--mod-size-s);
@@ -29,6 +39,7 @@
   }
 
   @media screen and (min-width:map-get($breakpoints, 'small')) {
+    --mod-size-l:40px;
     --mod-size-m:26px;
     --mod-size-s: 18px;
   }
