@@ -10,12 +10,14 @@ import reportWebVitals from './reportWebVitals';
 //import Homepage from './Page/index';
 import CalculatorUI from './Page/calculator/calculatorUI';
 import ResultPage from './Page/result/ResultPage';
+import ErrorPage from './Page/error/error';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement:<ErrorPage />,
     children: [
       // {
       //   path:'/',
@@ -23,7 +25,7 @@ const router = createBrowserRouter([
       // },
       {
         path:'/',
-        element:<CalculatorUI />
+        element:<CalculatorUI />,
       },
       {
         path:'/result',
