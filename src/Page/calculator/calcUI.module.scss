@@ -136,5 +136,15 @@
     .pContainer{
       max-width: 288px;
     }
+    .guideContainer{
+      .guideItem{
+        .guideDesc{
+          margin-left: 14px;
+          h5{
+            @include font-size(14px)
+          }
+        }
+      }
+    }
   }
 }

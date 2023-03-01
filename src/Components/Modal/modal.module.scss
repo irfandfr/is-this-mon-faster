@@ -35,7 +35,7 @@
 
       .icon{
         width: 20px;
-        height: 24px;
+        height: 20px;
         path{
           stroke : var(--basic-heading);
         }
@@ -45,5 +45,24 @@
   
   &.open{
     display: flex;
+  }
+
+  @media screen and (min-width: map-get($breakpoints, 'small')) {
+    padding-top: 80px;
+    .modalCard{
+      max-width: 439px;
+      padding: 10px;
+
+      .headerTitle{
+        @include font-size(24px)
+      }
+
+      .closeBtn{
+        .icon{
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
   }
 }
