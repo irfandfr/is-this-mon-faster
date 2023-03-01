@@ -31,7 +31,6 @@ const baseStatCalculator = (base_stat : number, ev: number, iv : number, nature:
   let errMessage : string[] = [];
   let stat; 
   let props = {base_stat, ev, iv, nature, level}
-
   //error checker for values excluding nature, and change value to max or min caps
   let key : keyof typeof props
   for (key in props){
@@ -45,9 +44,14 @@ const baseStatCalculator = (base_stat : number, ev: number, iv : number, nature:
       }
     }
   }
+  
+  
+  stat = Math.floor( (Math.floor((2 * props.base_stat + props.iv + Math.floor(0.25 * props.ev))*(!!props.level ? props.level : 50) / 100) + 5) * NATURE_BOOST.get(props.nature)!)
 
-  stat = Math.floor((Math.floor(0.01 * (2 * props.base_stat + props.iv + Math.floor(0.25 * props.ev)) * (!!props.level ? props.level : 50)) + 5 ) * NATURE_BOOST.get(props.nature)!)
-
+  //stat = Math.floor( (Math.floor((2 * props.base_stat + props.iv + Math.floor(0.25 * props.ev))*(!!props.level ? props.level : 50) / 100) + 5) * NATURE_BOOST.get(props.nature)!)
+  if(errMessage.length > 0){
+    console.log(errMessage)
+  }
   return {stat, errMessage}
 }
 

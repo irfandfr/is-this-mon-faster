@@ -1,12 +1,35 @@
 import { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import BurgerMenu from '../BurgerMenu/BurgerMenu'
+import ThemeButton from '../ThemeButton/ThemeButton'
 import style from './header.module.scss'
 
-const Header = () =>{
-  const [open, setopen] = useState(false)
+interface MenuProp{
+  title : string,
+  link : string
+}
 
-  function toggleMenu() {
-    setopen(!open);
+interface HeaderProp{
+  menu : MenuProp[] | []
+}
+
+const Header = ({menu} : HeaderProp) =>{
+  const [open, setopen] = useState(false)
+  let location = useLocation()
+  function toggleMenu(val? : boolean) {
+    if(typeof val === 'undefined'){
+      setopen(!open);
+    }else{
+      setopen(val)
+    }
+  }
+
+  function renderMenu(menu : MenuProp[]){
+    return menu.map((nav : MenuProp) => {
+      return(
+        <li className={`${location.pathname === nav.link ? style.active : ''}`} key={`menu-${nav.title}`}><Link to={nav.link}>{nav.title}</Link></li>
+      )
+    })
   }
   return(
     <header className={style.header}>
@@ -15,13 +38,13 @@ const Header = () =>{
           <img src="/isMonFasterLogo.svg" alt="isMonFaster Logo" className={style.isMonLogo}/>
           <span className={style.headerAppName}> isMonFaster?</span> 
         </a>
-        <BurgerMenu className={style.menuBtn} open={open} setOpen={toggleMenu} />
+        {/*<BurgerMenu className={style.menuBtn} open={open} setOpen={toggleMenu} />*/}
+        <ThemeButton state={open} toggle={toggleMenu} className={style.themeTemp}/>
         <nav className={`${style.navContainer} ${open ? style.open : ''}`}>
           <ul>
-            <li className={style.active}>Home</li>
-            <li>Calculator</li>
-            <li>Advanced Calculator</li>
+            {renderMenu(menu)}
           </ul>
+          <ThemeButton state={open} toggle={toggleMenu}/>
         </nav>
       </div>
     </header>

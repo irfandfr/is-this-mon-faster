@@ -1,0 +1,17 @@
+.errorContainer{
+  position: absolute;
+  width: 100%;
+  margin-top: 200px;
+  h1{
+    color: var(--basic-heading)
+  }
+  p{
+    color: var(--basic-heading);
+  }
+
+  .icon{
+    path{
+      fill: var(--light-font)
+    }
+  }
+}

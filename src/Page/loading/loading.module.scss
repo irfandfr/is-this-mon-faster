@@ -1,0 +1,27 @@
+@keyframes loadingAnimation {
+  0%{
+    content: 'Loading...';
+  }
+  25%{
+    content: 'Loading.';
+  }
+  50%{
+    content: 'Loading..'
+  }
+  100%{
+    content: 'Loading...';
+  }
+}
+
+.loadingPage{
+  margin-top: 300px;
+
+  .loadingText{
+    &::before{
+      font-size: 28px;
+      color: var(--basic-heading);
+      content: 'Loading...';
+      animation: loadingAnimation 2s linear 1s infinite ;
+    }
+  }
+}

@@ -24,7 +24,7 @@
     border: none;
     border-bottom: solid 1px var(--basic-heading);
     opacity: 0.5;
-    margin: 0 10px;
+    margin: 0 6px;
     margin-top: 6px;
   }
 
@@ -55,9 +55,13 @@
         background-color: var(--body-font);
       }
     }
+    .content{
+      padding-top: 2px;
+    }
   }
 
   @media screen and (min-width: map-get($breakpoints, 'small')) {
+    @include font-size(14px);
     .listItem{
       margin-bottom: 5px;
       .icon{
@@ -76,6 +80,12 @@
       .headerTitle{
         @include font-size(24px);
         @include line-height(28px);
+      }
+    }
+    .listItem{
+      .content{
+        padding-top: 3.5px;
+        padding-left: 2px;
       }
     }
   }

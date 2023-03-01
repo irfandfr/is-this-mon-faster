@@ -1,0 +1,169 @@
+@import './../../styles/config.module.scss';
+
+$icon-size: 16px;
+.resultPage{
+  .verdictCard{
+    width: 100%;
+    max-width: 245px;
+    margin-top: 30px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 23px;
+    position: relative;
+  
+    .bigInput{
+      max-width: 110px;
+      input{
+        @include font-size(32px);
+      }
+    }
+
+    .trResult{
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      align-items: center;
+
+      p{
+        font-family: 'Patua One';
+        margin: 0;
+        margin-right: 4px;
+      }
+    }
+  }
+  
+  .statCalcCard{
+    margin-top: 39px;
+    padding-bottom: 18px;
+  
+    .calculationContainer{
+      margin-top: 22px;
+      margin-bottom: 22px;
+      width: 90%;
+      display: grid;
+      grid-template-columns: auto auto auto auto;
+      color: var(--body-font);
+      p{
+        margin: 0;
+      }
+      .title{
+        @include font-size(16px);
+        font-weight: 300;
+      }
+  
+      .statContainer{
+        justify-self: center;
+        display: flex;
+        flex-flow: column;
+        align-items: center
+      }
+  
+      .bspd{
+        @include font-size(16px);
+        @include line-height(18px);
+        font-family: 'Patua One', cursive;
+      }
+
+      .stat{
+        font-size: 10.5px;
+      }
+      .vs{
+        font-family: 'Patua One', cursive;
+        justify-self: center;
+      }
+  
+      .totalSpeed{
+        justify-self: center;
+  
+        &.faster{
+          color: $faster-color;
+          @include font-size(32px);
+        }
+        &.slower{
+          color:$slower-color;
+        }
+        &.tied{
+          color:$tie-color;
+        }
+      }
+
+      .modifierContainer{
+        justify-self: center;
+        display: flex;
+        justify-content: center;
+        height: $icon-size;
+      }
+
+      .divider{
+        grid-area: auto/auto/auto/span 3;
+        margin-top: 7px;
+        margin-bottom: 10px;
+        border-bottom: solid 1px var(--basic-heading);
+        width: 92%;
+        opacity: 0.5;
+      }
+    }
+  }
+  .modifierIcon{
+    margin: 0 1.5px;
+    margin-bottom: 3px;
+  }
+  .p1text{
+    color: $pkmn1-color
+  }
+  h2.p1text{
+    @include font-size(32px);
+    @include line-height(39px);
+  }
+  .p2text{
+    color: $pkmn2-color
+  }
+  
+  .text{
+    @include font-size(16px);
+    font-weight: medium;
+    color: var(--basic-heading)
+  }
+
+  .icon{
+    path{
+      fill: var(--light-font)
+    }
+  }
+
+  @media screen and (min-width: map-get($breakpoints, 'small')){
+    padding-bottom: 21px;
+    .verdictCard{
+      max-width: 288px;
+      padding-top: 38px;
+      padding-bottom: 36px;
+    }
+
+    .statCalcCard{
+      max-width: 442px;
+    }
+  }
+
+  .statTable{
+    width: 90%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: var(--basic-heading);
+    tr{
+      th:first-child{
+        text-align: left;
+        font-weight: 700;
+      }
+      th{
+        width: calc(100% / 3);
+        font-weight:500;
+      }
+      &:nth-child(odd){
+        background-color: rgba($color: #DFEDEE, $alpha: 0.8);
+      }
+    }
+  }
+}

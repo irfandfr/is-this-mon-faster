@@ -1,0 +1,50 @@
+@import './../../../styles/config.module.scss';
+
+.selectInputContainer{
+  display: inline-flex;
+  align-items: center;
+  @include font-size(12px);
+  color: var(--basic-heading);
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 4px;
+  margin-left: 4px;
+  position: relative;
+  .inputLabel{
+
+    &:not(:empty){
+      margin-right: 3px;
+      &::after{
+        content: ':';
+        margin-left: 2px;
+      }
+    }
+  }
+  .selectInput{
+    all: unset;
+    border-bottom: solid 1px var(--basic-heading);
+    width: 60px;
+
+    option{
+      color: $primary-color;
+      border-radius: 0;
+    }
+  }
+
+  &::after{
+    content:'';
+    position: absolute;
+    top: calc(50% - 2.5px);
+    right: 1px;
+    width: 0; 
+    height: 0; 
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 6px solid var(--secondary-bg);
+  }
+  @media screen and (min-width: map-get($breakpoints, 'small')) {
+    @include font-size(14px);
+    .selectInput{
+      width: 70px;
+    }
+  }
+}
