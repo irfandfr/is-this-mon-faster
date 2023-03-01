@@ -56,9 +56,15 @@ function advancedModeAnalyzer(p1stats : PkmnBaseStat, p2stats : PkmnBaseStat ,p1
     if(p1TotalSpeed > p2TotalSpeed){
       resp.verdict = 1;
       resp.min_boost = Math.ceil((p1TotalSpeed / p2TotalSpeed / 0.5) - 2);
+      if(p1TotalSpeed === p2TotalSpeed*resp.min_boost){
+        resp.min_boost = resp.min_boost + 1;
+      }
     }else if(p1TotalSpeed < p2TotalSpeed){
       resp.verdict = -1;
       resp.min_boost = Math.ceil((p2TotalSpeed / p1TotalSpeed / 0.5) - 2);
+      if(p2TotalSpeed === p1TotalSpeed*resp.min_boost){
+        resp.min_boost = resp.min_boost + 1;
+      }
     }else if(p1TotalSpeed === p2TotalSpeed){
       resp.verdict = 0;
       resp.min_boost = 1
