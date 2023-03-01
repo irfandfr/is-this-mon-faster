@@ -1,0 +1,35 @@
+@import './../../../styles/config.module.scss';
+
+.inputContainer{
+  display: inline-flex;
+  flex-flow: row;
+  align-items: center;
+  @include font-size(12px);
+  color: var(--basic-heading);
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 4px;
+  margin-left: 4px;
+
+  .inputLabel{
+
+    &:not(:empty){
+      margin-right: 3px;
+      &::after{
+        content: ':';
+        margin-left: 2px;
+      }
+    }
+  }
+
+  .input{
+    all: unset;
+    border-bottom: solid 1px var(--basic-heading);
+
+    &[type= 'number']{
+      width: 40px;
+    }
+  }
+  @media screen and (min-width: map-get($breakpoints, 'small')) {
+    @include font-size(14px);
+  }
+}

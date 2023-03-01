@@ -1,0 +1,150 @@
+@import './../../styles/config.module.scss';
+
+.calcUIContainer{
+  padding-top: 35px;
+  width: 240px;
+  
+  .text{
+    color: var(--basic-heading);
+    text-align: center;
+  }
+  h3.text{
+    margin-bottom: 22px;
+  }
+  h4.text{
+    margin: 20px 0;
+  }
+  h5.text{
+    margin: 4px 0 6px 0;
+  }
+
+  .link{
+    color: var(--basic-heading);
+    margin: 14px 0 40px 0;
+    @include font-size(14px);
+
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+
+  .pageHeader{
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    .faqButton{
+      all: unset;
+      cursor: pointer;
+      font-family: 'Patua One', cursive;
+      color: #5A5858;
+      background: #D9D9D9;
+      width: 24px;
+      height: 24px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+  .compareContainer{
+    margin-bottom: 6px;
+  }
+  .pContainer{
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+  
+  .formContainer{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    .formTitle{
+      font-family: 'Roboto', sans-serif;
+      font-weight: 600;
+
+      &.pokemon1{
+        color: $pkmn1-color;
+      }
+      &.pokemon2{
+        color: $pkmn2-color;
+      }
+    }
+  }
+
+  .refreshIcon{
+    path{
+      stroke: var(--light-font);
+    }
+  }
+
+  .guideContainer{
+    display: flex;
+    flex-flow: column;
+    margin-top: 16px;
+    .guideItem{
+      display: flex;
+      flex-wrap: nowrap;
+      margin-bottom: 14px;
+      align-items: center;
+      .guideDesc{
+        display: flex;
+        flex-flow: column;
+        margin-left: 10px;
+        h5{
+          margin-bottom: 2px;
+        }
+        p{
+          margin: 0;
+          @include font-size(12px)
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width:map-get($breakpoints, 'small')) {
+    width: $main-container;
+
+    h3.text{
+      @include font-size(32px)
+    }
+    h4.text{
+      @include font-size(20px)
+    }
+    h5.text{
+      @include font-size(16px);
+      margin: 6px;
+    }
+    .compareContainer{
+      width: 100%;
+      display: flex;
+      flex-flow: row;
+      justify-content: space-between;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    .formContainer{
+      justify-content: center;
+    }
+    .pContainer{
+      max-width: 288px;
+    }
+    .guideContainer{
+      .guideItem{
+        .guideDesc{
+          margin-left: 14px;
+          h5{
+            @include font-size(14px)
+          }
+        }
+      }
+    }
+  }
+}

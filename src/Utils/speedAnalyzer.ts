@@ -1,5 +1,7 @@
 import baseStatCalculator from "./baseStatCalculator";
 import evExtractor from "./evExtractor";
+import statCalculator from "./statCalculator";
+import { Modifiers } from "./types";
 
 
 interface minStatProp{
@@ -15,19 +17,12 @@ interface responseProp{
   inTrickRoom: boolean
 }
 
-export enum statusTypes{
-  'tailwind',
-  'paralyzed',
-  'choice_scarf',
-  'active_ability',
-  'iron_ball'
-}
 
 interface speedProps{
   base_speed1: number
   base_speed2: number
-  status1?: statusTypes[]
-  status2?: statusTypes[]
+  status1?: Modifiers[]
+  status2?: Modifiers[]
   inTrickRoom?: boolean
 }
 
@@ -44,47 +39,7 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
     min_boost: 0,
     inTrickRoom : !!inTrickRoom
   }
-
-  /**
-   * function to calculate status using the baseStatCalculator function as a base
-   *  and multipled with the current status affecting the pokemon
-   */
-  function calculateStat(base_speed: number, ev : number, iv: number, nature : 'beneficial'| 'neutral' | 'hindering', status? : statusTypes[]){
-    const TAILWIND_MULTIPLIER = 2;
-    const PARALYZE_MULTIPLIER = 0.5;
-    const CHOICE_SCARF_MULTILPIER = 1.5;
-    const ABILITY_MULTIPLIER = 2;
-    const IRON_BALL_MULTIPLIER = 0.5
-    let stat : number;
-
-    stat = baseStatCalculator(base_speed, iv, ev, nature).stat
-    if(!!status && status.length > 0 ){
-      status.forEach( entry => {
-        switch (entry) {
-          case statusTypes.tailwind:
-            stat = stat * TAILWIND_MULTIPLIER
-            break;
-          case statusTypes.choice_scarf:
-            stat = Math.floor(stat * CHOICE_SCARF_MULTILPIER)
-            break;
-          case statusTypes.active_ability:
-            stat = stat * ABILITY_MULTIPLIER
-            break;
-          case statusTypes.paralyzed:
-            stat = Math.floor(stat * PARALYZE_MULTIPLIER)
-            break;
-          case statusTypes.iron_ball:
-            stat = Math.floor(stat * IRON_BALL_MULTIPLIER)
-            break;
-          default:
-            break;
-        }
-      });
-    }
-
-    return stat
-  }
-  
+ 
   /**
    * calculate speed based on status
    * max : max IV & EV with beneficial Nature(1.1x)
@@ -93,16 +48,16 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
    * min : no IV & EV with hindering Nature(0.9x)
    */
   let p1SpeedStat = new Map([
-    ['max', calculateStat(base_speed1, 31, 252, "beneficial", status1)],
-    ['neutral_max', calculateStat(base_speed1, 31, 252, "neutral", status1)],
-    ['neutral_min', calculateStat(base_speed1, 31, 0, "neutral", status1)],
-    ['min', calculateStat(base_speed1, 0, 0, "hindering",status1)]
+    ['max', statCalculator(base_speed1, 31, 252, "beneficial",50 ,status1)],
+    ['neutral_max', statCalculator(base_speed1, 31, 252, "neutral",50, status1)],
+    ['neutral_min', statCalculator(base_speed1, 31, 0, "neutral",50, status1)],
+    ['min', statCalculator(base_speed1, 0, 0, "hindering",50,status1)]
   ])
   let p2SpeedStat = new Map([
-    ['max', calculateStat(base_speed2, 31, 252, "beneficial",status2)],
-    ['neutral_max', calculateStat(base_speed2, 31, 252, "neutral",status2)],
-    ['neutral_min', calculateStat(base_speed2, 31, 0, "neutral",status2)],
-    ['min', calculateStat(base_speed2, 0, 0, "hindering",status2)]
+    ['max', statCalculator(base_speed2, 31, 252, "beneficial",50,status2)],
+    ['neutral_max', statCalculator(base_speed2, 31, 252, "neutral",50,status2)],
+    ['neutral_min', statCalculator(base_speed2, 31, 0, "neutral",50,status2)],
+    ['min', statCalculator(base_speed2, 0, 0, "hindering",50,status2)]
   ])
 
 

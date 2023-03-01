@@ -3,13 +3,13 @@
 .button{
   all : unset;
   position: relative;
-  height: 40px;
+  height: 36px;
   padding: 8px 10px;
   border-radius: 3px;
   color: var(--light-font);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family: 'Patua One', cursive;
-  @include font-size(20px);
+  @include font-size(16px);
   cursor: pointer;
   box-sizing: border-box;
   transition: all 0.1s ease-in-out;
@@ -26,14 +26,14 @@
     background: transparent;
     transition: all 0.1s ease-in-out;
   }
-  &:hover{
+  &:hover:not(:disabled){
     &::after{
       background: rgba($color: #fff, $alpha: 0.1);
       mix-blend-mode: lighten;
     }
   }
 
-  &:active{
+  &:active:not(:disabled){
     transform: translate(1px);
     &::after{
       background: rgba($color: #000, $alpha: 0.2);
@@ -41,7 +41,17 @@
     }
   }
 
-  &:focus-visible{
+  &:disabled{
+    background-color: gray!important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.0);
+    cursor:default;
+    &::after{
+      background: rgba($color: gray, $alpha: 0.5);
+      mix-blend-mode: darken;
+    }
+  }
+
+  &:focus-visible:not(:disabled){
     outline: solid 3px var(--body-font);
   }
 
@@ -59,5 +69,32 @@
 
   &.success{
     background: $success-color;
+  }
+
+  &.iconed{
+    padding-left: 30px;
+  }
+
+  .icon{
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    left: 6px;
+    top: calc(50% - 10px);
+  }
+
+  @media screen and (min-width: map-get($breakpoints, 'small')) {
+    height: 40px;
+    @include font-size(20px);
+
+    &.iconed{
+      padding-left: 36px;
+    }
+
+    .icon{
+      height: 24px;
+      width: 24px;
+      top: calc(50% - 12px);
+    }
   }
 }
