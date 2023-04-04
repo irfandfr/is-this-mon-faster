@@ -101,10 +101,10 @@ const CalculatorUI = () =>{
   const [stateTrickRoom , setTRstate] = useState({trick_room :{icon:<TrickRoomIcon /> , title: 'Trick Room', id:'trick_room', value:'tr', check: false}})
   const GUIDE_DATA = [
     {icon:<ActiveAbilityIcon />, title: 'Active Ability', description: 'Ability that doubles Speed under certain conditions such as weathers (Swift Swim), consuming item(Unburden), etc. (x2)'},
-    {icon:<TailwindIcon />, title: 'Tailwind', description: 'A move that doubles the user\’s and their allies Speed (x2)'},
+    {icon:<TailwindIcon />, title: 'Tailwind', description: 'A move that doubles the user’s and their allies Speed (x2)'},
     {icon:<ParalyzeIcon />, title: 'Paralyze', description: 'A status effect that reduces Speed by 50%(x0.5)'},
     {icon:<ChoiceScarfIcon />, title: 'Choice Scarf', description: 'A held item that increases the user Speed by 50%(x1.5)'},
-    {icon:<IronBallIcon />, title: 'Iron Ball', description: 'A held item that decreases the user\’s Speed by 50%(x0.5)'},
+    {icon:<IronBallIcon />, title: 'Iron Ball', description: 'A held item that decreases the user’s Speed by 50%(x0.5)'},
     {icon:<TrickRoomIcon />, title: 'Trick Room', description: 'A move that affects the field, the move makes slower Pokemon go first.'},
   ]
   const [modalOpen, setModal] = useState(false)
@@ -139,7 +139,7 @@ const CalculatorUI = () =>{
   //compile pokemon stats and modifiers into one array
   function extractData(pkmn:pkmnData, mods: initialState){
     let pStats :any[]= [pkmn.base_spd,pkmn.ev,pkmn.iv,pkmn.lvl,natureToSigns(pkmn.nature)]
-    Object.entries(mods).map((value : [string, SelectionProp]) =>{
+    Object.entries(mods).forEach((value : [string, SelectionProp]) =>{
       if(value[1].check){
         pStats.push(modifiersAbbreviator(value[0] as keyof typeof InitialStateKey))
       }
