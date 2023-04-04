@@ -34,7 +34,7 @@ const ThemeButton = ({ state, toggle, className}: ThemeButtonProp) =>{
       }
       setLoad(false)
     }
-  }, [])
+  })
   
   function toggleState(){
     if(state){
