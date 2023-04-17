@@ -51,6 +51,7 @@ const ThemeButton = ({ state, toggle, className}: ThemeButtonProp) =>{
     <button className={`${style.themeBtn} ${state ? style.isDefault : ''} ${className}` } onClick={toggleState}>
       <SunIcon className={`${style.icon} ${style.sun}`}/>
       <MoonIcon className={`${style.icon} ${style.moon}`}/>
+      <div className={style.circle} style={!state ? {transform: 'translate(-30px)'} : {transform: 'translate(0px)'}}></div>
     </button>
   )
 }
