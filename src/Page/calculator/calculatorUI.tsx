@@ -160,7 +160,7 @@ const CalculatorUI = () =>{
       let p1data = extractData(p1Stat,stateP1);
       let p2data = extractData(p2Stat,stateP2)
       let tr = getTrValue().toString()
-      let url = `/result?p1=${p1data.join('_')}&p2=${p2data.join('_')}&tr=${tr}`
+      let url = `/advresult?p1=${p1data.join('_')}&p2=${p2data.join('_')}&tr=${tr}`
       navigate(url)
     }, 800);
   }
@@ -223,7 +223,7 @@ const CalculatorUI = () =>{
         <InputGroup groupList={stateTrickRoom} onClick={trToggle} disabled={selectGroupState.trstate}/>
       </div>
       <Button icon={<RefreshIcon className={style.refreshIcon} />} onClick={toResultPage} text="Analyze" type="primary" style={{marginTop: '30px'}}/>
-      {/* <a className={style.link} href="/calc">Switch to Simple</a> */}
+      <a className={style.link} href="/calc">Switch to Simple</a>
     </MainView>
   )
 }

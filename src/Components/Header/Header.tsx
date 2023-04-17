@@ -10,7 +10,7 @@ interface MenuProp{
 }
 
 interface HeaderProp{
-  menu : MenuProp[] | []
+  menu : {title:string,link:string}[] | []
 }
 
 const Header = ({menu} : HeaderProp) =>{
@@ -24,8 +24,8 @@ const Header = ({menu} : HeaderProp) =>{
     }
   }
 
-  function renderMenu(menu : MenuProp[]){
-    return menu.map((nav : MenuProp) => {
+  function renderMenu(menu : {title:string,link:string}[]){
+    return menu.map((nav : {title:string,link:string}) => {
       return(
         <li className={`${location.pathname === nav.link ? style.active : ''}`} key={`menu-${nav.title}`}><Link to={nav.link}>{nav.title}</Link></li>
       )
