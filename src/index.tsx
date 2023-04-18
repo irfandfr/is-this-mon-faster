@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/advanced',
-        element:<CalculatorUI />,
+        element:<CalculatorUI advanced/>,
       },
       {
         path:'/advresult',
