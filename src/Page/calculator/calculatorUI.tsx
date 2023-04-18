@@ -5,7 +5,7 @@ import MainView from "../../Components/MainView/MainView"
 import Modal from "../../Components/Modal/Modal"
 import ModifierContainer from "../../Components/ModifierContainer/ModifierContainer"
 import Button from "../../Components/Button/Button"
-import { CalculatorAdvanced } from "./calculatorAdvanced"
+import {PkmnAdvancedSelector} from "./pkmnAdvancedSelector"
 
 //import utils
 import { modifiersAbbreviator, natureToSigns } from "../../Utils/utils"
@@ -23,6 +23,7 @@ import RefreshIcon from "../../Components/Icons/RefreshIcon"
 import { SelectionProp } from "../../Components/InputGroup/InputGroup"
 
 import style from './calcUI.module.scss'
+import { PkmnSimpleSelector } from "./pkmnSimpleSelector"
 
 
 
@@ -201,7 +202,14 @@ const CalculatorUI = ({ advanced }: CalculatorProp) => {
         <h3 className={style.text}>Is</h3>
         <button className={style.faqButton} onClick={() => setModal(true)}>?</button>
       </div>
-      <CalculatorAdvanced setP1Value={setP1Value} setP2Value={setP2Value} dispatch1={dispatch1} dispatch2={dispatch2} stateP1={stateP1} selectGroupState={selectGroupState} stateP2={stateP2} natures={NATURE_OPTIONS} />
+      {
+        advanced ? (
+          <PkmnAdvancedSelector setP1Value={setP1Value} setP2Value={setP2Value} dispatch1={dispatch1} dispatch2={dispatch2} stateP1={stateP1} selectGroupState={selectGroupState} stateP2={stateP2} natures={NATURE_OPTIONS} />
+        ):(
+          <PkmnSimpleSelector setP1Value={setP1Value} setP2Value={setP2Value} dispatch1={dispatch1} dispatch2={dispatch2} stateP1={stateP1} selectGroupState={selectGroupState} stateP2={stateP2}/>
+        )
+      }
+      
       <div className={style.pContainer}>
         <h5 className={style.text}>in</h5>
         <InputGroup groupList={stateTrickRoom} onClick={trToggle} disabled={selectGroupState.trstate} />
