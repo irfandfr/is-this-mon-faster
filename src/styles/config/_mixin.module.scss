@@ -72,6 +72,25 @@
   transition: #{$str};
 }
 
+@mixin movingGradient($str){
+  &::before{
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 200px;
+    @include animation(load 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite);
+    @if $str == dark{
+      background: linear-gradient(to right, transparent 0%, $basic-300 50%, transparent 100%);
+    } @else if $str == darker{
+      background: linear-gradient(to right, transparent 0%, $basic-400 50%, transparent 100%);
+    } @else if $str == bright{
+      background: linear-gradient(to right, transparent 0%, $basic-200 50%, transparent 100%);
+    } @else{
+      background: linear-gradient(to right, transparent 0%, $basic-200 50%, transparent 100%);
+    }
+  }
+}
+
 /*
 * Maintaining aspect ratios for an element
 */
