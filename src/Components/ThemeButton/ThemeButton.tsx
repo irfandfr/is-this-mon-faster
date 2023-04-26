@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import MoonIcon from '../Icons/MoonIcon'
 import SunIcon from '../Icons/SunIcon'
+import Skeleton from '../Skeleton/Skeleton'
 import style from './themebtn.module.scss'
 
 interface ThemeButtonProp{
@@ -17,19 +18,19 @@ interface ThemeButtonProp{
 const ThemeButton = ({ state, toggle, className}: ThemeButtonProp) =>{
   const [firstLoad, setLoad] = useState(true)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if(firstLoad){
-      let theme = document.body.getAttribute('data-theme')
-      let x = localStorage.getItem('ismonfasterTheme')
-      if(!x || x === ''){
+      let dataTheme = document.body.getAttribute('data-theme')
+      let theme = localStorage.getItem('ismonfasterTheme')
+      if(!theme || theme === ''){
         localStorage.setItem('ismonfasterTheme','light')
-      }else if(x === 'dark'){
+      }else if(theme === 'dark'){
         document.body.setAttribute('data-theme','dark')
         toggle(false)
-      }else if(x === 'light'){
+      }else if(theme === 'light'){
         document.body.setAttribute('data-theme','light')
         toggle(true)
-      }else if(theme === 'dark'){
+      }else if(dataTheme === 'dark'){
         toggle(false)
       }
       setLoad(false)
@@ -37,16 +38,11 @@ const ThemeButton = ({ state, toggle, className}: ThemeButtonProp) =>{
   })
   
   function toggleState(){
-    if(state){
-      document.body.setAttribute('data-theme','dark')
-      localStorage.setItem('ismonfasterTheme','dark')
-      toggle(false)
-    }else{
-      document.body.setAttribute('data-theme','light')
-      localStorage.setItem('ismonfasterTheme','light')
-      toggle(true)
-    }
+    document.body.setAttribute('data-theme',`${state ? "dark" : "light"}`)
+    localStorage.setItem('ismonfasterTheme',`${state ? "dark" : "light"}`)
+    toggle(!state)
   }
+
   return(
     <button className={`${style.themeBtn} ${state ? style.isDefault : ''} ${className}` } onClick={toggleState}>
       <SunIcon className={`${style.icon} ${style.sun}`}/>
