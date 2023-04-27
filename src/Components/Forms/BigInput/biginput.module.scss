@@ -11,13 +11,13 @@
   .bigInput{
     all: unset;
     width: 100%;
-    height: 30px;
     font-family: 'Patua One', cursive;
     color: $pkmn1-color;
     @include font-size(24px);
     padding-bottom: 2px;
     position: relative;
     margin-bottom: 3px;
+    word-break: break-word;
   }
 
   .underline{
