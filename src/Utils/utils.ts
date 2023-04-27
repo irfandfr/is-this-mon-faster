@@ -1,4 +1,4 @@
-import { Modifiers } from "./types";
+import { Modifiers, PkmnData } from "./types";
 
 /**
  * @desc function to calculate speed after been given a speed boost
@@ -83,4 +83,9 @@ export function modifiersExtendor(mod : 'ab'|'tw'|'pz'|'ib'|'cs'|string): Modifi
     default:
       return undefined
   }
+}
+
+export function dbToPkmnData(name : string, payload:{baseSpeed:string,image:'link'}): PkmnData{
+  let pkmn : PkmnData = {name: name, base: parseInt(payload.baseSpeed), imgLink: payload.image, ev: 255, iv: 31, lvl: 50,nature:'neutral'}
+  return pkmn
 }
