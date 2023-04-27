@@ -79,7 +79,7 @@ const ResultCard = ({advanced, verdict, trick_room, p1mod, advProp,simpleProp} :
         </>):(<></>) 
       }
       <p className={style.text}>is</p>
-      <BigInput defaultValue={verdictResult.verdict} disabled color={verdictResult.color} className={style.bigInput}/>
+      <BigInput defaultValue={verdictResult.verdict} disabled color={verdictResult.color} className={style.bigInput} id="result"/>
     </Card>
   )
 }
