@@ -26,6 +26,7 @@ import { SelectionProp } from "../../Components/InputGroup/InputGroup"
 //import style
 import style from './calcUI.module.scss'
 import LoadingPage from "../loading/Loading"
+import { PkmnData } from "../../Utils/types"
 
 
 const PkmnAdvancedSelector = lazy(() => import("./PkmnAdvancedSelector"));
@@ -74,8 +75,8 @@ const CalculatorUI = ({ advanced }: CalculatorProp) => {
     choice_scarf: { icon: <ChoiceScarfIcon />, title: 'Choice Scarf', id: 'choice_scarf', value: 'cs', check: false },
     iron_ball: { icon: <IronBallIcon />, title: 'Iron Ball', id: 'iron_ball', value: 'ib', check: false },
   }
-  const initialPkmnData: pkmnData = {
-    base_spd: 100,
+  const initialPkmnData: PkmnData = {
+    base: 100,
     lvl: 50,
     ev: 252,
     iv: 31,
@@ -111,8 +112,8 @@ const CalculatorUI = ({ advanced }: CalculatorProp) => {
       }
     }
   }
-  const [p1Stat, setp1Stat] = useState<pkmnData>(initialPkmnData)
-  const [p2Stat, setp2Stat] = useState<pkmnData>(initialPkmnData)
+  const [p1Stat, setp1Stat] = useState<PkmnData>(initialPkmnData)
+  const [p2Stat, setp2Stat] = useState<PkmnData>(initialPkmnData)
   const [selectGroupState, setGroupState] = useState(initialSelectState)
   const [stateP1, dispatch1] = useReducer(reducer, initialState)
   const [stateP2, dispatch2] = useReducer(reducer, initialState)
@@ -129,6 +130,14 @@ const CalculatorUI = ({ advanced }: CalculatorProp) => {
 
 
   const navigate = useNavigate()
+
+  function setPkmn1Stat(pkmn:PkmnData){
+    setp1Stat(pkmn)
+  }
+  function setPkmn2Stat(pkmn:PkmnData){
+    setp2Stat(pkmn)
+  }
+
   function setP1Value(id: string, value: string | number) {
     setp1Stat({
       ...p1Stat,
@@ -155,8 +164,8 @@ const CalculatorUI = ({ advanced }: CalculatorProp) => {
   }
 
   //compile pokemon stats and modifiers into one array
-  function extractData(pkmn: pkmnData, mods: initialState) {
-    let pStats: any[] = [pkmn.base_spd, pkmn.ev, pkmn.iv, pkmn.lvl, natureToSigns(pkmn.nature)]
+  function extractData(pkmn: PkmnData, mods: initialState) {
+    let pStats: any[] = [pkmn.base, pkmn.ev, pkmn.iv, pkmn.lvl, natureToSigns(pkmn.nature)]
     Object.entries(mods).forEach((value: [string, SelectionProp]) => {
       if (value[1].check) {
         pStats.push(modifiersAbbreviator(value[0] as keyof typeof InitialStateKey))
@@ -216,7 +225,7 @@ const CalculatorUI = ({ advanced }: CalculatorProp) => {
           </Suspense>
         ):(
           <Suspense fallback={<LoadingPage errorText="" />}>
-            <PkmnSimpleSelector setP1Value={setP1Value} setP2Value={setP2Value} dispatch1={dispatch1} dispatch2={dispatch2} stateP1={stateP1} selectGroupState={selectGroupState} stateP2={stateP2}/>
+            <PkmnSimpleSelector sprite1={p1Stat.imgLink} sprite2={p2Stat.imgLink} setP1Stat={setPkmn1Stat} setP2Stat={setPkmn2Stat} dispatch1={dispatch1} dispatch2={dispatch2} stateP1={stateP1} selectGroupState={selectGroupState} stateP2={stateP2}/>
           </Suspense>
         )
       }
