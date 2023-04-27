@@ -9,15 +9,15 @@ import style from './homepage.module.scss'
 const Homepage = () =>{
   let navigate = useNavigate()
   function redirectToCalc(){
-    navigate("/")
+    navigate("/calc")
   }
   return(
     <MainView className={style.homepage}>
       <h3 className={style.text} >Is</h3>
       <div className={style.compareGroup}>
-        <BigInput className={style.input} color='#36B7AF' defaultValue='Dunsparce'/>
+        <BigInput className={style.input} color='#36B7AF' defaultValue='Dunsparce' id='p1'/>
         <h4 className={style.text}style={{textAlign: 'center'}}>faster <br /> than</h4>
-        <BigInput className={style.input} color='#C13CFF' defaultValue='Dragapult'/>
+        <BigInput className={style.input} color='#C13CFF' defaultValue='Dragapult' id='p2'/>
       </div>
       <Card style={{marginTop: '37px'}}>
         <Card.Header text='Find Out:' />
