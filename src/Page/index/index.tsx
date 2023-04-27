@@ -15,9 +15,9 @@ const Homepage = () =>{
     <MainView className={style.homepage}>
       <h3 className={style.text} >Is</h3>
       <div className={style.compareGroup}>
-        <BigInput color='#36B7AF'/>
+        <BigInput className={style.input} color='#36B7AF' defaultValue='Dunsparce'/>
         <h4 className={style.text}style={{textAlign: 'center'}}>faster <br /> than</h4>
-        <BigInput color='#C13CFF'/>
+        <BigInput className={style.input} color='#C13CFF' defaultValue='Dragapult'/>
       </div>
       <Card style={{marginTop: '37px'}}>
         <Card.Header text='Find Out:' />
