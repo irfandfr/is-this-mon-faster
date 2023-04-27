@@ -7,7 +7,7 @@ export interface PkmnBaseStat{
 }
 
 export interface PkmnData extends PkmnBaseStat{
-  name: string
+  name?: string
   imgLink?: string
 }
 
