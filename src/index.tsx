@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
@@ -7,11 +7,11 @@ import {
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Homepage from './Page/index';
-import CalculatorUI from './Page/calculator/calculatorUI';
-import ResultPage from './Page/result/ResultPage';
-import ErrorPage from './Page/error/error';
-
+import LoadingPage from './Page/loading/Loading';
+const Homepage = lazy(() => import('./Page/index'));
+const CalculatorUI = lazy(() => import('./Page/calculator/calculatorUI'));
+const ResultPage = lazy(() => import('./Page/result/ResultPage'));
+const ErrorPage = lazy(() => import('./Page/error/error'));
 
 const router = createBrowserRouter([
   {
@@ -21,19 +21,22 @@ const router = createBrowserRouter([
     children: [
       {
         path:'/',
-        element:<Homepage />
+        element:(
+          <Suspense fallback={<LoadingPage errorText='' />}>
+            <Homepage />
+          </Suspense>)
       },
       {
         path:'/calc',
-        element:<CalculatorUI />,
+        element:<Suspense fallback={<LoadingPage errorText=''/>}><CalculatorUI /></Suspense>,
       },
       {
         path:'/advanced',
-        element:<CalculatorUI advanced/>,
+        element:<Suspense fallback={<LoadingPage errorText=''/>}><CalculatorUI advanced/></Suspense>,
       },
       {
         path:'/advresult',
-        element:<ResultPage advanced={true} />
+        element:<Suspense fallback={<LoadingPage errorText=''/>}><ResultPage advanced={true} /></Suspense>
       }
     ]
   },

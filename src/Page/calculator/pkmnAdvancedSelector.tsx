@@ -27,7 +27,7 @@ interface CaclAdvancedProp{
   natures : {value: string, name:string}[] 
 }
 
-export const PkmnAdvancedSelector = ({setP1Value,setP2Value,dispatch1, dispatch2, stateP1,stateP2, selectGroupState, natures}: CaclAdvancedProp) =>{
+ const PkmnAdvancedSelector = ({setP1Value,setP2Value,dispatch1, dispatch2, stateP1,stateP2, selectGroupState, natures}: CaclAdvancedProp) =>{
   return (
     <div className={style.compareContainer}>
         <div className={style.pContainer} id="p1">
@@ -58,3 +58,5 @@ export const PkmnAdvancedSelector = ({setP1Value,setP2Value,dispatch1, dispatch2
       </div>
   )
 }
+
+export default PkmnAdvancedSelector

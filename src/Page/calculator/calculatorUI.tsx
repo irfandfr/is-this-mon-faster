@@ -1,11 +1,12 @@
-import React, { useReducer, useState } from "react"
+import React, { lazy, Suspense, useReducer, useState } from "react"
 import { useNavigate } from "react-router-dom"
+
+//import component
 import InputGroup from "../../Components/InputGroup/InputGroup"
 import MainView from "../../Components/MainView/MainView"
 import Modal from "../../Components/Modal/Modal"
 import ModifierContainer from "../../Components/ModifierContainer/ModifierContainer"
 import Button from "../../Components/Button/Button"
-import {PkmnAdvancedSelector} from "./pkmnAdvancedSelector"
 
 //import utils
 import { modifiersAbbreviator, natureToSigns } from "../../Utils/utils"
@@ -22,8 +23,14 @@ import RefreshIcon from "../../Components/Icons/RefreshIcon"
 //import interface
 import { SelectionProp } from "../../Components/InputGroup/InputGroup"
 
+//import style
 import style from './calcUI.module.scss'
-import { PkmnSimpleSelector } from "./pkmnSimpleSelector"
+import LoadingPage from "../loading/Loading"
+
+
+const PkmnAdvancedSelector = lazy(() => import("./PkmnAdvancedSelector"));
+const PkmnSimpleSelector = lazy(() => import("./PkmnSimpleSelector"));
+
 
 
 
@@ -204,9 +211,13 @@ const CalculatorUI = ({ advanced }: CalculatorProp) => {
       </div>
       {
         advanced ? (
-          <PkmnAdvancedSelector setP1Value={setP1Value} setP2Value={setP2Value} dispatch1={dispatch1} dispatch2={dispatch2} stateP1={stateP1} selectGroupState={selectGroupState} stateP2={stateP2} natures={NATURE_OPTIONS} />
+          <Suspense fallback={<LoadingPage errorText="" />}>
+            <PkmnAdvancedSelector setP1Value={setP1Value} setP2Value={setP2Value} dispatch1={dispatch1} dispatch2={dispatch2} stateP1={stateP1} selectGroupState={selectGroupState} stateP2={stateP2} natures={NATURE_OPTIONS} />
+          </Suspense>
         ):(
-          <PkmnSimpleSelector setP1Value={setP1Value} setP2Value={setP2Value} dispatch1={dispatch1} dispatch2={dispatch2} stateP1={stateP1} selectGroupState={selectGroupState} stateP2={stateP2}/>
+          <Suspense fallback={<LoadingPage errorText="" />}>
+            <PkmnSimpleSelector setP1Value={setP1Value} setP2Value={setP2Value} dispatch1={dispatch1} dispatch2={dispatch2} stateP1={stateP1} selectGroupState={selectGroupState} stateP2={stateP2}/>
+          </Suspense>
         )
       }
       

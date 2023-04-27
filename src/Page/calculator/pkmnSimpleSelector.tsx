@@ -5,6 +5,8 @@ import style from './calcUI.module.scss'
 //Interface Export
 import { SelectionProp } from "../../Components/InputGroup/InputGroup"
 import { ActionType } from './calculatorUI'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 interface pkmnState{
   [key : string] : SelectionProp 
@@ -41,7 +43,20 @@ const PkmnSprite = ({img, name} : PkmnSpriteProp) => {
 }
 
 
-export const PkmnSimpleSelector = ({setP1Value,setP2Value,dispatch1, dispatch2, stateP1,stateP2, selectGroupState}: PkmnSimpleSelectorProp) => {
+const PkmnSimpleSelector = ({setP1Value,setP2Value,dispatch1, dispatch2, stateP1,stateP2, selectGroupState}: PkmnSimpleSelectorProp) => {
+  // useEffect(() => {
+  //   axios({
+  //     method: 'get',
+  //     url: 'https://ismonfaster-default-rtdb.firebaseio.com/list.json',
+  //     headers:{
+  //       Accept: '*/*'
+  //     }
+  //   }).then((res) => {
+  //     localStorage.setItem('pdex',JSON.stringify(res.data))
+  //   })
+  //   .catch(err => console.log(err))
+  // },)
+  
   return(
     <div className={style.compareContainer}>
       <div className={style.pContainer} id="p1">
@@ -60,3 +75,5 @@ export const PkmnSimpleSelector = ({setP1Value,setP2Value,dispatch1, dispatch2, 
     </div>
   )
 }
+
+export default PkmnSimpleSelector
