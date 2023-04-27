@@ -1,39 +1,55 @@
-import { ChangeEvent, ChangeEventHandler, useLayoutEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, useLayoutEffect, useRef, useState } from 'react'
+import { PkmnData } from '../../../Utils/types'
 import style from './biginput.module.scss'
 
-interface BigInputProp{
+interface BigInputProp {
+  id: string
   color?: string
   disabled?: boolean
   defaultValue?: string
   className?: string
+  pkmnList?: PkmnData[]
+  onChangeInput?: (e: ChangeEvent<HTMLInputElement>) => void
+  onSelectOption?: (pkmn: PkmnData,id:string) => void
 }
 
 
-const BigInput = ({color, disabled, defaultValue, className} : BigInputProp) =>{
-  const txtArea = useRef<HTMLTextAreaElement>(null)
-  const rowCount = useRef(1)
-  const [currHeight, setHeight] = useState(30)
-
-  function onChange(e : ChangeEvent<HTMLTextAreaElement>){
-    if(!!txtArea.current && txtArea.current.scrollHeight > currHeight + 10 ){//resize if input is longer than width
-      setHeight(txtArea.current.scrollHeight)
-      rowCount.current += 1 
-    }else if(e.currentTarget.value.length <= rowCount.current * 18){//reset size if somewords are deleted
-      setHeight(30)
-      rowCount.current = Math.max(Math.ceil(e.currentTarget.value.length / 18),1)
+const BigInput = ({ id, color, disabled, defaultValue, className, pkmnList, onChangeInput, onSelectOption }: BigInputProp) => {
+  const [currPkmn, setPkmn] = useState(!!defaultValue ? defaultValue : '')
+  const [hideSelect, setSelect] = useState(true)
+  const inputRef = useRef<HTMLInputElement>(null)
+  function updatePkmn(pkmn:PkmnData){
+    setPkmn(pkmn.name!)
+    !!onSelectOption && onSelectOption(pkmn,id)
+    if(inputRef.current){
+      inputRef.current.value = pkmn.name!
+      inputRef.current.blur()
     }
   }
-  useLayoutEffect(() => {
-    if(!!txtArea.current && txtArea.current.scrollHeight > currHeight + 10){//check if current height is smaller in case of value deletion
-      setHeight(txtArea.current.scrollHeight)
-    }
-  }, [currHeight])
 
-  return(
+  function onBlur(){
+    if(inputRef.current)
+      inputRef.current.value = currPkmn
+    setSelect(true)
+  }
+
+  useLayoutEffect(() => {
+    setSelect(false)
+  }, [pkmnList])
+
+
+  return (
     <>
       <div className={`${style.bigInputContainer} ${className}`}>
-          <textarea spellCheck={false} disabled={disabled} ref={txtArea} onChange={onChange} defaultValue={defaultValue} className={style.bigInput} name="" id="" style={{color: color, height: currHeight}}/>
-          <span className={style.underline}></span>
+        <input list={id} spellCheck={false} ref={inputRef} disabled={disabled} defaultValue={defaultValue} className={style.bigInput} name="" id="" style={{ color: color }} onChange={onChangeInput} onBlur={onBlur} placeholder="???"/>
+        <span className={style.underline}></span>
+        <div className={`${style.optionsContainer} ${hideSelect ? style.hide : ''}`}>
+          {pkmnList?.map(pkmn => {
+            return (
+              <option tabIndex={0} className={style.option} value={pkmn.name} key={`select${pkmn.name}`} onClick={() => updatePkmn(pkmn)}>{pkmn.name}</option>
+            )
+          })}
+        </div>
       </div>
     </>
   )
