@@ -45,8 +45,8 @@
       opacity: 0;
       cursor: pointer;
       z-index: 2;
-      &:focus~.focusOutline{
-        outline: solid 2px $basic-500;
+      &:focus-visible~.focusOutline{
+        outline: -webkit-focus-ring-color auto 1px;
       }
 
       &:checked~.customCheckmark{

@@ -50,6 +50,10 @@
       position: absolute;
       top: 0;
       right: 0;
+
+      &:focus-visible{
+        outline: -webkit-focus-ring-color auto 1px;
+      }
     }
   }
   .compareContainer{

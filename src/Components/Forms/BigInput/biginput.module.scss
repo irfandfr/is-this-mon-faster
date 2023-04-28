@@ -18,8 +18,8 @@
     position: relative;
     margin-bottom: 3px;
 
-    &:focus{
-      outline: solid 2px $basic-500;
+    &:focus-visible{    
+      outline: -webkit-focus-ring-color auto 1px;
     }
   }
 
@@ -58,7 +58,7 @@
       margin-bottom: -1px;
       
       &:focus{
-        outline: solid 2px $basic-200;
+        outline: solid 2px var(--body-font);
       }
       &:hover{
         background: $basic-100;
