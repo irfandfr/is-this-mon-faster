@@ -13,7 +13,7 @@ interface BigInputProp {
   onSelectOption?: (pkmn: PkmnData,id:string) => void
 }
 
-
+let blurTimer : number;
 const BigInput = ({ id, color, disabled, defaultValue, className, pkmnList, onChangeInput, onSelectOption }: BigInputProp) => {
   const [currPkmn, setPkmn] = useState(!!defaultValue ? defaultValue : '')
   const [hideSelect, setSelect] = useState(true)
@@ -21,6 +21,7 @@ const BigInput = ({ id, color, disabled, defaultValue, className, pkmnList, onCh
   function updatePkmn(pkmn:PkmnData){
     setPkmn(pkmn.name!)
     !!onSelectOption && onSelectOption(pkmn,id)
+    window.clearTimeout(blurTimer)
     if(inputRef.current){
       inputRef.current.value = pkmn.name!
       inputRef.current.blur()
@@ -28,9 +29,11 @@ const BigInput = ({ id, color, disabled, defaultValue, className, pkmnList, onCh
   }
 
   function onBlur(){
-    if(inputRef.current)
-      inputRef.current.value = currPkmn
-    setSelect(true)
+    blurTimer = window.setTimeout(() => {
+      if(inputRef.current)
+        inputRef.current.value = currPkmn
+      setSelect(true)
+    }, 200);
   }
 
   useLayoutEffect(() => {

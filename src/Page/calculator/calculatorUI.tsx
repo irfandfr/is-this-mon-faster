@@ -234,7 +234,7 @@ const CalculatorUI = ({ advanced }: CalculatorProp) => {
         <h5 className={style.text}>in</h5>
         <InputGroup groupList={stateTrickRoom} onClick={trToggle} disabled={selectGroupState.trstate} />
       </div>
-      <Button icon={<RefreshIcon className={style.refreshIcon} />} onClick={toResultPage} text="Analyze" type="primary" style={{ marginTop: '30px' }} />
+      <Button icon={<RefreshIcon className={style.refreshIcon} />} onClick={toResultPage} disabled={advanced ? false : !(!!p1Stat.name && !!p2Stat.name)} text="Analyze" type="primary" style={{ marginTop: '30px' }} />
       {advanced ? (
         <a className={style.link} href="/calc">Switch to Simple</a>
       ) : (
