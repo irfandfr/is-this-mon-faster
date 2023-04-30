@@ -57,7 +57,7 @@
       transition: background 0.05s ease-in-out;
       margin-bottom: -1px;
       
-      &:focus{
+      &:focus-visible{
         outline: solid 2px var(--body-font);
       }
       &:hover{
@@ -67,5 +67,13 @@
   }
   ::-webkit-calendar-picker-indicator{
     display: none!important;
+  }
+  .spinner{
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-width: 3px;
+    top: calc(50% - 9px);
+    right: 2px;
   }
 }
