@@ -12,12 +12,66 @@ $icon-size: 16px;
     padding-top: 30px;
     padding-bottom: 23px;
     position: relative;
+
+    &.simpleCard{
+      padding-top: 6px;
+    }
   
     .bigInput{
       max-width: 110px;
       input{
         @include font-size(32px);
       }
+    }
+
+    .pkmnSprite{
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+      &.p1Sprite{
+        height: 84px;
+        width: 84px;
+      }
+      &.p2Sprite{
+        height: 55px;
+        width: 55px;
+      }
+    }
+    .p2Container{
+      position: absolute;
+      display: flex;
+      align-items: center;
+      right: -25px;
+      bottom: -10px;
+      .sideSpriteContainer{
+        margin-left: 8px;
+        height: 50px;
+        width: 50px;
+        border-radius: 30px;
+        outline: solid 4px $primary-color;
+        background: var(--content-bg);
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+        .imageMask{
+          height: 50px;
+          width: 50px;
+          border-radius: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+
+        &:hover{
+          .tooltip{
+            display: inline-block
+          }
+        }
+      }
+    }
+    
+    .tooltip{
+      @include tooltip;
+      top : -36px;
     }
 
     .trResult{

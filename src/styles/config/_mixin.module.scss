@@ -32,6 +32,44 @@
   }
 }
 
+/*
+  Mixin for Tooltip, 
+  Tip: Add &:hover properties to the element in the style to make it appear
+  ex: &:hover{
+    .yourToolTipClassName{
+      display: inline-block;
+    }
+  }
+*/
+
+@mixin tooltip{
+  display: none;
+    background: var(--icon-bg);
+    color: var(--light-font);
+    padding: 3px 6px;
+    border-radius: 4px;
+    @include font-size(12px);
+    position: absolute;
+    white-space: nowrap;
+    top: -30px;
+    left: 50%;
+    margin-left: -50px;
+    width: 100px;
+    text-align: center;
+
+    &::before{
+      content: '';
+      width: 0; 
+      height: 0; 
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid var(--icon-bg);
+      position: absolute;
+      bottom: -6px;
+      left: 44px;
+    }
+}
+
 
 /*
  Mixin for creating animation
@@ -90,6 +128,7 @@
     }
   }
 }
+
 
 /*
 * Maintaining aspect ratios for an element
