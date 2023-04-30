@@ -17,18 +17,7 @@ interface responseProp{
   inTrickRoom: boolean
 }
 
-
-interface speedProps{
-  base_speed1: number
-  base_speed2: number
-  status1?: Modifiers[]
-  status2?: Modifiers[]
-  inTrickRoom?: boolean
-}
-
-
-
-const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : speedProps) =>{
+const speedAnalyzer = (base_speed1 : number, base_speed2: number,status1: Modifiers[] ,status2 : Modifiers[],inTrickRoom : boolean) =>{
   const FASTER = 1;
   const TIE = 0
   const SLOWER = -1; 
