@@ -37,6 +37,10 @@ const router = createBrowserRouter([
       {
         path:'/advresult',
         element:<Suspense fallback={<LoadingPage errorText=''/>}><ResultPage advanced={true} /></Suspense>
+      },
+      {
+        path:'/smpresult',
+        element:<Suspense fallback={<LoadingPage errorText=''/>}><ResultPage advanced={false} /></Suspense>
       }
     ]
   },

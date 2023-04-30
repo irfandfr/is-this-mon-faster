@@ -164,8 +164,13 @@ const CalculatorUI = ({ advanced }: CalculatorProp) => {
   }
 
   //compile pokemon stats and modifiers into one array
-  function extractData(pkmn: PkmnData, mods: initialState) {
-    let pStats: any[] = [pkmn.base, pkmn.ev, pkmn.iv, pkmn.lvl, natureToSigns(pkmn.nature)]
+  function extractData(pkmn: PkmnData, mods: initialState, mode: 'simple' | 'advanced') {
+    let pStats: any[] = []
+    if(mode === 'advanced'){
+      pStats = [pkmn.base, pkmn.ev, pkmn.iv, pkmn.lvl, natureToSigns(pkmn.nature)]
+    }else if(mode === 'simple'){
+      pStats = [encodeURIComponent(`${pkmn.name}`)]
+    }
     Object.entries(mods).forEach((value: [string, SelectionProp]) => {
       if (value[1].check) {
         pStats.push(modifiersAbbreviator(value[0] as keyof typeof InitialStateKey))
@@ -184,10 +189,17 @@ const CalculatorUI = ({ advanced }: CalculatorProp) => {
       trstate: true
     })
     setTimeout(() => {//wait incase for debounce function
-      let p1data = extractData(p1Stat, stateP1);
-      let p2data = extractData(p2Stat, stateP2)
       let tr = getTrValue().toString()
-      let url = `/advresult?p1=${p1data.join('_')}&p2=${p2data.join('_')}&tr=${tr}`
+      let p1data;
+      let p2data;
+      if(advanced){
+        p1data = extractData(p1Stat, stateP1, 'advanced');
+        p2data = extractData(p2Stat, stateP2, 'advanced')
+      }else{
+        p1data = extractData(p1Stat, stateP1, 'simple');
+        p2data = extractData(p2Stat, stateP2, 'simple')
+      }
+      let url = `/${advanced ? 'adv': 'smp'}result?p1=${p1data.join('_')}&p2=${p2data.join('_')}&tr=${tr}`
       navigate(url)
     }, 800);
   }
