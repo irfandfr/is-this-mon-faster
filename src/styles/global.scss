@@ -17,6 +17,7 @@
   --secondary-bg: #153F67;
   --icon-bg: rgba(21, 63, 103, 0.8);
   --theme-bg: #D9D9D9;
+  --table-accent: rgba(223, 237, 238, 0.8);
 }
 
 [data-theme='dark']{
@@ -33,6 +34,7 @@
     --secondary-bg: #CCD2E3;  
     --icon-bg: #f3f3f3;
     --theme-bg: #626262;
+    --table-accent: rgb(72 98 100 / 80%);
 }
 
 html,
