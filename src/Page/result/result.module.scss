@@ -196,27 +196,57 @@ $icon-size: 16px;
       padding-bottom: 36px;
     }
 
-    .statCalcCard{
+    .statCalcCard, .tableCard{
       max-width: 442px;
     }
   }
 
   .statTable{
-    width: 90%;
+    width: 100%;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     color: var(--basic-heading);
+    height: 100%;
+    
+    .sprite{
+      height: 48px;
+      width: 48px;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    }
     tr{
+      color: var(--light);
+
       th:first-child{
         text-align: left;
-        font-weight: 700;
+        font-weight: 500;
       }
       th{
         width: calc(100% / 3);
-        font-weight:500;
+        font-weight:400;
+        padding: 4px;
+        
+        .pkmnContainer{
+          height: 100%;
+          display: flex;
+          flex-flow: column;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          background: var(--table-accent);
+          border-radius: 4px;
+          padding: 2px;
+          img{
+            margin-bottom: 8px;
+          }
+        }
       }
-      &:nth-child(odd){
-        background-color: rgba($color: #DFEDEE, $alpha: 0.8);
+      &:first-child{
+        th{
+          padding: 0;
+        }
+      }
+      &:nth-child(even){
+        background-color: var(--table-accent);
       }
     }
   }
