@@ -39,7 +39,9 @@ const BigInput = ({ id, color, disabled, defaultValue, className, pkmnList, load
   }
 
   useLayoutEffect(() => {
-    setSelect(false)
+    if(typeof pkmnList !== 'undefined'){
+      setSelect(false)
+    }
   }, [pkmnList])
 
 
