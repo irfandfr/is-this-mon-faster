@@ -56,7 +56,7 @@ const PkmnSimpleSelector = ({setP1Stat,setP2Stat,dispatch1, dispatch2, stateP1,s
   async function onChangeInput(e: ChangeEvent<HTMLInputElement>, id:"p1"|"p2"){
     window.clearTimeout(debounceTimer)
     debounceTimer = window.setTimeout(()=>{
-      let cleanedSearchKey = e.target.value.charAt(0).toUpperCase()+e.target.value.toLocaleLowerCase().slice(1)//convert input search to Capitalize
+      let cleanedSearchKey = encodeURIComponent(e.target.value.split(' ').map((query) => query.charAt(0).toUpperCase()+query.toLocaleLowerCase().slice(1)).join(' '))//convert input search to Capitalize
       setLoad({...loadData, [id] : true})
       axios({
         method:'get',
@@ -69,7 +69,7 @@ const PkmnSimpleSelector = ({setP1Stat,setP2Stat,dispatch1, dispatch2, stateP1,s
         if(!!res.data){
           let queriedData = []
           for(let key in res.data){
-            if(key.includes(cleanedSearchKey)){
+            if(key.includes(decodeURIComponent(cleanedSearchKey))){
               queriedData.push(dbToPkmnData(key, res.data[key]))
             }
           }
