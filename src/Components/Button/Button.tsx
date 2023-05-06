@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react'
+import { Link } from 'react-router-dom'
 import styles from './button.module.scss'
 
 interface ButtonProp{
@@ -16,10 +17,10 @@ const Button = ({text, icon, disabled, type, style, href, onClick}: ButtonProp) 
   
   if(!!href){
     return(
-      <a href={!!href ? href : '#'} className={`${styles.button} ${!!icon && styles.iconed} ${!!type ? styles[type] : ''}`} style={style}>
+      <Link to={!!href ? href : '#'} className={`${styles.button} ${!!icon && styles.iconed} ${!!type ? styles[type] : ''}`} style={style}>
         {icon && React.cloneElement(icon, {className: `${icon.props.className} ${styles.icon}`})}
         {text}
-      </a>
+      </Link>
     )
   }else{
     return(
