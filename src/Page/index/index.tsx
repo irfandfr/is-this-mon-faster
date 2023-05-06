@@ -16,7 +16,7 @@ const Homepage = () =>{
       <h3 className={style.text} >Is</h3>
       <div className={style.compareGroup}>
         <BigInput className={style.input} color='#36B7AF' defaultValue='Dunsparce' id='p1' disabled/>
-        <h4 className={style.text}style={{textAlign: 'center'}}>faster <br /> than</h4>
+        <h4 className={`${style.text} ${style.spacing}`}style={{textAlign: 'center'}}>faster <br /> than</h4>
         <BigInput className={style.input} color='#C13CFF' defaultValue='Dragapult' id='p2' disabled/>
       </div>
       <Card style={{marginTop: '37px'}}>
