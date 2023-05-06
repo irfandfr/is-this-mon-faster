@@ -2,20 +2,21 @@ import { useLayoutEffect, useState } from 'react'
 import MoonIcon from '../Icons/MoonIcon'
 import SunIcon from '../Icons/SunIcon'
 import Skeleton from '../Skeleton/Skeleton'
-import style from './themebtn.module.scss'
+import styles from './themebtn.module.scss'
 
 interface ThemeButtonProp{
   state: boolean
   toggle: (val:boolean) => void
   className?:string
+  style?: React.CSSProperties
 }
 /**
  * This component both toggles and initialized the theme for the app, the default theme is light
  * the state true indicates it's in light mode and false indicating its in dark mode
- * @param className string containing the style for this component 
+ * @param className string containing the styles for this component 
  * 
  */
-const ThemeButton = ({ state, toggle, className}: ThemeButtonProp) =>{
+const ThemeButton = ({ state, toggle, className, style}: ThemeButtonProp) =>{
   const [firstLoad, setLoad] = useState(true)
 
   useLayoutEffect(() => {
@@ -44,10 +45,10 @@ const ThemeButton = ({ state, toggle, className}: ThemeButtonProp) =>{
   }
 
   return(
-    <button className={`${style.themeBtn} ${state ? style.isDefault : ''} ${className}` } onClick={toggleState}>
-      <SunIcon className={`${style.icon} ${style.sun}`}/>
-      <MoonIcon className={`${style.icon} ${style.moon}`}/>
-      <div className={style.circle} style={!state ? {transform: 'translate(-30px)'} : {transform: 'translate(0px)'}}></div>
+    <button className={`${styles.themeBtn} ${state ? styles.isDefault : ''} ${className}` } onClick={toggleState} style={style}>
+      <SunIcon className={`${styles.icon} ${styles.sun}`}/>
+      <MoonIcon className={`${styles.icon} ${styles.moon}`}/>
+      <div className={styles.circle} style={!state ? {transform: 'translate(-30px)'} : {transform: 'translate(0px)'}}></div>
     </button>
   )
 }

@@ -54,14 +54,12 @@
     transition: max-height 0.15s ease-in-out;
     display: flex;
     align-items: center;
-    display: none;//temporary
     
     ul{
       display: flex;
       flex-flow: column;
       list-style-type: none;
       align-items: flex-end;
-      align-items: center;
       padding: 0 14px;
       padding-top: 25px;
       margin: 0;
@@ -76,6 +74,12 @@
         position: relative;
         width: max-content;
         z-index: 1;
+
+        &.themeBtnContainer{
+          &::before{
+            display: none;
+          }
+        }
 
         &.active{
           text-decoration: underline;
@@ -139,7 +143,7 @@
     }
 
     .navContainer{
-      max-height: 250px;
+      max-height: 0;
       overflow: hidden;
       position: inherit;
       background-color: transparent;
@@ -152,7 +156,7 @@
       
       ul{
         flex-flow: row;
-        align-items: flex-start;
+        align-items: center;
         justify-content: right;
         padding: 0;
         margin: 0;
