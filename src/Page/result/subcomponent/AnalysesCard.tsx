@@ -16,7 +16,6 @@ interface AnalysesProp {
 }
 
 const AnalysesCard = ({ p1data, p2data, p1mods, p2mods, result }: AnalysesProp) => {
-  console.log(result)
 
   function renderAnalyses(verdict: 1 | 0 | -1) {
     let listItem: ReactNode[] = []
@@ -58,13 +57,10 @@ const AnalysesCard = ({ p1data, p2data, p1mods, p2mods, result }: AnalysesProp) 
             (<b className={style.p1text}>{minp1Speed}</b> vs <b className={style.p2text}>{minp2Speed}</b> )
           </Card.ListItem>
         )
-        if(result.min_stat[0].opponentState !== 'win'){
-          
-        }
         listItem.push(
-          <Card.ListItem type={result.min_boost >= -6 ? 'warning' : 'safe'} key="min_boosr">
+          <Card.ListItem type={result.min_boost < 6 ? 'warning' : 'danger'} key="min_boosr">
             <span className={style.statTooltip} data-tooltip={pkmnStatSpreadConverter('min--')}>{pkmnSpeedStateConverter('min--')}</span> <b className={style.p1text}>{p1data.name}</b> {result.min_boost <= 6 ? ' can ' : " can't "} outspeed <span className={style.statTooltip} data-tooltip={pkmnStatSpreadConverter('min--')}>MinEV&IV-</span> <b className={style.p2text}>{p2data.name}</b> with <b>-{`${Math.min(result.min_boost, 6)}/x${(2 / (Math.min(result.min_boost, 6) + 2)).toFixed(2)}`}
-            </b> Speed Boost (<b className={style.p1text}>{statCalculator(p1data.base, 0, 0, 'hindering', 50, p2mods, Math.min(result.min_boost, 6) * -1 )}</b> vs <b className={style.p2text}>{minp2Speed}</b>)
+            </b> Speed Boost (<b className={style.p1text}>{statCalculator(p1data.base, 0, 0, 'hindering', 50, p1mods, Math.min(result.min_boost, 6) * -1 )}</b> vs <b className={style.p2text}>{minp2Speed}</b>)
           </Card.ListItem>
         )
       }

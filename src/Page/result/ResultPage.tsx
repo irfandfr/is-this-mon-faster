@@ -203,7 +203,7 @@ const ResultPage = ({advanced} : ResultPageInterface) => {
           <ResultCard advanced={advanced} trick_room={isTr} verdict={result.verdict} simpleProp={{p1Name: pData.p1.name!, p2Name: pData.p2.name! ,p1ImageLink: pData.p1.imgLink, p2ImageLink: pData.p2.imgLink}} p1mod={pData.p1mod}/>
           <AnalysesCard result={result as responseProp} p1data={pData.p1} p2data={pData.p2} p1mods={pData.p1mod} p2mods={pData.p2mod}/>
           <StatTables p1base={pData.p1.base} p2base={pData.p2.base} p1mods={pData.p1mod} p2mods={pData.p2mod} p1ImgLink={pData.p1.imgLink!} p2ImgLink={pData.p2.imgLink}/>
-          <div style={{display: 'flex', marginTop: 39}}>
+          <div style={{display: 'flex', marginTop: 39, marginBottom: 30}}>
             <Button icon={<TriangleLeftIcon className={style.icon}/>} href={advanced ? '/advanced' : '/calc'} type='secondary' text="Back"/>
             {advanced ? <></>:(
               <Button icon={<RefreshIcon className={style.iconStroke}/>} onClick={redirectReverseURL}  type='primary' text="Reverse Result" style={{marginLeft: '20px'}}/>
