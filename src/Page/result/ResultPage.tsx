@@ -5,14 +5,18 @@ import ResultCard from "./subcomponent/ResultCard"
 import StatCalcCard from "./subcomponent/StatCalcCard"
 
 import style from "./result.module.scss"
-import { Modifiers, PkmnBaseStat, PkmnData } from "../../Utils/types"
-import advancedModeAnalyzer, { responseProp } from "../../Utils/advancedModeAnalyzer"
-import { useEffect, useState } from "react"
+import { Modifiers, PkmnData } from "../../Utils/types"
+import advancedModeAnalyzer, { advResponseProp } from "../../Utils/advancedModeAnalyzer"
+import { useLayoutEffect, useRef, useState } from "react"
 import LoadingPage from "../loading/Loading"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { modifiersExtendor, signsToNature } from "../../Utils/utils"
+
+import StatTables from './subcomponent/StatTables'
 import axios from "axios"
-import speedAnalyzer from "../../Utils/speedAnalyzer"
+import speedAnalyzer, { responseProp } from "../../Utils/speedAnalyzer"
+import AnalysesCard from "./subcomponent/AnalysesCard"
+import RefreshIcon from "../../Components/Icons/RefreshIcon"
 
 interface ResultPageInterface{
   advanced: boolean
@@ -27,12 +31,14 @@ interface pData{
 
 
 const ResultPage = ({advanced} : ResultPageInterface) => {
-  const [result, setResult] = useState<undefined | responseProp>(undefined)
+  const [result, setResult] = useState<undefined | advResponseProp | responseProp>(undefined)
+  const [load, setLoad] = useState(true)
   const [pData, setPData] = useState<undefined | pData>(undefined)
   const [isTr, setTr] = useState(false)
-  const [load, setLoad] = useState(true)
+  const navigate = useNavigate()
   const [errorText, setError] = useState<string>('')
   const location = useLocation()
+  const refURL = useRef(location.search)
 
   function getModifiersArrayFromUrlProp(arr:string[],startIndex:number):Modifiers[]{
     let pmods : Modifiers[] = []
@@ -81,7 +87,24 @@ const ResultPage = ({advanced} : ResultPageInterface) => {
     })
   }
 
-  useEffect(() => {
+  function redirectReverseURL(){
+    /**
+     * Using the refURL to capture the initial URL when page loads.
+     * to circumvent the possibility the user tinkered with with current URL and then pressing reverse
+     */
+    let p1prop = refURL.current.match(/p1=(.+)(?=&p2)/)
+    let p2prop = refURL.current.match(/p2=(.+)(?=&tr)/)
+    let trprop = refURL.current.match(/tr=(.+)/)
+    
+    if(!!p1prop && !!p2prop && !!trprop){
+      let URL = `/smpresult?p1=${p2prop[1]}&p2=${p1prop[1]}&${trprop[0]}`
+      setLoad(true)
+      navigate(URL);
+    }
+  }
+
+  useLayoutEffect(() => {
+    refURL.current = location.search //updates ref to newest url
     if(advanced){
       let p1prop = location.search.match(/p1=(.+)(?=&p2)/)
       let p2prop = location.search.match(/p2=(.+)(?=&tr)/)
@@ -101,11 +124,11 @@ const ResultPage = ({advanced} : ResultPageInterface) => {
           }
           if(p1props === -1 || p2props === -1 || trResult === -1){//check for mismatch value
             setError('Property value mismatch!')
-            console.log(p1props,p2props,trResult)
           }else{//analyze data
             let result = advancedModeAnalyzer(p1props[0],p2props[0],p1props[1],p2props[1],trResult)
             setTr(trResult)
             setResult({...result})
+            setLoad(false)
             setPData({
               p1: {...p1props[0]},
               p2: {...p2props[0]},
@@ -144,6 +167,7 @@ const ResultPage = ({advanced} : ResultPageInterface) => {
               let result = speedAnalyzer(p1.base,p2.base,p1mods,p2mods,!!trResult)
               setResult({...result})
               setTr(!!trResult)
+              setLoad(false)
               setPData({
                 p1: {...p1},
                 p2: {...p2},
@@ -159,28 +183,6 @@ const ResultPage = ({advanced} : ResultPageInterface) => {
       }
     }
   },[location.search])
-
-  useEffect(() => {
-    function checkResult(){
-      if(!result && !pData){
-        setTimeout(() => {
-          checkResult()
-        }, 1000);
-      }else{
-        setLoad(false)
-      }
-    }
-
-    if(load){
-      if(!!result && !!pData){
-        setLoad(false)
-      }else{
-        checkResult()
-      }
-    }
-  }, [result])
-  
-  
 
   if(load){
     return(
@@ -199,8 +201,14 @@ const ResultPage = ({advanced} : ResultPageInterface) => {
       return(
         <MainView className={style.resultPage}>
           <ResultCard advanced={advanced} trick_room={isTr} verdict={result.verdict} simpleProp={{p1Name: pData.p1.name!, p2Name: pData.p2.name! ,p1ImageLink: pData.p1.imgLink, p2ImageLink: pData.p2.imgLink}} p1mod={pData.p1mod}/>
-          
-          <Button icon={<TriangleLeftIcon className={style.icon}/>} href={advanced ? '/advanced' : '/calc'} type='secondary' text="Back" style={{marginTop: '39px'}}/>
+          <AnalysesCard result={result as responseProp} p1data={pData.p1} p2data={pData.p2} p1mods={pData.p1mod} p2mods={pData.p2mod}/>
+          <StatTables p1base={pData.p1.base} p2base={pData.p2.base} p1mods={pData.p1mod} p2mods={pData.p2mod} p1ImgLink={pData.p1.imgLink!} p2ImgLink={pData.p2.imgLink}/>
+          <div style={{display: 'flex', marginTop: 39}}>
+            <Button icon={<TriangleLeftIcon className={style.icon}/>} href={advanced ? '/advanced' : '/calc'} type='secondary' text="Back"/>
+            {advanced ? <></>:(
+              <Button icon={<RefreshIcon className={style.iconStroke}/>} onClick={redirectReverseURL}  type='primary' text="Reverse Result" style={{marginLeft: '20px'}}/>
+            )}
+          </div>
         </MainView>
       )
     }
