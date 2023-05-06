@@ -1,4 +1,3 @@
-import { useRef } from "react"
 import Card from "../../../Components/Card/Card"
 import statCalculator from "../../../Utils/statCalculator"
 import { Modifiers } from "../../../Utils/types"
@@ -48,13 +47,17 @@ const StatTables = ({p1base,p2base,p1mods,p2mods,p2ImgLink,p1ImgLink}:StatTables
             <th>
               <div className={style.pkmnContainer}>
                 <img className={style.sprite} src={p1ImgLink} alt="Pokemon1's Sprite" loading="lazy" />
-                <RenderModifiers mods={p1mods} pnumber={1} size='s'/>
+                <div className={style.modContainer}>
+                  <RenderModifiers mods={p1mods} pnumber={1} size='s'/>
+                </div>
               </div>
             </th>
             <th>
               <div  className={style.pkmnContainer}>
                 <img className={style.sprite} src={p2ImgLink} alt="Pokemon1's Sprite" loading="lazy" />
-                <RenderModifiers mods={p2mods} pnumber={2} size='s'/>
+                <div className={style.modContainer}>
+                  <RenderModifiers mods={p2mods} pnumber={2} size='s'/>
+                </div>
               </div>
             </th>
           </tr>
@@ -66,6 +69,7 @@ const StatTables = ({p1base,p2base,p1mods,p2mods,p2ImgLink,p1ImgLink}:StatTables
           {rendertables()}
         </tbody>
       </table>
+      <p style={{fontWeight: 300, fontSize: 12}} className={style.text}>Calculations are done with both Pokemon at <b style={{fontWeight: 500}}>lvl.50</b></p>
     </Card>
   )
 }
