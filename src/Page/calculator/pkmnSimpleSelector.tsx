@@ -79,7 +79,7 @@ const PkmnSimpleSelector = ({setP1Stat,setP2Stat,dispatch1, dispatch2, stateP1,s
         console.log(err)
         setLoad({...loadData, [id] : false})
       })
-    }, 1000)
+    }, 500)
   }
 
   function onChangePkmn(pkmn: PkmnData, id:string){
