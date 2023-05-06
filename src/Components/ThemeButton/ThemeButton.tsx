@@ -1,7 +1,6 @@
 import { useLayoutEffect, useState } from 'react'
 import MoonIcon from '../Icons/MoonIcon'
 import SunIcon from '../Icons/SunIcon'
-import Skeleton from '../Skeleton/Skeleton'
 import styles from './themebtn.module.scss'
 
 interface ThemeButtonProp{

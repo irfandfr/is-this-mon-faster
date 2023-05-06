@@ -4,11 +4,6 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu'
 import ThemeButton from '../ThemeButton/ThemeButton'
 import style from './header.module.scss'
 
-interface MenuProp{
-  title : string,
-  link : string
-}
-
 interface HeaderProp{
   menu : {title:string,link:string}[] | []
 }
@@ -27,7 +22,7 @@ const Header = ({menu} : HeaderProp) =>{
       setTheme(val)
     }
   }
-  
+
   function renderMenu(menu : {title:string,link:string}[]){
     return menu.map((nav : {title:string,link:string}) => {
       return(

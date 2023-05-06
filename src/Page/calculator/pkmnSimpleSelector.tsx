@@ -61,7 +61,7 @@ const PkmnSimpleSelector = ({setP1Stat,setP2Stat,dispatch1, dispatch2, stateP1,s
         setLoad({...loadData, [id] : true})
         axios({
           method:'get',
-          url: `https://ismonfaster-default-rtdb.firebaseio.com/list.json?orderBy="$key"&startAt="${cleanedSearchKey}"&limitToFirst=10`,
+          url: `${process.env.REACT_APP_IS_MON_DB}.json?orderBy="$key"&startAt="${cleanedSearchKey}"&limitToFirst=10`,
           headers:{
             Accept: '*/*'
           }
