@@ -7,8 +7,8 @@ import Header from './Components/Header/Header';
 function App() {
   const HEADER_MENU = [
     {title: 'Home', link:'/'},
-    {title: 'Calculator', link:'/calc'},
-    {title: 'Advanced Calculator', link: '/advanced'}
+    {title: 'Compare', link:'/calc'},
+    {title: 'Advanced Compare', link: '/advanced'}
   ]
   return (
     <div className={`${style.light} ${style.app}`} >
