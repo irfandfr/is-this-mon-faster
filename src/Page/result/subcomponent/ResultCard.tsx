@@ -1,13 +1,9 @@
 import Card from '../../../Components/Card/Card'
 import BigInput from '../../../Components/Forms/BigInput/BigInput'
-import ActiveAbilityIcon from '../../../Components/Icons/ActiveAbilityIcon'
-import ChoiceScarfIcon from '../../../Components/Icons/ChoiceScarfIcon'
-import IronBallIcon from '../../../Components/Icons/IronBallIcon'
-import ParalyzeIcon from '../../../Components/Icons/ParalyzeIcon'
-import TailwindIcon from '../../../Components/Icons/TailwindIcon'
 import TrickRoomIcon from '../../../Components/Icons/TrickRoomIcon'
 import ModifierContainer from '../../../Components/ModifierContainer/ModifierContainer'
 import { Modifiers } from '../../../Utils/types'
+import RenderModifiers from '../RenderModifier'
 import style from './../result.module.scss'
 
 
@@ -45,29 +41,6 @@ const ResultCard = ({advanced, verdict, trick_room, p1mod, advProp,simpleProp} :
   }else if(verdict === -1){
     verdictResult = {verdict: 'Slower', color: '#BB9262'}
   }
-  function renderModifiers(mods : Modifiers[], pnumber: 1|2, size: 's'|'m'){
-    if(!mods || mods.length === 0){
-      return(<></>)
-    }else{
-      return(
-        mods.map((mod : Modifiers) =>{
-          switch (mod) {
-            case 'iron_ball':
-              return(<ModifierContainer key={pnumber + mod} text="Iron Ball" className={style.modifierIcon} icon={<IronBallIcon />} size={size} />)
-            case 'active_ability':
-              return(<ModifierContainer key={pnumber + mod} text="Active Ability" className={style.modifierIcon} icon={<ActiveAbilityIcon />} size={size} />)
-            case 'tailwind':
-              return(<ModifierContainer key={pnumber + mod} text="Tailwind" className={style.modifierIcon} icon={<TailwindIcon />} size={size} />)
-            case 'choice_scarf':
-              return(<ModifierContainer key={pnumber + mod} text="Choice Scarf" className={style.modifierIcon} icon={<ChoiceScarfIcon />} size={size} />)
-            case 'paralyze':
-              return(<ModifierContainer key={pnumber + mod} text="Paralyze" className={style.modifierIcon} icon={<ParalyzeIcon />} size={size} />)
-            default  : return<></>
-          }
-        })
-      )
-    }
-  }
 
   return(
     <Card className={`${style.verdictCard} ${!advanced? style.simpleCard : ''}`}>
@@ -88,7 +61,7 @@ const ResultCard = ({advanced, verdict, trick_room, p1mod, advProp,simpleProp} :
         <>
           <p className={style.text} style={{marginBottom: 6,marginTop: 2, fontSize: 14}}>with</p>
           <div className={style.modContainer}>
-            {renderModifiers(p1mod, 1, 'm')}
+            <RenderModifiers mods={p1mod} pnumber={1} size="m"/>
           </div>
         </>):(<></>) 
       }
