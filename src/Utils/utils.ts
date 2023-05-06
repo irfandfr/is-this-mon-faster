@@ -128,9 +128,11 @@ export function pkmnSpeedStateConverter(state : string){
     case 'max':
       return 'Max EV'
     case 'min':
-      return 'No EV'
+      return 'Min EV'
+    case 'min--':
+      return 'MinEV&IV-'
     case 'win':
-      return 'No EV'
+      return 'Min EV'
     default:
       break;
   }
