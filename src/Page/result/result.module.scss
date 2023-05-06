@@ -89,6 +89,37 @@ $icon-size: 16px;
     }
   }
   
+  .analysesCard{
+    margin-top: 38px;
+    margin-bottom: 38px;
+
+    .statTooltip{
+      border-bottom: dashed 1px var(--body-font);
+      position: relative;
+
+      &::before{
+        content: attr(data-tooltip);
+        position: absolute;
+        background-color: var(--secondary-bg);
+        @include font-size(11px);
+        color: var(--light-font);
+        padding: 4px 6px;
+        top: -30px;
+        left: -40%;
+        border-radius: 4px;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        display: none;
+        opacity: 0.9s;
+      }
+
+      &:hover{
+        &::before{
+          display: block;
+        }
+      }
+    }
+  }
+
   .statCalcCard{
     margin-top: 39px;
     padding-bottom: 18px;
@@ -161,6 +192,17 @@ $icon-size: 16px;
       }
     }
   }
+
+  .faster{
+    color: $faster-color;
+  }
+  .slower{
+    color:$slower-color;
+  }
+  .tied{
+    color:$tie-color;
+  }
+
   .modifierIcon{
     margin: 0 1.5px;
     margin-bottom: 3px;
@@ -188,6 +230,12 @@ $icon-size: 16px;
     }
   }
 
+  .iconStroke{
+    path{
+      stroke: var(--light-font)
+    }
+  }
+
   @media screen and (min-width: map-get($breakpoints, 'small')){
     padding-bottom: 21px;
     .verdictCard{
@@ -196,7 +244,7 @@ $icon-size: 16px;
       padding-bottom: 36px;
     }
 
-    .statCalcCard, .tableCard{
+    .statCalcCard, .tableCard, .analysesCard{
       max-width: 442px;
     }
   }
@@ -238,6 +286,10 @@ $icon-size: 16px;
           img{
             margin-bottom: 8px;
           }
+        }
+        .modContainer{
+          display: flex;
+          align-items: center;
         }
       }
       &:first-child{
