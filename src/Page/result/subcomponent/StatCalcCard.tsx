@@ -8,6 +8,7 @@ import ModifierContainer from "../../../Components/ModifierContainer/ModifierCon
 import statCalculator from "../../../Utils/statCalculator"
 import { Modifiers, PkmnBaseStat } from "../../../Utils/types"
 import { statBoostCalc } from "../../../Utils/utils"
+import RenderModifiers from "../RenderModifier"
 
 
 import style from './../result.module.scss'
@@ -29,30 +30,6 @@ const StatCalcCard = ({p1stats,p2stats,p1mods,p2mods, verdict, minBoost, trick_r
   p1totalSpeed = statCalculator(p1stats.base,p1stats.ev,p1stats.iv,p1stats.nature,p1stats.lvl,p1mods);
   p2totalSpeed = statCalculator(p2stats.base,p2stats.ev,p2stats.iv,p2stats.nature,p2stats.lvl,p2mods);
 
-
-  function renderModifiers(mods : Modifiers[], pnumber: 1|2, size: 's'|'m'){
-    if(!mods || mods.length === 0){
-      return(<></>)
-    }else{
-      return(
-        mods.map((mod : Modifiers) =>{
-          switch (mod) {
-            case 'iron_ball':
-              return(<ModifierContainer key={pnumber + mod} text="Iron Ball" className={style.modifierIcon} icon={<IronBallIcon />} size={size} />)
-            case 'active_ability':
-              return(<ModifierContainer key={pnumber + mod} text="Active Ability" className={style.modifierIcon} icon={<ActiveAbilityIcon />} size={size} />)
-            case 'tailwind':
-              return(<ModifierContainer key={pnumber + mod} text="Tailwind" className={style.modifierIcon} icon={<TailwindIcon />} size={size} />)
-            case 'choice_scarf':
-              return(<ModifierContainer key={pnumber + mod} text="Choice Scarf" className={style.modifierIcon} icon={<ChoiceScarfIcon />} size={size} />)
-            case 'paralyze':
-              return(<ModifierContainer key={pnumber + mod} text="Paralyze" className={style.modifierIcon} icon={<ParalyzeIcon />} size={size} />)
-            default  : return<></>
-          }
-        })
-      )
-    }
-  }
 
   function renderNature(nature : 'beneficial' | 'hindering' | 'neutral'){
     switch (nature) {
@@ -115,7 +92,7 @@ const StatCalcCard = ({p1stats,p2stats,p1mods,p2mods, verdict, minBoost, trick_r
           if(minBoost <= 6){
             return(<Card.ListItem type="warning"><span className={style.p1text}><b>{p1stats.base} Bspd</b></span> can outspeed with at least <b>+{minBoost}/ {(2 + minBoost)/2}x Speed Boost <br />(<span className={style.p1text}>{statBoostCalc(p1totalSpeed,minBoost)} Spd</span> vs <span className={style.p2text}>{p2totalSpeed} Spd</span>)</b></Card.ListItem>)
           }else if(minBoost > 6){
-            return(<Card.ListItem type="danger"><span className={style.p1text}><b>{p2stats.base} Bspd</b></span> can not outspeed with <b>+6/ 4x Speed Boost <br />(<span className={style.p1text}>{statBoostCalc(p1totalSpeed,minBoost)} Spd</span> vs <span className={style.p2text}>{p2totalSpeed} Spd</span>)</b>  </Card.ListItem>)
+            return(<Card.ListItem type="danger"><span className={style.p1text}><b>{p2stats.base} Bspd</b></span> can not outspeed with <b>+6/ 4x Speed Boost <br />(<span className={style.p1text}>{statBoostCalc(p1totalSpeed,Math.min(minBoost,6))} Spd</span> vs <span className={style.p2text}>{p2totalSpeed} Spd</span>)</b>  </Card.ListItem>)
           }break;
         default:
           break;
@@ -138,11 +115,11 @@ const StatCalcCard = ({p1stats,p2stats,p1mods,p2mods, verdict, minBoost, trick_r
         </div>
         <div> </div>
         <div className={style.modifierContainer}>
-          {renderModifiers(p1mods,1,'s')}
+          <RenderModifiers mods={p1mods} pnumber={1} size="s" />
         </div>
         <div></div>
         <div className={style.modifierContainer}>
-          {renderModifiers(p2mods,2,'s')}
+          <RenderModifiers mods={p2mods} pnumber={2} size="s" />
         </div>
         <div></div>
         <div className={style.divider}></div>
