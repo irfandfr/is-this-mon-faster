@@ -89,3 +89,64 @@ export function dbToPkmnData(name : string, payload:{baseSpeed:string,image:'lin
   let pkmn : PkmnData = {name: name, base: parseInt(payload.baseSpeed), imgLink: payload.image, ev: 255, iv: 31, lvl: 50,nature:'neutral'}
   return pkmn
 }
+
+export function modsValue(mods : Modifiers[]):number{
+  const TAILWIND_MULTIPLIER = 2;
+  const PARALYZE_MULTIPLIER = 0.5;
+  const CHOICE_SCARF_MULTILPIER = 1.5;
+  const ABILITY_MULTIPLIER = 2;
+  const IRON_BALL_MULTIPLIER = 0.5
+  let stat = 1
+  mods.forEach( entry => {
+    switch (entry) {
+      case ('tailwind'):
+        stat = stat * TAILWIND_MULTIPLIER
+        break;
+      case ('choice_scarf'):
+        stat = stat * CHOICE_SCARF_MULTILPIER
+        break;
+      case ('active_ability'):
+        stat = stat * ABILITY_MULTIPLIER
+        break;
+      case ('paralyze'):
+        stat = stat * PARALYZE_MULTIPLIER
+        break;
+      case ('iron_ball'):
+        stat = stat * IRON_BALL_MULTIPLIER
+        break;
+      default:
+        break;
+    }
+  });
+  return stat
+}
+
+export function pkmnSpeedStateConverter(state : string){
+  switch (state) {
+    case 'max+':
+      return 'Max EV+'
+    case 'max':
+      return 'Max EV'
+    case 'min':
+      return 'No EV'
+    case 'win':
+      return 'No EV'
+    default:
+      break;
+  }
+}
+
+export function pkmnStatSpreadConverter(state : string){
+  switch (state) {
+    case 'max+':
+      return '252EV/31IV/Beneficial'
+    case 'max':
+      return '252EV/31IV/Neutral'
+    case 'min':
+      return '0EV/31IV/Neutral'
+    case 'min--':
+      return '0EV/0IV/Hindering'
+    default:
+      break;
+  }
+}
