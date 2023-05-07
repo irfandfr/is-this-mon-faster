@@ -1,5 +1,5 @@
-import React, { lazy, Suspense, useReducer, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { lazy, Suspense, useEffect, useReducer, useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 
 //import component
 import InputGroup from "../../Components/InputGroup/InputGroup"
@@ -57,6 +57,7 @@ interface CalculatorProp {
 }
 
 const CalculatorUI = ({ advanced }: CalculatorProp) => {
+  const location = useLocation()
   const initialState = {
     active_ability: { icon: <ActiveAbilityIcon />, title: 'Active Ability', id: 'active_ability', value: 'ab', check: false },
     tailwind: { icon: <TailwindIcon />, title: 'Tailwind', id: 'tailwind', value: 'tw', check: false },
@@ -192,6 +193,10 @@ const CalculatorUI = ({ advanced }: CalculatorProp) => {
       navigate(url)
     }, 800);
   }
+
+  useEffect(() => {
+    document.title = `isMonFaster | ${location.pathname === '/calc' ? 'Simple Compare' : 'Advanced Compare'}`
+  },[location])
 
   return (
     <MainView className={style.calcUIContainer}>
