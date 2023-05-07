@@ -3,9 +3,7 @@ import { Modifiers, PkmnBaseStat } from "./types"
 
 
 
-
-
-export interface responseProp{
+export interface advResponseProp{
   verdict : 1 | 0 | -1
   min_boost: number
   inTrickRoom: boolean
@@ -22,8 +20,8 @@ export interface responseProp{
  * @param trick_room : boolean, indicate if Trick Room is active
  * @returns returns an object with the property verdict: 1|0|-1, min_boost: number, and inTrickRoom: boolean
  */
-function advancedModeAnalyzer(p1stats : PkmnBaseStat, p2stats : PkmnBaseStat ,p1Mods : Modifiers[], p2Mods : Modifiers[], trick_rooom : boolean): responseProp{
-  let resp : responseProp = {
+function advancedModeAnalyzer(p1stats : PkmnBaseStat, p2stats : PkmnBaseStat ,p1Mods : Modifiers[], p2Mods : Modifiers[], trick_rooom : boolean): advResponseProp{
+  let resp : advResponseProp = {
     verdict: 0,
     min_boost:0,
     inTrickRoom:trick_rooom
@@ -62,7 +60,7 @@ function advancedModeAnalyzer(p1stats : PkmnBaseStat, p2stats : PkmnBaseStat ,p1
     }else if(p1TotalSpeed < p2TotalSpeed){
       resp.verdict = -1;
       resp.min_boost = Math.ceil((p2TotalSpeed / p1TotalSpeed / 0.5) - 2);
-      if(p2TotalSpeed === p1TotalSpeed*resp.min_boost){
+      if(p2TotalSpeed === p1TotalSpeed*((resp.min_boost + 2) /2)){
         resp.min_boost = resp.min_boost + 1;
       }
     }else if(p1TotalSpeed === p2TotalSpeed){

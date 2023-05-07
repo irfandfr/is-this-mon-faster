@@ -1,0 +1,47 @@
+@import './../../../styles/config.scss';
+
+
+
+
+
+.lighter{
+  background-color: $basic-100;
+}
+
+.light{
+  background-color: $basic-300;
+}
+
+.dark{
+  background-color: $basic-500;
+}
+
+.darker{
+  background-color: $basic-700;
+}
+
+.animate{
+	overflow:hidden;
+	&.dark{
+		@include movingGradient(dark)
+	}
+	&.darker{
+		@include movingGradient(darker)
+	}
+	&.light{
+		@include movingGradient(light)
+	}
+	&.lighter{
+		@include movingGradient(bright)
+	}
+}
+
+/* Animations */
+@keyframes load {
+	from {
+		left: -200px;
+	}
+	to   {
+			left: 100%;
+	}
+}

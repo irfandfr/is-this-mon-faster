@@ -5,10 +5,10 @@ import Header from './Components/Header/Header';
 
 
 function App() {
-  const HEADER_MENU : [] | {title: string, link: string} = [
-    //{title: 'Home', link:'/'},
-    //{title: 'Calculator', link:'/'},
-    //{title: 'Advanced Calculator', link: '/calc'}
+  const HEADER_MENU = [
+    {title: 'Home', link:'/'},
+    {title: 'Compare', link:'/calc'},
+    {title: 'Advanced Compare', link: '/advanced'}
   ]
   return (
     <div className={`${style.light} ${style.app}`} >

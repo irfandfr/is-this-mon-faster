@@ -28,6 +28,10 @@
       color: $primary-color;
       border-radius: 0;
     }
+
+    &:focus-visible{
+      outline: -webkit-focus-ring-color auto 1px;
+    }
   }
 
   &::after{
