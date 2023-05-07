@@ -10,32 +10,22 @@ interface minStatProp{
   nature: 'beneficial' | 'hindering' | 'neutral' | undefined
   opponentState: 'min' | 'min-' |'min--' | 'max' | 'max+' | 'neutral' | 'win'| undefined
 }
-interface responseProp{
+
+export interface responseProp{
   verdict : 1 | 0 | -1
-  min_stat: minStatProp
+  min_stat: minStatProp[]
   min_boost: number
   inTrickRoom: boolean
 }
 
-
-interface speedProps{
-  base_speed1: number
-  base_speed2: number
-  status1?: Modifiers[]
-  status2?: Modifiers[]
-  inTrickRoom?: boolean
-}
-
-
-
-const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : speedProps) =>{
+const speedAnalyzer = (base_speed1 : number, base_speed2: number,status1: Modifiers[] ,status2 : Modifiers[],inTrickRoom : boolean) : responseProp=>{
   const FASTER = 1;
   const TIE = 0
   const SLOWER = -1; 
 
   let resp : responseProp = {
     verdict: 0,
-    min_stat:{minEV: 0, minIV: 0, nature: undefined, opponentState: undefined},
+    min_stat:[],
     min_boost: 0,
     inTrickRoom : !!inTrickRoom
   }
@@ -48,15 +38,15 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
    * min : no IV & EV with hindering Nature(0.9x)
    */
   let p1SpeedStat = new Map([
-    ['max', statCalculator(base_speed1, 31, 252, "beneficial",50 ,status1)],
-    ['neutral_max', statCalculator(base_speed1, 31, 252, "neutral",50, status1)],
-    ['neutral_min', statCalculator(base_speed1, 31, 0, "neutral",50, status1)],
+    ['max', statCalculator(base_speed1, 252, 31, "beneficial",50 ,status1)],
+    ['neutral_max', statCalculator(base_speed1, 252, 31, "neutral",50, status1)],
+    ['neutral_min', statCalculator(base_speed1, 0, 31, "neutral",50, status1)],
     ['min', statCalculator(base_speed1, 0, 0, "hindering",50,status1)]
   ])
   let p2SpeedStat = new Map([
-    ['max', statCalculator(base_speed2, 31, 252, "beneficial",50,status2)],
-    ['neutral_max', statCalculator(base_speed2, 31, 252, "neutral",50,status2)],
-    ['neutral_min', statCalculator(base_speed2, 31, 0, "neutral",50,status2)],
+    ['max', statCalculator(base_speed2, 252, 31, "beneficial",50,status2)],
+    ['neutral_max', statCalculator(base_speed2, 252, 31, "neutral",50,status2)],
+    ['neutral_min', statCalculator(base_speed2, 0, 31, "neutral",50,status2)],
     ['min', statCalculator(base_speed2, 0, 0, "hindering",50,status2)]
   ])
 
@@ -77,6 +67,7 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
 
   //analyze further based on verdict
   let minStat : minStatProp= {minEV: 0,minIV: 0, nature:undefined, opponentState: undefined}
+  let minStatCol : minStatProp[] = []
   let min_boost : number;
   let minEV: number;
 
@@ -90,19 +81,24 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
     switch (resp.verdict) {
       case FASTER:
         //min EV investement to outspeed max stat p2
-        minEV = evExtractor(base_speed1, p2SpeedStat.get('max')! + 1, 'beneficial')
+        minEV = evExtractor(base_speed1, p2SpeedStat.get('max')! + 1, status1, 'beneficial')
         if(minEV < 0){
-          minEV =  evExtractor(base_speed1, p2SpeedStat.get('max')! + 1, 'neutral')
+          minEV =  evExtractor(base_speed1, p2SpeedStat.get('max')! + 1, status1, 'neutral')
           if(minEV <= 0 ){
-            //can outspeed max speed p2 with not ev investment and neutral nature
-            minStat = {minEV: 0, minIV: 31, nature:'neutral', opponentState: 'max+'}
+            //can outspeed max speed p2 with no ev investment and neutral nature
+            minStatCol.push({minEV: 0, minIV: 31, nature:'neutral', opponentState: 'max+'})
           }else if(minEV > 0){
             //can outspeed max speed p2 with ev investment and neutral nature
-            minStat = {minEV: minEV, minIV: 31, nature:'neutral', opponentState: 'max+'}
+            minStatCol.push({minEV: minEV, minIV: 31, nature:'neutral', opponentState: 'max+'})
           }
         }else if(minEV >= 0){
           //can outspeed max speed p2 with ev and + nature
-          minStat = {minEV: minEV, minIV: 31, nature:'beneficial', opponentState: 'max+'}
+          minStatCol.push({minEV: minEV, minIV: 31, nature:'beneficial', opponentState: 'max+'})
+          minEV = evExtractor(base_speed1, p2SpeedStat.get('max')! + 1, status1, 'neutral')
+          if(minEV >= 0){
+            //can outspeed max speed p2 with ev and + nature
+            minStatCol.push({minEV: minEV, minIV: 31, nature:'neutral', opponentState: 'max+'})
+          }
         }
   
         //min booost needed to outspeed p1
@@ -112,15 +108,15 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
         
         //minimum EV for +Nature p1 to outspeed p2 with max EV and a neutral nature
       case TIE:
-        minEV = evExtractor(base_speed1, p2SpeedStat.get('neutral_max')! + 1, 'beneficial')
-        minStat = {minEV: minEV, minIV: 31, nature:'beneficial', opponentState: 'max'}
+        minEV = evExtractor(base_speed1, p2SpeedStat.get('neutral_max')! + 1, status1, 'beneficial')
+        minStatCol.push({minEV: minEV, minIV: 31, nature:'beneficial', opponentState: 'max'})
         min_boost = 1;
         break;
         
       case SLOWER:
-        minEV = evExtractor(base_speed1, p2SpeedStat.get('neutral_max')! + 1, 'beneficial')
+        minEV = evExtractor(base_speed1, p2SpeedStat.get('neutral_max')! + 1, status1, 'beneficial')
         if(minEV < 0){
-          minEV =  evExtractor(base_speed1, p2SpeedStat.get('neutral_min')! + 1, 'beneficial')
+          minEV =  evExtractor(base_speed1, p2SpeedStat.get('neutral_min')! + 1, status1, 'beneficial')
           if(minEV < 0){
             //cannot outspeed min speed neutral nature p2
             minStat = {minEV: minEV, minIV: 31, nature:'beneficial', opponentState:'win'}
@@ -132,6 +128,7 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
           //can outspeed max speed neutral nature p2
           minStat = {minEV: minEV, minIV: 31, nature:'beneficial', opponentState: 'max'}
         }
+        minStatCol.push(minStat)
   
         //min booost needed to outspeed p2
         min_boost = Math.ceil((p2SpeedStat.get('max')! / p1SpeedStat.get('max')! / 0.5) - 2)
@@ -158,7 +155,7 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
         }
         //min booost needed to outslow p1
         //used the formula x =(2 x (faster speed) ) / (lower speed) ; formula for negative boost is 2 / (2 + boost)
-        min_boost = Math.ceil((2* p1SpeedStat.get('min')!) / p2SpeedStat.get('min')!)
+        min_boost = Math.ceil(((2* p2SpeedStat.get('min')!) / p1SpeedStat.get('min')!) - 2)
         resp.min_boost = min_boost
       break;
       case TIE:
@@ -172,16 +169,17 @@ const speedAnalyzer = ({base_speed1,base_speed2,status1,status2,inTrickRoom} : s
           minStat = {minEV : 0, minIV: 0, nature: 'neutral', opponentState:'win'}
         }
         //min booost needed to outslow p2
-        min_boost = Math.ceil((2* p2SpeedStat.get('min')!) / p1SpeedStat.get('min')!)
+        min_boost = Math.ceil(((2* p1SpeedStat.get('min')!) / p2SpeedStat.get('min')!) - 2)
         resp.min_boost = min_boost
         break;
         
       default:
         break;
     }
+    minStatCol.push(minStat)
   }
 
-  resp.min_stat = {...minStat}
+  resp.min_stat = [...minStatCol]
   
   return resp
 }

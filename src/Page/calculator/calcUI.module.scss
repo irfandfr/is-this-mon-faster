@@ -16,7 +16,7 @@
     margin: 20px 0;
   }
   h5.text{
-    margin: 4px 0 6px 0;
+    margin: 5px 0 7px 0;
   }
 
   .link{
@@ -50,6 +50,10 @@
       position: absolute;
       top: 0;
       right: 0;
+
+      &:focus-visible{
+        outline: -webkit-focus-ring-color auto 1px;
+      }
     }
   }
   .compareContainer{
@@ -60,6 +64,10 @@
     display: flex;
     flex-flow: column;
     align-items: center;
+
+    .pkmnInput{
+      margin-top: 8px;
+    }
   }
   
   .formContainer{
@@ -76,6 +84,33 @@
       }
       &.pokemon2{
         color: $pkmn2-color;
+      }
+    }
+  }
+
+  .spriteContainer{
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .pkmnSprite{
+      height: 100%;
+      width:auto;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+      &.placeholder{
+        background: var(--secondary-bg);
+        height: 80px;
+        width: 80px;
+        border-radius: 50px;
+        color: var(--light-font);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+        font-family: 'Patua One', cursive;
       }
     }
   }

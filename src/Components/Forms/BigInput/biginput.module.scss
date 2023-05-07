@@ -1,30 +1,105 @@
 @import './../../../styles/config.module.scss';
 
+@keyframes blinking {
+  0%{
+    opacity: 0.8;
+  }
+  50%{
+    opacity: 0.8;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+
 .bigInputContainer{
   width:100%;
   max-width: 200px;
   position: relative;
   text-align: center;
   display: flex;
-  flex-flow: column-reverse;
+  flex-flow: column;
   align-items: center;
   .bigInput{
     all: unset;
     width: 100%;
-    height: 30px;
     font-family: 'Patua One', cursive;
     color: $pkmn1-color;
     @include font-size(24px);
+    padding-bottom: 2px;
     position: relative;
     margin-bottom: 3px;
+
+    &:focus-visible{    
+      outline: -webkit-focus-ring-color auto 1px;
+    }
   }
 
   .underline{
     display: block;
-    position: absolute;
     max-width: 200px;
     width: 100%;
     height: 2px;
     background-image: var(--svg-underline);
+  }
+
+  .optionsContainer{
+    position: absolute;
+    width: 100%;
+    margin-top: 38px;
+    z-index: 3;
+    opacity: 1;
+    transition: opacity 0.15s ease-in-out;
+
+    &.hide{
+      display: none;
+      opacity: 0;
+    }
+
+    .option{
+      width: 100%;
+      font-family: $BODY_FONT;
+      padding: 6px 0;
+      background: white;
+      font-weight: 400;
+      color: $basic-500;
+      display: block;
+      border: solid 1px rgba($color: #000000, $alpha: 0.4);
+      cursor: pointer;
+      transition: background 0.05s ease-in-out;
+      margin-bottom: -1px;
+      
+      &:focus-visible{
+        outline: solid 2px var(--body-font);
+      }
+      &:hover{
+        background: $basic-100;
+      }
+    }
+  }
+  ::-webkit-calendar-picker-indicator{
+    display: none!important;
+  }
+  .spinner{
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-width: 3px;
+    top: calc(50% - 9px);
+    right: 2px;
+  }
+
+  .displayContainer{
+    display: flex;
+    margin-bottom: 5px;
+    min-height: 29px;
+    .cursor{
+      margin-left: 4px;
+      opacity: 0.8;
+      width: 4px;
+      background: var(--body-font);
+      animation: blinking 1s 0s infinite;
+    }
   }
 }

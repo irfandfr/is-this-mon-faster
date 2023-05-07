@@ -18,19 +18,19 @@ const RefreshIcon = ({width, height, color, style, className} : Props) => (
     style={{...style}}
     className={className}
   >
-    <path d="m14 15-4 4 4 4" stroke={color} strokeWidth={2} />
+    <path stroke={!!color ? color : '#f3f3f3'} strokeWidth={2} d="m14 15-4 4 4 4" />
     <path
+      stroke={!!color ? color : '#f3f3f3'}
+      strokeLinecap="round"
+      strokeWidth={2}
       d="M18.062 8.5A7 7 0 0 1 12 19"
-      stroke={color}
-      strokeWidth={2}
-      strokeLinecap="round"
     />
-    <path d="m10 9 4-4-4-4" stroke={color} strokeWidth={2} />
+    <path stroke={!!color ? color : '#f3f3f3'} strokeWidth={2} d="m10 9 4-4-4-4" />
     <path
-      d="M5.938 15.5A7 7 0 0 1 12 5"
-      stroke={color}
-      strokeWidth={2}
+      stroke={!!color ? color : '#f3f3f3'}
       strokeLinecap="round"
+      strokeWidth={2}
+      d="M5.938 15.5A7 7 0 0 1 12 5"
     />
   </svg>
 )

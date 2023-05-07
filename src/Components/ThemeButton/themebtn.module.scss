@@ -1,5 +1,6 @@
 @import './../../styles/config.module.scss';
 
+
 .themeBtn{
   all: unset;
   height: 30px;
@@ -11,10 +12,20 @@
   justify-content: space-between;
   background-color: var(--theme-bg);
   cursor: pointer;
-  margin-left: 28px;
   outline: solid 1.5px var(--theme-bg);
   position: relative;
 
+  .circle{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    height: 26px;
+    width: 26px;
+    border-radius: 20px;
+    background-color: var(--basic-heading);
+    z-index: 2;
+    transition: transform 0.1s ease-in-out;
+  }
   &::before{
     content: '';
     position: absolute;
@@ -27,29 +38,14 @@
     opacity: 0%;
     transition: opacity 0.1s ease-in-out;
   }
-  &::after{
-    content: '';
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    height: 26px;
-    width: 26px;
-    border-radius: 20px;
-    background-color: var(--basic-heading);
-    z-index: 2;
-    transform: translateX(-30px);
-    transition: transform 0.1s ease-in-out;
-  }
-
-  &.isDefault{
-    &::after{
-      transform: translateX(0px);
-    }
-  }
 
   &:hover{
     &::before{
       opacity: 100%;
     }
+  }
+
+  &:focus-visible{
+    outline: -webkit-focus-ring-color auto 1px;
   }
 }

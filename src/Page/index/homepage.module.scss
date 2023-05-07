@@ -5,6 +5,11 @@
     color: var(--basic-heading);
   }
 
+  .spacing{
+    margin-top: 34px;
+    margin-bottom: 34px;
+  }
+
   h3.text{
     margin: 33px 0
   }
@@ -15,7 +20,15 @@
     margin: 34px 0;
   }
 
+  .input{
+    max-width: 178px;
+  }
+
   @media screen and (min-width: map-get($breakpoints, 'small')) {
+    max-width: 445px;
+    .spacing{
+      margin: 0;
+    }
     h3.text{
       @include font-size(32px);
       margin: 69px 0 25px 0;

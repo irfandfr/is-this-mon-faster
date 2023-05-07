@@ -26,7 +26,8 @@ interface CheckItemProp extends SelectionProp{
 const CheckItem = ({check, icon, title, id, onClick, value, } : CheckItemProp) => {
   return(
     <div className={`${style.checkItem} ${check ? style.checked : ''}`} >
-      <input className={style.checkbox} type="checkbox" name={title} value={value} id={id} checked={check} onChange={onClick}/>
+      <input  className={style.checkbox} type="checkbox" name={title} value={value} id={id} checked={check} onChange={onClick}/>
+      <span className={style.focusOutline}></span>
       <span className={style.customCheckmark}></span>
       <div className={style.iconContainer}>
         {icon}

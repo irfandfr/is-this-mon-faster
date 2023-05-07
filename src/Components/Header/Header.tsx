@@ -4,30 +4,29 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu'
 import ThemeButton from '../ThemeButton/ThemeButton'
 import style from './header.module.scss'
 
-interface MenuProp{
-  title : string,
-  link : string
-}
-
 interface HeaderProp{
-  menu : MenuProp[] | []
+  menu : {title:string,link:string}[] | []
 }
 
 const Header = ({menu} : HeaderProp) =>{
   const [open, setopen] = useState(false)
+  const [lightTheme, setTheme]=useState(true)
   let location = useLocation()
-  function toggleMenu(val? : boolean) {
+  function toggleMenu() {
+    setopen(!open)
+  } 
+  function toggleTheme(val?:boolean){
     if(typeof val === 'undefined'){
-      setopen(!open);
+      setTheme(!open);
     }else{
-      setopen(val)
+      setTheme(val)
     }
   }
 
-  function renderMenu(menu : MenuProp[]){
-    return menu.map((nav : MenuProp) => {
+  function renderMenu(menu : {title:string,link:string}[]){
+    return menu.map((nav : {title:string,link:string}) => {
       return(
-        <li className={`${location.pathname === nav.link ? style.active : ''}`} key={`menu-${nav.title}`}><Link to={nav.link}>{nav.title}</Link></li>
+        <li className={`${location.pathname === nav.link ? style.active : ''}`} key={`menu-${nav.title}`} onClick={() => setopen(false)}><Link to={nav.link}>{nav.title}</Link></li>
       )
     })
   }
@@ -38,13 +37,12 @@ const Header = ({menu} : HeaderProp) =>{
           <img src="/isMonFasterLogo.svg" alt="isMonFaster Logo" className={style.isMonLogo}/>
           <span className={style.headerAppName}> isMonFaster?</span> 
         </a>
-        {/*<BurgerMenu className={style.menuBtn} open={open} setOpen={toggleMenu} />*/}
-        <ThemeButton state={open} toggle={toggleMenu} className={style.themeTemp}/>
+        <BurgerMenu className={style.menuBtn} open={open} setOpen={toggleMenu} />
         <nav className={`${style.navContainer} ${open ? style.open : ''}`}>
           <ul>
             {renderMenu(menu)}
+            <li className={style.themeBtnContainer}><ThemeButton state={lightTheme} toggle={toggleTheme} className={style.themeBtn}/></li>
           </ul>
-          <ThemeButton state={open} toggle={toggleMenu}/>
         </nav>
       </div>
     </header>
