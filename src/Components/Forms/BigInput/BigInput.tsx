@@ -52,7 +52,7 @@ const BigInput = ({ id, color, disabled, defaultValue, className, pkmnList, disp
     let index = Math.floor(Math.random() * (400) + 1);
     return axios({
       method:'get',
-      url: `$https://ismonfaster-default-rtdb.firebaseio.com/list.json?orderBy="number/paldea"&startAt=${index}&endAt=${index}`,
+      url: `https://ismonfaster-default-rtdb.firebaseio.com/list.json?orderBy="number/paldea"&startAt=${index}&endAt=${index}`,
       headers:{
         Accept: '*/*'
       }
