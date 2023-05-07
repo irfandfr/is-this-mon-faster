@@ -59,31 +59,9 @@ const BigInput = ({ id, color, disabled, defaultValue, className, pkmnList, disp
     })
   }
 
-  function addTextAnimation(){
-    if(currPkmn !== displayPkmn){
-      setTimeout(() => {
-        setDisplay(displayPkmn+currPkmn.charAt(displayPkmn.length))
-      }, 200);
-    }
-  }
-
-  function deleteTextAnimation(){
-    if(displayPkmn.length > 0){
-      let x = displayPkmn
-
-      setDisplay(x.slice(0, -1))
-      console.log(displayPkmn)
-      setTimeout(() => {
-        deleteTextAnimation()
-      }, 500);
-    }else{
-      addTextAnimation()
-    }
-  }
-
-  useLayoutEffect(() => {
+  useLayoutEffect(() => {//animation flag, only occurs on display type input
     if(animFlag){
-      if(displayPkmn.length > 0){
+      if(displayPkmn.length > 0){//delete display pkmn name
         let x = displayPkmn
         setTimeout(() => {
           setDisplay(x.slice(0, -1))
@@ -93,7 +71,7 @@ const BigInput = ({ id, color, disabled, defaultValue, className, pkmnList, disp
           setFlag(false)
         }, 1000);
       }
-    }else if(displayPkmn !== currPkmn){
+    }else if(displayPkmn !== currPkmn){//add current randomly selected pkmn nmae 1-by-1
       setTimeout(() => {
         setDisplay(displayPkmn+currPkmn.charAt(displayPkmn.length))
       }, 100);
