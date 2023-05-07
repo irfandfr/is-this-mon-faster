@@ -1,14 +1,18 @@
-import BigInput from '../../Components/Forms/BigInput/BigInput'
-import InputGroup from '../../Components/InputGroup/InputGroup'
-import style from './calcUI.module.scss'
+import { ChangeEvent, useState } from 'react'
+import BigInput from '../../../Components/Forms/BigInput/BigInput'
+import InputGroup from '../../../Components/InputGroup/InputGroup'
+import axios from 'axios'
 
 //Interface Export
-import { SelectionProp } from "../../Components/InputGroup/InputGroup"
-import { ActionType } from './calculatorUI'
-import { ChangeEvent, useState } from 'react'
-import axios from 'axios'
-import { PkmnData } from '../../Utils/types'
-import { dbToPkmnData } from '../../Utils/utils'
+import { SelectionProp } from "../../../Components/InputGroup/InputGroup"
+import { ActionType } from '../calculatorUI'
+import { PkmnData } from '../../../Utils/types'
+
+//import utils
+import { dbToPkmnData } from '../../../Utils/utils'
+
+
+import style from '../calcUI.module.scss'
 
 interface pkmnState{
   [key : string] : SelectionProp 

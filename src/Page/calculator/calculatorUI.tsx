@@ -29,8 +29,8 @@ import LoadingPage from "../loading/Loading"
 import { PkmnData } from "../../Utils/types"
 
 
-const PkmnAdvancedSelector = lazy(() => import("./PkmnAdvancedSelector"));
-const PkmnSimpleSelector = lazy(() => import("./PkmnSimpleSelector"));
+const PkmnAdvancedSelector = lazy(() => import("./subComponent/PkmnAdvancedSelector"));
+const PkmnSimpleSelector = lazy(() => import("./subComponent/PkmnSimpleSelector"));
 
 
 

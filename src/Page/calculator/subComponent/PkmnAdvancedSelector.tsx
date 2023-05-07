@@ -1,12 +1,12 @@
-import Input from '../../Components/Forms/Input/Input'
-import SelectInput from '../../Components/Forms/SelectInput/SelectInput'
-import InputGroup from '../../Components/InputGroup/InputGroup'
+import Input from '../../../Components/Forms/Input/Input'
+import SelectInput from '../../../Components/Forms/SelectInput/SelectInput'
+import InputGroup from '../../../Components/InputGroup/InputGroup'
 
 //Interface Export
-import { SelectionProp } from "../../Components/InputGroup/InputGroup"
-import { ActionType } from './calculatorUI'
+import { SelectionProp } from "../../../Components/InputGroup/InputGroup"
+import { ActionType } from '../calculatorUI'
 
-import style from './calcUI.module.scss'
+import style from '../calcUI.module.scss'
 
 interface pkmnState{
   [key : string] : SelectionProp 
