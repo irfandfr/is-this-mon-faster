@@ -1,5 +1,18 @@
 @import './../../../styles/config.module.scss';
 
+@keyframes blinking {
+  0%{
+    opacity: 0.8;
+  }
+  50%{
+    opacity: 0.8;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+
 .bigInputContainer{
   width:100%;
   max-width: 200px;
@@ -75,5 +88,18 @@
     border-width: 3px;
     top: calc(50% - 9px);
     right: 2px;
+  }
+
+  .displayContainer{
+    display: flex;
+    margin-bottom: 5px;
+    min-height: 29px;
+    .cursor{
+      margin-left: 4px;
+      opacity: 0.8;
+      width: 4px;
+      background: var(--body-font);
+      animation: blinking 1s 0s infinite;
+    }
   }
 }
