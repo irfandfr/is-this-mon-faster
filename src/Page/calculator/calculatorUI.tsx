@@ -7,7 +7,6 @@ import MainView from "../../Components/MainView/MainView"
 import Modal from "../../Components/Modal/Modal"
 import ModifierContainer from "../../Components/ModifierContainer/ModifierContainer"
 import Button from "../../Components/Button/Button"
-import PkmnSimpleSelector from "./PkmnSimpleSelector"
 
 //import utils
 import { modifiersAbbreviator, natureToSigns } from "../../Utils/utils"
@@ -31,6 +30,7 @@ import { PkmnData } from "../../Utils/types"
 
 
 const PkmnAdvancedSelector = lazy(() => import("./PkmnAdvancedSelector"));
+const PkmnSimpleSelector = lazy(() => import("./PkmnSimpleSelector"));
 
 
 
