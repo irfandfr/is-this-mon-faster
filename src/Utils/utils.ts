@@ -148,6 +148,8 @@ export function pkmnStatSpreadConverter(state : string){
       return '0EV/31IV/Neutral'
     case 'min--':
       return '0EV/0IV/Hindering'
+    case 'win':
+      return '0EV/31IV/Neutral'
     default:
       break;
   }
