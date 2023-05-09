@@ -114,7 +114,7 @@ const BigInput = ({ id, color, disabled, defaultValue, className, pkmnList, disp
         <div className={`${style.optionsContainer} ${hideSelect ? style.hide : ''}`}>
           {pkmnList?.map(pkmn => {
             return (
-              <option tabIndex={0} className={style.option} value={pkmn.name} key={`select${pkmn.name}`} onClick={() => updatePkmn(pkmn)}>{pkmn.name}</option>
+              <div tabIndex={0} className={style.option} key={`select${pkmn.name}`} onClick={() => updatePkmn(pkmn)}>{pkmn.name}</div>
             )
           })}
         </div>
