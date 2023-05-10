@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '../../Components/Button/Button'
 import Card from '../../Components/Card/Card'
 import BigInput from '../../Components/Forms/BigInput/BigInput'
@@ -7,10 +8,14 @@ import MainView from '../../Components/MainView/MainView'
 import style from './homepage.module.scss'
 
 const Homepage = () =>{
+  const location = useLocation()
   let navigate = useNavigate()
   function redirectToCalc(){
     navigate("/calc")
   }
+  useEffect(() => {
+    document.title = `Is Pokemon Faster | Pokemon Speed Calculator`
+  },[location])
   return(
     <MainView className={style.homepage}>
       <h3 className={style.text} >Is</h3>
