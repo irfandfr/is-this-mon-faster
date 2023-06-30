@@ -80,7 +80,7 @@ const ResultPage = ({advanced} : ResultPageInterface) => {
   async function getPkmnInfo(name:string){
     return axios({
       method: 'get',
-      url: `https://ismonfaster-default-rtdb.firebaseio.com/list/${name}.json`,
+      url: `https://ismonfaster-default-rtdb.firebaseio.com/listv2/${name}.json`,
       headers:{
         Accept: '*/*'
       }
