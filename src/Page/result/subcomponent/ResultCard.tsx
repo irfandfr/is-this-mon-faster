@@ -53,7 +53,7 @@ const ResultCard = ({advanced, verdict, trick_room, p1mod, advProp,simpleProp} :
       ):(
         <>
           <img src={simpleProp?.p1ImageLink} alt={`${simpleProp?.p1Name}'s sprite`} loading="lazy" className={`${style.pkmnSprite} ${style.p1Sprite}`} style={{marginBottom: 7}}/>
-          <h2 className={style.p1text}>{simpleProp?.p1Name}</h2>
+          <h2 className={style.p1text} style={{textAlign: 'center'}}>{simpleProp?.p1Name}</h2>
         </>
       )}
       {
